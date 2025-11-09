@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="AccessMap: rutas accesibles, comunidad colaborativa y reportes validados por IA para moverte con confianza." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>AccessMap — La ciudad te espera</title>
+  </head>
+  <body>
+    <!-- Header / Nav pegajoso (se completará en T-2) -->
+    <header class="site-header" id="inicio">
+      <div class="container header-inner">
+        <a class="brand" href="#" aria-label="AccessMap inicio">
+          <img src="IMG/AccessMap-Logo.png" alt="Logo AccessMap" class="footer-logo-img" />
+          <span>Access<span class="accent">MAP</span></span>
+        </a>
+        <div class="nav-right">
+          <nav class="main-nav" aria-label="Principal"></nav>
+          <div class="header-ctas"></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Sidebar accesible/hamburguesa (se añade en T-2) -->
+    <button id="btn-toggle" class="btn-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">
+      <span class="line top"></span>
+      <span class="line middle"></span>
+      <span class="line bottom"></span>
+    </button>
+    <aside id="sidebar" class="sidebar closed" aria-label="Menú de navegación">
+      <div class="sidebar-brand">Access<span>MAP</span></div>
+      <div class="leftbar">
+        <nav class="sidebar-nav" role="navigation"></nav>
+        <div class="sidebar-ctas"></div>
+      </div>
+    </aside>
+    <div id="overlay" class="overlay" aria-hidden="true"></div>
+
+    <main class="main-content">
+      <!-- Secciones se irán agregando en T-3..T-9 -->
+    </main>
+
+    <footer class="site-footer section--white">
+      <div class="container footer">
+        <!-- contenido del footer se agrega en T-9 -->
+        <div class="footer-copy"><small>© OpenBarrier 2025 - Todos los derechos reservados.</small></div>
+      </div>
+    </footer>
+
+    <script src="js/index.js" defer></script>
+  </body>
+</html>
