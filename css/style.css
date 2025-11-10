@@ -30,3 +30,17 @@ h1,h2,h3 { color: var(--primary); margin: 0 0 .6rem; }
 h1{ font-size: var(--h1); font-weight:700; }
 h2{ font-size: var(--h2); font-weight:700; text-align:center; margin-bottom:1.25rem; }
 h3{ font-size: var(--h3); font-weight:500; }
+
+.btn-outline{color:var(--bg);outline:2px solid
+#05af43;background:#05af43}
+.btn-outline:hover{background:var(--bg);color:#05af43}
+.hero{padding:clamp(2rem, 2vw + 1rem, 4rem) 0;}
+.hero-grid{display:grid;gap:2rem;align-items:center;}
+.hero-actions{display:flex;gap:.75rem;flex-wrap:wrap;margintop:.75rem;justify-content:center;}
+.hero-media img{border-radius:var(--radius);box-shadow:var(--shadowxl);}
+.hero-copy{text-align:center;}
+@media (min-width:790px){
+ .hero-grid{grid-template-columns:1.1fr 1fr;}
+ .hero-copy{text-align:left;}
+ .hero-actions{justify-content:left;}
+}
