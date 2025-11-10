@@ -691,12 +691,12 @@ align-items: center;
   align-items: center;
   gap: .5rem;
   position: relative;
-  padding: .75rem 2.25rem .75rem 1rem; /* deja espacio al signo de la derecha */
-  list-style: none;                     /* quita el marcador por defecto */
+  padding: .75rem 2.25rem .75rem 1rem; 
+  list-style: none;
 }
 
 .faq-item summary::after {
-  content: "+";                       /* signo + y tubería derecha al estar cerrado */
+  content: "+";
   position: absolute;
   right: .75rem;
   top: 50%;
@@ -705,12 +705,10 @@ align-items: center;
   color: var(--primary);
 }
 
-/* Al abrir el <details> cambia el signo a "-" */
 .faq-item[open] summary::after {
   content: "-";
 }
 
-/* Opcional: resalta al pasar el mouse o con foco */
 .faq-item summary:hover,
 .faq-item summary:focus-visible {
   background: #0a637f10;
@@ -911,8 +909,6 @@ align-items: center;
     align-items: center;
     gap: 3rem;
   }
-
- 
   
   .btn-toggle {
     display: none;
