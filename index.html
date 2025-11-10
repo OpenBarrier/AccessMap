@@ -7,15 +7,17 @@
       name="description"
       content="AccessMap: rutas accesibles, comunidad colaborativa y reportes validados por IA para moverte con confianza."
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/style.css" />
     <title>AccessMap — La ciudad te espera</title>
   </head>
   <body>
-    <!-- Botón Hamburguesa -->
+    <!-- ========= CABECERA ========= -->
     <button
       id="btn-toggle"
       class="btn-toggle"
@@ -28,55 +30,53 @@
       <span class="line bottom"></span>
     </button>
 
-    <!-- Sidebar -->
     <aside id="sidebar" class="sidebar closed" aria-label="Menú de navegación">
       <div class="sidebar-brand">Access<span>MAP</span></div>
-
       <div class="leftbar">
         <nav class="sidebar-nav" role="navigation">
-          <a href="#inicio">Inicio</a>
+          <a href="#herramientas">Herramientas</a>
           <a href="#mapa-tiempo-real">Mapa</a>
           <a href="#comunidad">Comunidad</a>
-          <a href="#ayuda">Ayuda</a>
           <a href="#planes">Planes</a>
+          <a href="#ayuda">Ayuda</a>
         </nav>
-
-        <!-- CTAs dentro del menú -->
         <div class="sidebar-ctas">
           <a class="btn btn-secondary" href="#planes">Crear cuenta</a>
           <a class="btn btn-primary" href="#cta">Iniciar sesión</a>
         </div>
       </div>
     </aside>
-
     <div id="overlay" class="overlay" aria-hidden="true"></div>
 
-    <!-- Header (desktop) -->
     <header class="site-header" id="inicio">
       <div class="container header-inner">
         <a class="brand" href="#" aria-label="AccessMap inicio">
-          <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
-            <path
-              d="M12 2a8 8 0 0 0-8 8c0 5 8 12 8 12s8-7 8-12a8 8 0 0 0-8-8Zm0 10.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Z"
-            />
-          </svg>
+          <img
+            src="IMG/AccessMap-Logo.png"
+            alt="Logo AccessMap"
+            class="footer-logo-img"
+          />
           <span>Access<span class="accent">MAP</span></span>
         </a>
-        <nav class="main-nav" aria-label="Principal">
-          <a href="#inicio">Inicio</a>
-          <a href="#mapa-tiempo-real">Mapa</a>
-          <a href="#comunidad">Comunidad</a>
-          <a href="#ayuda">Ayuda</a>
-        </nav>
-        <div class="header-ctas">
-          <a class="btn btn-secondary" href="#planes">Crear cuenta</a>
-          <a class="btn btn-primary" href="#cta">Iniciar sesión</a>
+        <div class="nav-right">
+          <nav class="main-nav" aria-label="Principal">
+            <a href="#herramientas">Herramientas</a>
+            <a href="#mapa-tiempo-real">Mapa</a>
+            <a href="#comunidad">Comunidad</a>
+            <a href="#planes">Planes</a>
+            <a href="#ayuda">Ayuda</a>
+          </nav>
+          <div class="header-ctas">
+            <a class="btn btn-secondary" href="#planes">Crear cuenta</a>
+            <a class="btn btn-primary" href="#cta">Iniciar sesión</a>
+          </div>
         </div>
       </div>
     </header>
 
+    <!-- ========= CONTENIDO ========= -->
     <main class="main-content">
-      <!-- HERO -->
+      <!-- Hero -->
       <section class="hero section--muted">
         <div class="container hero-grid">
           <div class="hero-copy">
@@ -102,7 +102,7 @@
         </div>
       </section>
 
-      <!-- MÉTRICAS -->
+      <!-- Métricas -->
       <section
         class="metrics section--white"
         aria-label="Confianza en cada paso"
@@ -112,7 +112,7 @@
           <ul class="metrics-list" role="list">
             <li class="metric-card">
               <div class="metric-icon" aria-hidden="true">
-                <svg id="icon" width="28" height="28" viewBox="0 0 24 24">
+                <svg width="28" height="28" viewBox="0 0 24 24">
                   <path
                     d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.33 0-8 2.17-8 5v1h16v-1c0-2.83-3.67-5-8-5Z"
                   />
@@ -124,7 +124,9 @@
             <li class="metric-card">
               <div class="metric-icon" aria-hidden="true">
                 <svg width="28" height="28" viewBox="0 0 24 24">
-                  <path d="M4 4h16v2H4zm0 7h16v2H4zm0 7h16v2H4z" />
+                  <path
+                    d="M15 4.5V19l-6-2.11V2.5l6 2zm-8 .7v14.5l-4-1.4V3.8l4 1.4zm14 1.6v14.5l-4-1.4V5.4l4 1.4z"
+                  />
                 </svg>
               </div>
               <p class="metric-value">10K+</p>
@@ -133,7 +135,9 @@
             <li class="metric-card">
               <div class="metric-icon" aria-hidden="true">
                 <svg width="28" height="28" viewBox="0 0 24 24">
-                  <path d="M12 2 2 7l10 5 10-5zm0 8L2 5v12l10 5 10-5V5Z" />
+                  <path
+                    d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"
+                  />
                 </svg>
               </div>
               <p class="metric-value">15</p>
@@ -143,15 +147,16 @@
         </div>
       </section>
 
-      <!-- HERRAMIENTAS -->
-      <section class="tools section--muted">
+      <!-- Herramientas -->
+      <section id="herramientas" class="tools section--muted">
         <div class="container">
           <h2>Herramientas para tu independencia.</h2>
           <p id="text-Indepen">
             Diseñamos cada función pensando en tus necesidades, para que te
             muevas con confianza y seguridad.
           </p>
-          <article class="feature">
+
+          <article id="mapas" class="feature feature--reverse">
             <figure class="feature-media">
               <img
                 src="IMG/MapaAccesible.jpg"
@@ -169,7 +174,7 @@
             </div>
           </article>
 
-          <article id="comunidad" class="feature feature--reverse">
+          <article id="comunidad" class="feature">
             <figure class="feature-media">
               <img
                 src="IMG/PersonaColaborandoComunidad.jpg"
@@ -186,7 +191,7 @@
             </div>
           </article>
 
-          <article class="feature">
+          <article id="panel" class="feature feature--reverse">
             <figure class="feature-media">
               <img
                 src="IMG/MockupSistema.jpg"
@@ -194,7 +199,7 @@
               />
             </figure>
             <div class="feature-copy">
-              <h2>Reportes inteligentes, validados por IA.</h2>
+              <h3>Reportes inteligentes, validados por IA.</h3>
               <p>
                 Nuestra tecnología de inteligencia artificial ayuda a verificar
                 los reportes de la comunidad, garantizando que la información
@@ -205,7 +210,7 @@
         </div>
       </section>
 
-      <!-- MAPA EN TIEMPO REAL (con iframe) -->
+      <!-- Mapa en tiempo real -->
       <section id="mapa-tiempo-real" class="realtime-map section--white">
         <div class="container">
           <h2>Explora el Mapa en Tiempo Real</h2>
@@ -214,7 +219,6 @@
             de barrera y planifica tu ruta con información actualizada por la
             comunidad.
           </p>
-
           <div class="iframe-wrapper">
             <iframe
               title="Mapa en tiempo real"
@@ -225,7 +229,7 @@
         </div>
       </section>
 
-      <!-- TESTIMONIO -->
+      <!-- Testimonio -->
       <section class="testimonial section--muted">
         <div class="container">
           <h2>Historias que Mueven el Mundo</h2>
@@ -240,44 +244,56 @@
                 "Antes de AccessMap, cada salida era una preocupación. Ahora, es
                 una oportunidad. Volví a ser dueño de mi camino."
               </p>
-              <cite>— Carlos Herrera <br />Usuario de AccessMap</cite>
+              <cite
+                ><span class="nameUser">— Carlos Herrera</span> <br />Usuario de
+                AccessMap</cite
+              >
             </blockquote>
           </article>
         </div>
       </section>
 
-      <!-- PLANES -->
+      <!-- Planes -->
       <section id="planes" class="pricing section--white">
         <div class="container">
-          <h2>Un plan para cada necesidad</h2>
-          <p>
-            Comienza gratis y únete a la comunidad, o desbloquea todo el
-            potencial de AccessMap con nuestro plan premium.
-          </p>
+          <span class="princing-text">
+            <h2>Un plan para cada necesidad</h2>
+            <p>
+              Comienza gratis y únete a la comunidad, o desbloquea todo el
+              potencial de AccessMap con nuestro plan premium.
+            </p>
+          </span>
           <div class="pricing-grid">
             <article class="price-card" aria-label="Plan Gratis">
-              <h5>Comunidad</h5>
-              <h3>Gratis</h3>
-              <p class="price">s/0 <span class="text-mounth">/ mes</span></p>
+              <div class="free">
+                <h5>Comunidad</h5>
+                <h3>Gratis <span class="text-mounth">/ para siempre</span></h3>
+              </div>
               <p>
                 Ideal para unirte al movimiento, reportar barreras y planificar
                 rutas sencillas.
               </p>
               <ul>
-                <!-- poner prefijo del check verde -->
                 <li>Ver mapa de alertas en tiempo real</li>
                 <li>Reportar barreras (ilimitado)</li>
                 <li>Planificación de rutas (A-B)</li>
                 <li>Guardar hasta 3 rutas favoritas</li>
               </ul>
-              <a href="#cta" class="btn btn-outline">Empieza gratis</a>
+              <a href="#cta" id="btn-free" class="btn btn-outline"
+                >Empieza gratis</a
+              >
             </article>
 
             <article class="price-card featured" aria-label="Plan Premium">
-              <div class="badge">Popular</div>
-              <h5>AccessMap+</h5>
-              <h3>Premium</h3>
-              <p class="price">s/9.90 <span class="text-mounth">/ mes</span></p>
+              <div class="premiun">
+                <div class="acces-plus">
+                  <h5>AccessMap+</h5>
+                  <h3 class="price">
+                    s/9.90 <span class="text-mounth">/ mes</span>
+                  </h3>
+                </div>
+                <span id="badge" class="badge">Más Popular</span>
+              </div>
               <p>
                 Ideal para unirte al movimiento, reportar barreras y planificar
                 rutas sencillas.
@@ -289,7 +305,9 @@
                 <li>Rutas con múltiples paradas</li>
                 <li>Experiencia sin anuncios</li>
               </ul>
-              <a href="#cta" class="btn btn-primary">Probar AccessMap+</a>
+              <a href="#cta" id="btn-premiun" class="btn btn-secondary"
+                >Probar AccessMap+</a
+              >
             </article>
           </div>
         </div>
@@ -299,7 +317,6 @@
       <section id="ayuda" class="faq section--muted">
         <div class="container">
           <h2>¿Tienes preguntas?</h2>
-
           <details class="faq-item">
             <summary>¿AccessMap es gratis?</summary>
             <p>
@@ -308,7 +325,6 @@
               Creemos que la accesibilidad debe ser para todos.
             </p>
           </details>
-
           <details class="faq-item">
             <summary>¿La información es confiable?</summary>
             <p>
@@ -318,7 +334,6 @@
               sea lo más precisa y actualizada posible.
             </p>
           </details>
-
           <details class="faq-item">
             <summary>¿En qué dispositivos se puede usar?</summary>
             <p>
@@ -326,20 +341,18 @@
               Google Play para dispositivos Android.
             </p>
           </details>
-
           <details class="faq-item">
             <summary>¿Cómo puedo reportar una barrera?</summary>
             <p>
-              Es muy fácil. Cuando encuentres un obstáculo, solo tienes que
-              presionar el botón de 'Reportar' en el mapa, tomar una foto,
-              añadir una breve descripción y enviarlo. ¡Tu aporte ayuda a toda
-              la comunidad al instante!
+              Es muy fácil. Cuando encuentres un obstáculo, presiona el botón de
+              'Reportar' en el mapa, toma una foto, añade una breve descripción
+              y envíalo.
             </p>
           </details>
         </div>
       </section>
 
-      <!-- CTA FINAL -->
+      <!-- CTA final -->
       <section id="cta" class="final-cta section--white">
         <div class="container cta-grid">
           <div class="cta-copy">
@@ -351,9 +364,9 @@
             </p>
             <div class="store-badges">
               <div class="btn btn-store">
-                <a class="icon-store" href="#" aria-label="App Store"
-                  ><img src="IMG/AppStore.png" alt="Descargar en App Store"
-                /></a>
+                <a class="icon-store" href="#" aria-label="App Store">
+                  <img src="IMG/AppStore.png" alt="Descargar en App Store" />
+                </a>
                 <p>
                   Descargar en la <br class="br-store" /><span
                     class="shop-store"
@@ -362,11 +375,12 @@
                 </p>
               </div>
               <div class="btn btn-store">
-                <a class="icon-store" href="#" aria-label="Google Play"
-                  ><img
+                <a class="icon-store" href="#" aria-label="Google Play">
+                  <img
                     src="IMG/GooglePlay.png"
                     alt="Disponible en Google Play"
-                /></a>
+                  />
+                </a>
                 <p>
                   Disponible en <br class="br-store" /><span class="shop-store"
                     >Google Play</span
@@ -385,10 +399,9 @@
       </section>
     </main>
 
-    <!-- FOOTER -->
+    <!-- ========= PIE ========= -->
     <footer class="site-footer section--white">
       <div class="container footer">
-        <!-- 1️⃣ Fila superior -->
         <div class="footer-top">
           <div class="footer-logo">
             <a href="#" class="brand" aria-label="AccessMap inicio">
@@ -411,7 +424,9 @@
                 placeholder="Ingresa tu email y entérate de nuestras últimas actualizaciones"
                 required
               />
-              <button class="btn btn-primary" type="submit">Suscríbete</button>
+              <button id="suscribe" class="btn btn-outline" type="submit">
+                Suscríbete
+              </button>
             </div>
             <p
               id="subscribe-status"
@@ -475,13 +490,13 @@
         </div>
 
         <hr class="footer-divider" />
-
         <div class="footer-copy">
           <small>© OpenBarrier 2025 - Todos los derechos reservados.</small>
         </div>
       </div>
     </footer>
 
+    <!-- ========= INTERACCIÓN ========= -->
     <script src="js/index.js" defer></script>
   </body>
 </html>
