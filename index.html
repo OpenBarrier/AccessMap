@@ -3,72 +3,482 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="AccessMap: rutas accesibles, comunidad colaborativa y reportes validados por IA para moverte con confianza." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet" />
+    <meta
+      name="description"
+      content="AccessMap: rutas accesibles, comunidad colaborativa y reportes validados por IA para moverte con confianza."
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/style.css" />
     <title>AccessMap — La ciudad te espera</title>
   </head>
   <body>
-    <nav class="main-nav" aria-label="Principal">
-      <a href="#herramientas">Herramientas</a>
-      <a href="#mapa-tiempo-real">Mapa</a>
-      <a href="#comunidad">Comunidad</a>
-      <a href="#planes">Planes</a>
-      <a href="#ayuda">Ayuda</a>
-    </nav>
-      <div class="header-ctas">
-        <a class="btn btn-secondary" href="#planes">Crear cuenta</a>
-        <a class="btn btn-primary" href="#cta">Iniciar sesión</a>
-      </div>
-    <header class="site-header" id="inicio">
-      <div class="container header-inner">
-        <a class="brand" href="#" aria-label="AccessMap inicio">
-          <img src="IMG/AccessMap-Logo.png" alt="Logo AccessMap" class="footer-logo-img" />
-          <span>Access<span class="accent">MAP</span></span>
-        </a>
-        <div class="nav-right">
-          <nav class="main-nav" aria-label="Principal"></nav>
-          <div class="header-ctas"></div>
-        </div>
-      </div>
-    </header>
-
-     <nav class="sidebar-nav" role="navigation">
-        <a href="#herramientas">Herramientas</a>
-        <a href="#mapa-tiempo-real">Mapa</a>
-        <a href="#comunidad">Comunidad</a>
-        <a href="#planes">Planes</a>
-        <a href="#ayuda">Ayuda</a>
-      </nav>
-      <div class="sidebar-ctas">
-        <a class="btn btn-secondary" href="#planes">Crear cuenta</a>
-        <a class="btn btn-primary" href="#cta">Iniciar sesión</a>
-      </div>
-
-    <button id="btn-toggle" class="btn-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="sidebar">
+    <!-- Botón Hamburguesa -->
+    <button
+      id="btn-toggle"
+      class="btn-toggle"
+      aria-label="Abrir menú"
+      aria-expanded="false"
+      aria-controls="sidebar"
+    >
       <span class="line top"></span>
       <span class="line middle"></span>
       <span class="line bottom"></span>
     </button>
+
+    <!-- Sidebar -->
     <aside id="sidebar" class="sidebar closed" aria-label="Menú de navegación">
       <div class="sidebar-brand">Access<span>MAP</span></div>
+
       <div class="leftbar">
-        <nav class="sidebar-nav" role="navigation"></nav>
-        <div class="sidebar-ctas"></div>
+        <nav class="sidebar-nav" role="navigation">
+          <a href="#inicio">Inicio</a>
+          <a href="#mapa-tiempo-real">Mapa</a>
+          <a href="#comunidad">Comunidad</a>
+          <a href="#ayuda">Ayuda</a>
+          <a href="#planes">Planes</a>
+        </nav>
+
+        <!-- CTAs dentro del menú -->
+        <div class="sidebar-ctas">
+          <a class="btn btn-secondary" href="#planes">Crear cuenta</a>
+          <a class="btn btn-primary" href="#cta">Iniciar sesión</a>
+        </div>
       </div>
     </aside>
+
     <div id="overlay" class="overlay" aria-hidden="true"></div>
 
+    <!-- Header (desktop) -->
+    <header class="site-header" id="inicio">
+      <div class="container header-inner">
+        <a class="brand" href="#" aria-label="AccessMap inicio">
+          <svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M12 2a8 8 0 0 0-8 8c0 5 8 12 8 12s8-7 8-12a8 8 0 0 0-8-8Zm0 10.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Z"
+            />
+          </svg>
+          <span>Access<span class="accent">MAP</span></span>
+        </a>
+        <nav class="main-nav" aria-label="Principal">
+          <a href="#inicio">Inicio</a>
+          <a href="#mapa-tiempo-real">Mapa</a>
+          <a href="#comunidad">Comunidad</a>
+          <a href="#ayuda">Ayuda</a>
+        </nav>
+        <div class="header-ctas">
+          <a class="btn btn-secondary" href="#planes">Crear cuenta</a>
+          <a class="btn btn-primary" href="#cta">Iniciar sesión</a>
+        </div>
+      </div>
+    </header>
+
     <main class="main-content">
-      <!-- Secciones se irán agregando en T-3..T-9 -->
+      <!-- HERO -->
+      <section class="hero section--muted">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <h1>La ciudad te espera. Descúbrela a tu manera.</h1>
+            <p>
+              AccessMap es la plataforma colaborativa que te guía por rutas
+              accesibles y seguras, gracias a reportes en tiempo real de una
+              comunidad que, como tú, busca un mundo sin barreras.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-secondary" href="#cta">Descargar la App</a>
+              <a class="btn btn-outline" href="#mapa-tiempo-real"
+                >Ver el Mapa</a
+              >
+            </div>
+          </div>
+          <figure class="hero-media">
+            <img
+              src="IMG/PersonaSillaDeRuedas.jpg"
+              alt="Persona en silla de ruedas usando su celular cerca de la ciudad"
+            />
+          </figure>
+        </div>
+      </section>
+
+      <!-- MÉTRICAS -->
+      <section
+        class="metrics section--white"
+        aria-label="Confianza en cada paso"
+      >
+        <h2>Confianza en cada paso</h2>
+        <div class="container">
+          <ul class="metrics-list" role="list">
+            <li class="metric-card">
+              <div class="metric-icon" aria-hidden="true">
+                <svg id="icon" width="28" height="28" viewBox="0 0 24 24">
+                  <path
+                    d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.33 0-8 2.17-8 5v1h16v-1c0-2.83-3.67-5-8-5Z"
+                  />
+                </svg>
+              </div>
+              <p class="metric-value">8K+</p>
+              <p class="metric-label">Usuarios activos</p>
+            </li>
+            <li class="metric-card">
+              <div class="metric-icon" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24">
+                  <path d="M4 4h16v2H4zm0 7h16v2H4zm0 7h16v2H4z" />
+                </svg>
+              </div>
+              <p class="metric-value">10K+</p>
+              <p class="metric-label">Rutas verificadas</p>
+            </li>
+            <li class="metric-card">
+              <div class="metric-icon" aria-hidden="true">
+                <svg width="28" height="28" viewBox="0 0 24 24">
+                  <path d="M12 2 2 7l10 5 10-5zm0 8L2 5v12l10 5 10-5V5Z" />
+                </svg>
+              </div>
+              <p class="metric-value">15</p>
+              <p class="metric-label">Distritos Conectados</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- HERRAMIENTAS -->
+      <section class="tools section--muted">
+        <div class="container">
+          <h2>Herramientas para tu independencia.</h2>
+          <p id="text-Indepen">
+            Diseñamos cada función pensando en tus necesidades, para que te
+            muevas con confianza y seguridad.
+          </p>
+          <article class="feature">
+            <figure class="feature-media">
+              <img
+                src="IMG/MapaAccesible.jpg"
+                alt="Mapa con puntos de accesibilidad"
+              />
+            </figure>
+            <div class="feature-copy">
+              <h3>Mapas que te entienden.</h3>
+              <p>
+                Visualiza en tiempo real rampas, ascensores y barreras
+                reportadas por la comunidad. Nuestro mapa interactivo te muestra
+                la información que realmente importa para que tomes la mejor
+                ruta.
+              </p>
+            </div>
+          </article>
+
+          <article id="comunidad" class="feature feature--reverse">
+            <figure class="feature-media">
+              <img
+                src="IMG/PersonaColaborandoComunidad.jpg"
+                alt="Personas colaborando para validar accesibilidad"
+              />
+            </figure>
+            <div class="feature-copy">
+              <h3>Comunidad colaborativa.</h3>
+              <p>
+                Únete a una comunidad que comparte experiencias y actualiza
+                información sobre accesibilidad en tiempo real. Juntos,
+                construimos un mapa más preciso para todos.
+              </p>
+            </div>
+          </article>
+
+          <article class="feature">
+            <figure class="feature-media">
+              <img
+                src="IMG/MockupSistema.jpg"
+                alt="Mockup de la app y panel de AccessMap"
+              />
+            </figure>
+            <div class="feature-copy">
+              <h2>Reportes inteligentes, validados por IA.</h2>
+              <p>
+                Nuestra tecnología de inteligencia artificial ayuda a verificar
+                los reportes de la comunidad, garantizando que la información
+                sobre los obstáculos sea confiable y esté siempre actualizada.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- MAPA EN TIEMPO REAL (con iframe) -->
+      <section id="mapa-tiempo-real" class="realtime-map section--white">
+        <div class="container">
+          <h2>Explora el Mapa en Tiempo Real</h2>
+          <p class="section-lead">
+            Descubre qué está pasando en tu ciudad ahora mismo. Filtra por tipo
+            de barrera y planifica tu ruta con información actualizada por la
+            comunidad.
+          </p>
+
+          <div class="iframe-wrapper">
+            <iframe
+              title="Mapa en tiempo real"
+              loading="lazy"
+              src="https://www.google.com/maps/d/embed?mid=1fU80zTEQ1xRlN0yJCrCSCFZWs_c6vhk&ehbc=2E312F"
+            ></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- TESTIMONIO -->
+      <section class="testimonial section--muted">
+        <div class="container">
+          <h2>Historias que Mueven el Mundo</h2>
+          <article class="testimonial-card">
+            <img
+              class="avatar"
+              src="IMG/UsuarioAccesMAP.jpg"
+              alt="Foto de usuaria de AccessMap"
+            />
+            <blockquote>
+              <p>
+                "Antes de AccessMap, cada salida era una preocupación. Ahora, es
+                una oportunidad. Volví a ser dueño de mi camino."
+              </p>
+              <cite>— Carlos Herrera <br />Usuario de AccessMap</cite>
+            </blockquote>
+          </article>
+        </div>
+      </section>
+
+      <!-- PLANES -->
+      <section id="planes" class="pricing section--white">
+        <div class="container">
+          <h2>Un plan para cada necesidad</h2>
+          <p>
+            Comienza gratis y únete a la comunidad, o desbloquea todo el
+            potencial de AccessMap con nuestro plan premium.
+          </p>
+          <div class="pricing-grid">
+            <article class="price-card" aria-label="Plan Gratis">
+              <h5>Comunidad</h5>
+              <h3>Gratis</h3>
+              <p class="price">s/0 <span class="text-mounth">/ mes</span></p>
+              <p>
+                Ideal para unirte al movimiento, reportar barreras y planificar
+                rutas sencillas.
+              </p>
+              <ul>
+                <!-- poner prefijo del check verde -->
+                <li>Ver mapa de alertas en tiempo real</li>
+                <li>Reportar barreras (ilimitado)</li>
+                <li>Planificación de rutas (A-B)</li>
+                <li>Guardar hasta 3 rutas favoritas</li>
+              </ul>
+              <a href="#cta" class="btn btn-outline">Empieza gratis</a>
+            </article>
+
+            <article class="price-card featured" aria-label="Plan Premium">
+              <div class="badge">Popular</div>
+              <h5>AccessMap+</h5>
+              <h3>Premium</h3>
+              <p class="price">s/9.90 <span class="text-mounth">/ mes</span></p>
+              <p>
+                Ideal para unirte al movimiento, reportar barreras y planificar
+                rutas sencillas.
+              </p>
+              <ul>
+                <li>Todo lo del plan Comunidad</li>
+                <li>Guardar rutas ilimitadas</li>
+                <li>Modo sin conexión (Descargar mapas)</li>
+                <li>Rutas con múltiples paradas</li>
+                <li>Experiencia sin anuncios</li>
+              </ul>
+              <a href="#cta" class="btn btn-primary">Probar AccessMap+</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="ayuda" class="faq section--muted">
+        <div class="container">
+          <h2>¿Tienes preguntas?</h2>
+
+          <details class="faq-item">
+            <summary>¿AccessMap es gratis?</summary>
+            <p>
+              ¡Sí! Las funciones principales de AccessMap, como ver el mapa,
+              planificar rutas y reportar barreras, son completamente gratuitas.
+              Creemos que la accesibilidad debe ser para todos.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>¿La información es confiable?</summary>
+            <p>
+              Nuestra comunidad es la primera línea de validación. Además,
+              utilizamos algoritmos e inteligencia artificial para verificar la
+              coherencia de los reportes y asegurar que la información que ves
+              sea lo más precisa y actualizada posible.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>¿En qué dispositivos se puede usar?</summary>
+            <p>
+              Puedes descargar AccessMap desde la App Store para iPhone y desde
+              Google Play para dispositivos Android.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>¿Cómo puedo reportar una barrera?</summary>
+            <p>
+              Es muy fácil. Cuando encuentres un obstáculo, solo tienes que
+              presionar el botón de 'Reportar' en el mapa, tomar una foto,
+              añadir una breve descripción y enviarlo. ¡Tu aporte ayuda a toda
+              la comunidad al instante!
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <!-- CTA FINAL -->
+      <section id="cta" class="final-cta section--white">
+        <div class="container cta-grid">
+          <div class="cta-copy">
+            <h2>Únete al movimiento</h2>
+            <p>
+              Descarga AccessMap hoy y sé parte de la solución. Reporta
+              barreras, descubre nuevas rutas y ayuda a construir un mundo más
+              accesible para todos.
+            </p>
+            <div class="store-badges">
+              <div class="btn btn-store">
+                <a class="icon-store" href="#" aria-label="App Store"
+                  ><img src="IMG/AppStore.png" alt="Descargar en App Store"
+                /></a>
+                <p>
+                  Descargar en la <br class="br-store" /><span
+                    class="shop-store"
+                    >App Store</span
+                  >
+                </p>
+              </div>
+              <div class="btn btn-store">
+                <a class="icon-store" href="#" aria-label="Google Play"
+                  ><img
+                    src="IMG/GooglePlay.png"
+                    alt="Disponible en Google Play"
+                /></a>
+                <p>
+                  Disponible en <br class="br-store" /><span class="shop-store"
+                    >Google Play</span
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
+          <figure class="cta-media">
+            <img
+              src="IMG/MockupAccesMap.jpg"
+              alt="Mockup de AccessMap mostrando una ruta accesible"
+            />
+          </figure>
+        </div>
+      </section>
     </main>
 
+    <!-- FOOTER -->
     <footer class="site-footer section--white">
       <div class="container footer">
-        <!-- contenido del footer se agrega en T-9 -->
-        <div class="footer-copy"><small>© OpenBarrier 2025 - Todos los derechos reservados.</small></div>
+        <!-- 1️⃣ Fila superior -->
+        <div class="footer-top">
+          <div class="footer-logo">
+            <a href="#" class="brand" aria-label="AccessMap inicio">
+              <img
+                src="IMG/AccessMap-Logo.png"
+                alt="Logo AccessMap"
+                class="footer-logo-img"
+              />
+              <span id="Name-Access">Access<span id="Name-MAP">MAP</span></span>
+            </a>
+          </div>
+          <form id="form-subscribe" class="subscribe" novalidate>
+            <div class="subscribe-row">
+              <input
+                id="email"
+                name="email"
+                type="email"
+                inputmode="email"
+                autocomplete="email"
+                placeholder="Ingresa tu email y entérate de nuestras últimas actualizaciones"
+                required
+              />
+              <button class="btn btn-primary" type="submit">Suscríbete</button>
+            </div>
+            <p
+              id="subscribe-status"
+              class="status"
+              role="status"
+              aria-live="polite"
+            ></p>
+          </form>
+        </div>
+
+        <hr class="footer-divider" />
+
+        <div class="footer-columns">
+          <div class="footer-col">
+            <h3>La App</h3>
+            <ul>
+              <li><a href="#herramientas">Características</a></li>
+              <li><a href="#comunidad">Comunidad</a></li>
+              <li><a href="#ayuda">FAQs</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h3>OpenBarrier</h3>
+            <ul>
+              <li><a href="#">Quiénes Somos</a></li>
+              <li><a href="#">Contacto</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h3>Redes Sociales</h3>
+            <div class="social">
+              <a href="#" aria-label="YouTube" title="YouTube">
+                <svg width="22" height="22" viewBox="0 0 24 24">
+                  <path fill="currentColor" d="M10 15l5.19-3L10 9z" />
+                  <path
+                    fill="currentColor"
+                    d="M21.58 7.19a2.78 2.78 0 0 0-1.95-2C17.5 5 12 5 12 5s-5.5 0-7.63.22a2.78 2.78 0 0 0-1.95 2A29.94 29.94 0 0 0 2 12a29.94 29.94 0 0 0 .42 4.81 2.78 2.78 0 0 0 1.95 2C6.5 19 12 19 12 19s5.5 0 7.63-.22a2.78 2.78 0 0 0 1.95-2A29.94 29.94 0 0 0 22 12a29.94 29.94 0 0 0-.42-4.81Z"
+                  />
+                </svg>
+              </a>
+              <a href="#" aria-label="Facebook" title="Facebook">
+                <svg width="22" height="22" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M13 3h4a1 1 0 0 1 1 1v3h-3a1 1 0 0 0-1 1v3h4l-1 4h-3v6h-4v-6H8v-4h2V8a5 5 0 0 1 5-5Z"
+                  />
+                </svg>
+              </a>
+              <a href="#" aria-label="LinkedIn" title="LinkedIn">
+                <svg width="22" height="22" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M6.94 7.5A2.19 2.19 0 1 0 6.9 3.1 2.19 2.19 0 0 0 6.94 7.5ZM4.97 20h3.94V9.25H4.97zM13 9.25h-3.8V20H13v-5.64c0-1.52.98-2.5 2.3-2.5s2.26.98 2.26 2.5V20h3.94v-6.5c0-3.3-1.76-4.83-4.11-4.83-1.89 0-3.04 1.04-3.55 1.9H13Z"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <hr class="footer-divider" />
+
+        <div class="footer-copy">
+          <small>© OpenBarrier 2025 - Todos los derechos reservados.</small>
+        </div>
       </div>
     </footer>
 
