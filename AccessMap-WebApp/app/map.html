@@ -4,39 +4,208 @@
     <meta charset="UTF-8">
     <title>AccessMap – Mapa</title>
 
-    <!-- Archivos CSS generales -->
+    <!-- CSS global -->
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/layout.css">
+
+    <!-- CSS específico del mapa -->
+    <link rel="stylesheet" href="../styles/map.css">
 </head>
 
 <body>
 
-    <button class="btn-toggle" id="btn-menu-toggle">
-        ☰
-    </button>
+    <!-- Botón hamburguesa -->
+    <button id="btn-menu-toggle">☰</button>
 
-    <nav class="sidebar" id="sidebar-nav">
-        <div style="padding: 1.5rem; color: white; font-weight: bold; font-size: 1.5rem;">
-            AccessMap
-        </div>
+    <!-- Sidebar -->
+    <nav id="sidebar-nav">
+        <div class="sidebar-title">AccessMap</div>
 
         <a href="home.html" class="nav-link">Inicio</a>
         <a href="map.html" class="nav-link active">Mapa</a>
         <a href="report.html" class="nav-link">Reportes</a>
         <a href="community.html" class="nav-link">Comunidad</a>
         <a href="profile.html" class="nav-link">Perfil</a>
-        <a href="../index.html" class="nav-link" style="margin-top: auto; color: #e03737;">
-            Cerrar Sesión
-        </a>
+
+        <a href="../index.html" class="nav-link logout">Cerrar Sesión</a>
     </nav>
 
     <main class="main-content">
-        <h1>Página de Mapa</h1>
-        <p>Aquí irá el mapa interactivo.</p>
-        
+
+        <!-- ENCABEZADO -->
+        <header class="map-header">
+            <h1 class="page-title">Mapa</h1>
+
+            <div class="search-card">
+                <input id="search-input" type="search" placeholder="Buscar destino..." />
+                <button id="btn-filters">Filtros</button>
+            </div>
+        </header>
+
+        <!-- MAPA -->
+        <section id="map-container">
+            <div class="map-image"></div>
+
+            <!-- Marcadores mockup (ubicaciones) -->
+            <div class="marker-green" style="top: 40%; left: 20%;"></div>
+            <div class="marker-blue" style="top: 65%; left: 60%;"></div>
+
+            <div class="warning-pill">⚠️ 3 barreras reportadas</div>
+
+            <div class="map-controls">
+                <button id="zoom-in">＋</button>
+                <button id="locate-user">◉</button>
+            </div>
+        </section>
+
+        <!-- PANEL DE BÚSQUEDA -->
+        <section id="panel-search" class="hidden">
+
+            <div class="panel-header">
+                <h2>Buscar destino</h2>
+                <button id="btn-close-search">✕</button>
+            </div>
+
+            <div class="search-tabs">
+                <button class="tab active">Lugares</button>
+                <button class="tab">Eventos</button>
+            </div>
+
+            <div id="search-results">
+                <!-- Ejemplo de resultado (más se agregan con JS) -->
+                <div class="result-card" data-place="Mall de Sur">
+                    <div class="result-pin"></div>
+
+                    <div class="result-body">
+                        <h3 class="result-title">
+                            Mall de Sur
+                            <span class="tag tag-verde">Accesible</span>
+                        </h3>
+
+                        <p class="result-sub">Centro Comercial · 250m</p>
+
+                        <div class="result-tags">
+                            <span class="chip">Rampa</span>
+                            <span class="chip">Baño adaptado</span>
+                            <span class="chip">Entrada amplia</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- PANEL DE PLANIFICACIÓN DE RUTA -->
+<section id="panel-route" class="hidden">
+
+    <h2>Planificación de Ruta</h2>
+
+    <!-- Origen y destino -->
+    <div class="route-header">
+
+        <div>
+            <strong>Origen</strong>
+            <p class="muted">Mi ubicación actual</p>
+        </div>
+
+        <div>
+            <strong>Destino</strong>
+            <p id="route-destination" class="muted">—</p>
+        </div>
+
+    </div>
+
+    <!-- Horario -->
+    <div class="travel-time">
+
+        <button class="time-item" id="btn-time-now">
+            Ahora
+            <div class="muted">11:07 p.m.</div>
+        </button>
+
+        <button class="time-item" id="btn-time-schedule">
+            Programar
+            <div class="muted">Elegir hora</div>
+        </button>
+
+    </div>
+
+    <!-- Aviso horario nocturno -->
+    <div class="night-info">
+        Horario nocturno: Las rutas priorizan iluminación y seguridad verificada.
+    </div>
+
+    <!-- Mapa pequeño de rutas -->
+    <div class="mini-map">
+        <!-- Imagen o canvas del mapa (lo colocará el JS o CSS) -->
+        <div class="mini-map-view"></div>
+    </div>
+
+    <!-- Rutas sugeridas -->
+    <h3>Rutas Sugeridas</h3>
+
+    <div id="routes-container">
+
+        <!-- RUTA A -->
+        <div class="route-card" data-route="A">
+            <div class="route-meta">
+                <div class="route-name">Ruta A</div>
+                <div class="route-info">14 min · 1.2 km · <span class="tag tag-ambar">1 barrera</span></div>
+            </div>
+
+            <div class="route-access">
+                <div class="access-progress">
+                    <div class="progress" style="width: 98%;"></div>
+                </div>
+                <div class="access-label">Accesibilidad 98%</div>
+            </div>
+
+            <!-- Botón de selección -->
+            <button class="btn-select-route" data-select="A">Recomendada para ti</button>
+        </div>
+
+        <!-- RUTA B -->
+        <div class="route-card" data-route="B">
+            <div class="route-meta">
+                <div class="route-name">Ruta B</div>
+                <div class="route-info">11 min · 0.9 km · <span class="tag tag-rojo">4 barreras</span></div>
+            </div>
+
+            <div class="route-access">
+                <div class="access-progress">
+                    <div class="progress" style="width: 72%;"></div>
+                </div>
+                <div class="access-label">Accesibilidad 72%</div>
+            </div>
+
+            <button class="btn-select-route" data-select="B">Ver ruta</button>
+        </div>
+
+    </div>
+
+    <!-- BOTONES FINALES -->
+    <div class="route-actions">
+
+        <button id="btn-share-route" class="action-secondary">
+            Compartir ruta conjunta
+        </button>
+
+        <button id="btn-save-route" class="action-secondary">
+            Guardar ruta
+        </button>
+
+        <button id="btn-start-navigation" class="action-primary">
+            Iniciar Navegación
+        </button>
+
+    </div>
+
+</section>
+
     </main>
 
-    <script src="../scripts/main.js"></script>
-    <script src="../scripts/map.js"></script>
+    <!-- JS del mapa -->
+    <script src="../js/map.js"></script>
+
 </body>
 </html>
