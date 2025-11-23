@@ -1,0 +1,96 @@
+/* styles/layout.css - ESTRUCTURA Y NAVEGACIÓN 
+ AIDA LO MODIFICAS PLSSS SOLO ES TIPO UN BORRADOR
+*/
+
+/* =========================================
+   1. SIDEBAR (La Barra Lateral)
+   ========================================= */
+
+/* ESTILO MÓVIL (Por defecto: Escondido a la izquierda) */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh; /* Toda la altura */
+    background-color: #024260; /* Azul Primario */
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    z-index: 1000; /* Encima de todo */
+    
+    /* EL TRUCO: Lo sacamos de la pantalla */
+    transform: translateX(-100%); 
+    transition: transform 0.3s ease;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+}
+
+/* Clase que JS agregará para mostrar el menú */
+.sidebar.activo {
+    transform: translateX(0); /* Entra a la pantalla */
+}
+
+/* Enlaces del Menú */
+.nav-link {
+    color: #FFFFFF;
+    padding: 0.8rem;
+    border-radius: 8px;
+    font-weight: 500;
+    text-decoration: none;
+    display: block;
+}
+
+.nav-link:hover {
+    background-color: #00b592; /* Verde Acento al pasar el mouse */
+}
+
+/* =========================================
+   2. BOTÓN HAMBURGUESA (Solo Móvil)
+   ========================================= */
+.btn-toggle {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    background-color: #024260; /* Azul */
+    color: #FFFFFF;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    padding: 0.5rem 0.8rem;
+    z-index: 1100; /* Más arriba que el sidebar */
+    cursor: pointer;
+    display: block; /* Visible en móvil */
+    width: auto; /* Sobrescribe el width: 100% de botones genéricos */
+}
+
+/* =========================================
+   3. CONTENIDO PRINCIPAL
+   ========================================= */
+.main-content {
+    padding: 1rem;
+    padding-top: 4rem; /* Espacio para que el botón hamburguesa no tape el texto */
+    transition: margin-left 0.3s ease;
+}
+
+/* =========================================
+   4. RESPONSIVIDAD ESCRITORIO (PC/Laptop)
+   ========================================= */
+@media (min-width: 768px) {
+    
+    /* El Sidebar se queda fijo y visible siempre */
+    .sidebar {
+        transform: translateX(0); 
+    }
+
+    /* Ocultamos el botón hamburguesa */
+    .btn-toggle {
+        display: none; 
+    }
+
+    /* Empujamos el contenido a la derecha */
+    .main-content {
+        margin-left: 250px; /* Mismo ancho que el sidebar */
+        padding: 2rem; /* Más espacio */
+    }
+}
