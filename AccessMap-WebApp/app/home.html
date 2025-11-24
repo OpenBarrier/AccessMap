@@ -6,36 +6,192 @@
 
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/layout.css">
+    <link rel="stylesheet" href="../styles/home.css">
 </head>
 
 <body>
-    <!-- Botón Hamburguesa -->
-    <button class="btn-toggle" id="btn-menu-toggle">
-        ☰
-    </button>
+    <!-- ========= CABECERA / NAVEGACIÓN ========= -->
+		<aside id="sidebar" class="sidebar">
+			<div class="sidebar-brand">Access<span>MAP</span></div>
 
-    <!-- Sidebar -->
-    <nav class="sidebar" id="sidebar-nav">
-        <div style="padding: 1.5rem; color: white; font-weight: bold; font-size: 1.5rem;">
-            AccessMap
+			<nav class="sidebar-nav">
+				<a href="#home-view" class="nav-link">Inicio</a>
+				<a href="../app/map.html" class="nav-link">Mapa</a>
+				<a href="#community-view" class="nav-link">Comunidad</a>
+				<a href="#profile-view" class="nav-link">Perfil</a>
+			</nav>
+		</aside>
+
+    <div id="overlay" class="overlay" aria-hidden="true"></div>
+
+    <header class="site-header app-header">
+      <div class="dashboard-header">
+        <!--<p class="dashboard-greeting">Hola, Explorador</p> (Eliminar) -->
+      	<h1 id="home-title" class="dashboard-title">Inicio</h1>
+      </div>
+			<div class="container header-inner">
+        <button class="btn btn-icon notification-btn" type="button" aria-label="Notificaciones">
+          <span class="notification-icon">🔔</span>
+          <span class="notification-dot" aria-hidden="true"></span>
+        </button>
         </div>
+      </div>
+    </header>
 
-        <a href="home.html" class="nav-link">Inicio</a>
-        <a href="map.html" class="nav-link">Mapa</a>
-        <a href="report.html" class="nav-link">Reportes</a>
-        <a href="community.html" class="nav-link">Comunidad</a>
-        <a href="profile.html" class="nav-link">Perfil</a>
-        <a href="../index.html" class="nav-link" style="margin-top: auto; color: #e03737;">Cerrar Sesión</a>
-    </nav>
-
-    <!-- Contenido Principal -->
+    <!-- ========= CONTENIDO PRINCIPAL ========= -->
     <main class="main-content">
-        <h1>Bienvenida </h1>
-        <p>Explora mapas, reporta accesibilidad y contribuye con tu comunidad </p>
+      <!-- HOME / DASHBOARD -->
+      <section
+        id="home-view"
+        class="dashboard section--muted"
+        aria-labelledby="home-title"
+      >
+        <div class="container dashboard-grid">
+          <div class="dashboard-main">
+            <!-- Mis logros recientes -->
+            <section class=" panel--achievements" aria-labelledby="achievements-title">
+              <div class="panel-header">
+								<div class="title-panel">
+                <h2 id="achievements-title" class="panel-title">
+                  <span class="panel-title-icon" aria-hidden="true">🏅</span>
+                  Mis logros recientes
+                </h2>
+								</div>
+								<div class="title-panel">
+                <button type="button" class="panel-link">
+                  Ver más
+                  <span aria-hidden="true">›</span>
+                </button>
+								</div>
+							</div>
+
+              <div class="panel-body achievements-grid">
+                <!-- Card de nivel -->
+                <article class="card card-level" aria-label="Nivel actual">
+                  <div class="card-level-header">
+                    <div>
+                      <p class="card-eyebrow">Tu nivel</p>
+                      <h3 class="card-title">Nivel 5 — Explorador</h3>
+                    </div>
+                    <div
+                      class="card-level-badge"
+                      aria-hidden="true"
+                      title="Nivel actual"
+                    >
+                      ★
+                    </div>
+                  </div>
+									<div class="progress-exp">
+                  <p class="card-progress-label">Progreso</p>
+                  <span class="card-progress-value">850 / 1000 XP</span>
+									</div>
+                  <div
+                    class="progress-bar"
+                    role="img"
+                    aria-label="85% del nivel completado"
+                  >
+                    <div class="progress-bar-fill" style="width: 85%;"></div>
+                  </div>
+                </article>
+
+                <!-- Badges -->
+                <section
+                  class=""
+                  aria-label="Insignias desbloqueadas"
+                >
+                  <ul class="badge-list" role="list">
+                    <li class="card card-badges badge-card badge-card--unlocked">
+											<span class="badge-status">📊</span>
+                      <h3 class="badge-title">Explorador</h3>
+                      <p class="badge-status">✓ Desbloqueado</p>
+                    </li>
+                    <li class="card card-badges badge-card badge-card--unlocked">
+											<span class="badge-status">📊</span>
+                      <h3 class="badge-title">Colaborador</h3>
+                      <p class="badge-status">✓ Desbloqueado</p>
+                    </li>
+                    <li class="card card-badges badge-card badge-card--locked">
+											<span class="badge-status">📊</span>
+                      <h3 class="badge-title">Pionero</h3>
+                      <p class="badge-status">Bloqueado</p>
+                    </li>
+                  </ul>
+                </section>
+              </div>
+            </section>
+          </div>
+
+          <!-- Columna lateral: estadísticas -->
+          <section class="" aria-labelledby="stats-title">
+              <div class="panel-header">
+								<div class="title-panel">
+									<h2 id="stats-title" class="panel-title">
+										<span class="panel-title-icon" aria-hidden="true">📊</span>
+										Estadísticas de <br>accesibilidad en Lima
+									</h2>
+								</div>
+								<div>
+									<button type="button" class="panel-link">
+										Ver detalle
+										<span aria-hidden="true">›</span>
+									</button>
+								</div>
+							</div>
+
+              <div class="panel panel--stats panel-body stats-body">
+                <div
+                  class="progress-ring"
+                  data-progress="68"
+                  aria-label="68% de la ciudad accesible"
+                >
+                  <div class="progress-ring-inner">
+                    <p class="progress-ring-value">68%</p>
+                    <span class="progress-ring-label">Accesible</span>
+                  </div>
+                </div>
+
+                <div class="stats-list" role="list">
+                  <div class="stats-item">
+										<div class="item"><span class="stats-label">Barreras reportadas</span></div>
+										<div class="item"><span class="stats-value stats-value--total">23</span></div>
+                  </div>
+									<hr class="line-stats">
+                  <div class="stats-item">
+                    <div class="item"><span class="stats-label">Barreras solucionadas</span></div>
+                    <div class="item"><span class="stats-value stats-value--solved">15</span></div>
+                  </div>
+									<hr class="line-stats">
+                  <div class="stats-item">
+                    <div class="item"><span class="stats-label">En progreso</span></div>
+                    <div class="item"><span class="stats-value stats-value--inprogress">8</span></div>
+                  </div>
+                </div>
+              </div>
+          </section>
+        </div>
+      </section>
+
+      <!-- Secciones vacías para otros módulos (mapa, comunidad, perfil) -->
+      <section id="map-view" hidden aria-hidden="true"></section>
+      <section id="community-view" hidden aria-hidden="true"></section>
+      <section id="profile-view" hidden aria-hidden="true"></section>
+
+
+			<br>
+			<br>
+			<br>
     </main>
 
-    <!-- Scripts -->
-    <script src="../scripts/main.js"></script>
+		<!-- NAV inferior (solo mobile) -->
+		<nav class="bottom-nav" aria-label="Navegación inferior">
+			<a href="#home-view" class="bottom-link">🏠<span>Inicio</span></a>
+			<a href="../app/map.html" class="bottom-link">🗺️<span>Mapa</span></a>
+			<a href="#report-view" class="bottom-link main-action">＋</a>
+			<a href="#community-view" class="bottom-link">👥<span>Comunidad</span></a>
+			<a href="#profile-view" class="bottom-link">👤<span>Perfil</span></a>
+		</nav>
 
-</body>
+    <!-- ========= INTERACCIÓN ========= -->
+    <script src="assets/scripts/home.js"></script>
+  </body>
 </html>
