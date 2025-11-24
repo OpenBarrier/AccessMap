@@ -3,32 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <title>AccessMap - Reportes</title>
+
+    <!-- CSS global -->
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/layout.css">
+
+    <!-- CSS específico de reportes -->
+    <link rel="stylesheet" href="../styles/report.css">
 </head>
 
 <body>
 
-    <button class="btn-toggle" id="btn-menu-toggle">☰</button>
+    <!-- Botón menú móvil -->
+    <button id="btn-menu-toggle" class="btn-toggle">☰</button>
 
-    <nav class="sidebar" id="sidebar-nav">
-        <div style="padding: 1.5rem; color: white; font-weight: bold; font-size: 1.5rem;">
-            AccessMap
-        </div>
+    <!-- Sidebar -->
+    <nav id="sidebar-nav" class="sidebar">
+        <div class="sidebar-title">AccessMap</div>
 
         <a href="home.html" class="nav-link">Inicio</a>
         <a href="map.html" class="nav-link">Mapa</a>
-        <a href="report.html" class="nav-link">Reportes</a>
+        <a href="report.html" class="nav-link active">Reportes</a>
         <a href="community.html" class="nav-link">Comunidad</a>
         <a href="profile.html" class="nav-link">Perfil</a>
-        <a href="../index.html" class="nav-link" style="margin-top: auto; color: #e03737;">Cerrar Sesión</a>
+
+        <a href="../index.html" class="nav-link logout">Cerrar Sesión</a>
     </nav>
 
+    <!-- CONTENIDO PRINCIPAL -->
     <main class="main-content">
-        <h1>Reportar Accesibilidad</h1>
-        <p>Ayuda a mejorar la accesibilidad en tu comunidad reportando lugares con dificultades.</p>
 
-        <!-- Aquí luego irá el formulario -->
+        <!-- ===================================== -->
+        <!-- PANTALLA 1 — CÁMARA -->
+        <!-- ===================================== -->
+        <section id="screen-camera" class="screen active">
+
+            <div class="camera-tips">
+                Mantén la cámara estable y apunta hacia la barrera.
+            </div>
+
+            <div class="camera-frame">
+                <div class="frame-box"></div>
+                <div class="camera-icon">📷</div>
+            </div>
+
+            <div class="camera-footer">
+                <button id="btn-take-photo" class="btn-primary btn-full">
+                    Tomar Foto
+                </button>
+            </div>
+        </section>
+
+
+        <!-- ===================================== -->
+        <!-- PANTALLA 2 — PREVIEW DE FOTO -->
+        <!-- ===================================== -->
+        <section id="screen-preview" class="screen hidden">
+
+            <img id="report-photo" class="photo-preview" alt="Foto tomada">
+
+            <div class="preview-status">
+                ✔ Foto tomada correctamente
+            </div>
+
+            <div class="preview-actions">
+                <button id="btn-retake" class="btn-secondary">Volver a tomar</button>
+                <button id="btn-continue-info" class="btn-primary">Continuar</button>
+            </div>
+        </section>
+
+
+        <!-- ===================================== -->
+        <!-- PANTALLA 3 — INFO PREVIA AL REPORTE -->
+        <!-- ===================================== -->
+        <section id="screen-info" class="screen hidden">
+
+            <div class="info-card">
+                <h2>Antes de continuar…</h2>
+                <p>Estás a punto de crear un reporte de accesibilidad. Esto ayudará a otros usuarios y a la comunidad.</p>
+
+                <ul class="info-list">
+                    <li>✔ La foto debe ser clara</li>
+                    <li>✔ Describe el problema con detalle</li>
+                    <li>✔ Verifica la ubicación</li>
+                </ul>
+            </div>
+
+            <div class="info-footer">
+                <button id="btn-info-cancel" class="btn-secondary">Cancelar</button>
+                <button id="btn-info-continue" class="btn-primary">Continuar</button>
+            </div>
+        </section>
+
+
+        <!-- ===================================== -->
+        <!-- PANTALLA 4 — FORMULARIO DEL REPORTE -->
+        <!-- ===================================== -->
+        <section id="screen-form" class="screen hidden">
+
+            <h2>Nuevo Reporte</h2>
+
+            <!-- Foto fijada del preview -->
+            <img id="report-photo-preview" class="photo-preview" alt="Foto previa">
+
+            <form id="report-form">
+
+                <!-- Descripción -->
+                <label for="report-description" class="label">Descripción del problema</label>
+                <textarea
+                    id="report-description"
+                    class="input"
+                    rows="4"
+                    placeholder="Describe la barrera o dificultad…"></textarea>
+
+                <!-- Categoría -->
+                <label for="report-category" class="label">Categoría</label>
+                <select id="report-category" class="input">
+                    <option value="">Selecciona una categoría…</option>
+                    <option value="rampa-rota">Rampa rota</option>
+                    <option value="escaleras">Escaleras</option>
+                    <option value="vereda-danada">Vereda dañada</option>
+                    <option value="iluminacion">Falta de iluminación</option>
+                </select>
+
+                <!-- Ubicación -->
+                <label for="report-location" class="label">Ubicación</label>
+                <div id="report-location" class="location-box">
+                    Detectando ubicación…
+                </div>
+
+                <!-- Enviar -->
+                <button id="btn-report-submit" type="button" class="btn-primary btn-full">
+                    Enviar Reporte
+                </button>
+            </form>
+        </section>
+
+
+        <!-- ===================================== -->
+        <!-- POPUP PROCESANDO -->
+        <!-- ===================================== -->
+        <div id="popup-processing" class="popup hidden">
+            <div class="popup-box">
+                <h3>Procesando…</h3>
+                <p>Estamos enviando tu reporte.</p>
+            </div>
+        </div>
+
+        <!-- ===================================== -->
+        <!-- POPUP ÉXITO -->
+        <!-- ===================================== -->
+        <div id="popup-success" class="popup hidden">
+            <div class="popup-box popup-success-box">
+                <h3>¡Reporte enviado!</h3>
+                <p>Gracias por mejorar la accesibilidad de tu comunidad.</p>
+
+                <img id="success-photo" class="success-thumb" alt="Foto del reporte">
+
+                <button class="btn-primary btn-full" onclick="location.href='report.html'">
+                    Crear otro reporte
+                </button>
+            </div>
+        </div>
+
     </main>
 
     <!-- Scripts -->
