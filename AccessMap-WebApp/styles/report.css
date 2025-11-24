@@ -1,0 +1,231 @@
+/* =========================================================
+   ESTILOS GENERALES DEL MÓDULO REPORTE
+   ========================================================= */
+
+.screen {
+    display: none;
+    padding: 2rem;
+}
+
+.screen.active {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}
+
+.label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #024260;
+}
+
+.input {
+    width: 100%;
+    padding: 0.9rem;
+    border: 2px solid #334155;
+    border-radius: 0.6rem;
+    font-size: 1rem;
+    background: #fff;
+    color: #334155;
+    margin-bottom: 1.5rem;
+}
+
+.input:focus {
+    outline: none;
+    border-color: #00b592;
+}
+
+/* =========================================================
+   BOTONES
+   ========================================================= */
+
+.btn-primary {
+    background: #024260;
+    color: #fff;
+    padding: 1rem;
+    border-radius: 0.6rem;
+    width: 100%;
+    text-align: center;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.btn-primary:hover {
+    background: #003347;
+}
+
+.btn-secondary {
+    background: #e5e7eb;
+    color: #334155;
+    padding: 1rem;
+    border-radius: 0.6rem;
+    width: 100%;
+    text-align: center;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-secondary:hover {
+    background: #d8dce1;
+}
+
+.btn-full {
+    width: 100%;
+}
+
+/* =========================================================
+   PANTALLA: CÁMARA
+   ========================================================= */
+
+.camera-tips {
+    text-align: center;
+    font-size: 1rem;
+    color: #334155;
+    margin-bottom: 2rem;
+}
+
+.camera-frame {
+    width: 100%;
+    height: 380px;
+    background: #000;
+    border-radius: 1rem;
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.frame-box {
+    position: absolute;
+    border: 3px solid #00b592;
+    border-radius: 0.5rem;
+    width: 60%;
+    height: 60%;
+    top: 20%;
+    left: 20%;
+}
+
+.camera-icon {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 2rem;
+    color: #fff;
+}
+
+.camera-footer {
+    margin-top: 2rem;
+}
+
+/* =========================================================
+   PANTALLA: PREVIEW DE FOTO
+   ========================================================= */
+
+.photo-preview {
+    width: 100%;
+    border-radius: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.preview-status {
+    background: #05af43;
+    color: #fff;
+    padding: 1rem;
+    border-radius: 0.6rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.preview-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+/* =========================================================
+   PANTALLA: INFO PREVIA
+   ========================================================= */
+
+.info-card {
+    background: #f8fafc;
+    padding: 2rem;
+    border-radius: 1rem;
+    border: 2px solid #024260;
+}
+
+.info-card h2 {
+    color: #024260;
+    margin-bottom: 1rem;
+}
+
+.info-list {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 1rem;
+}
+
+.info-list li {
+    margin-bottom: 0.8rem;
+    color: #334155;
+}
+
+.info-footer {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+/* =========================================================
+   PANTALLA: FORMULARIO DEL REPORTE
+   ========================================================= */
+
+#report-location {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #334155;
+    background: #e5e7eb;
+    border-radius: 0.6rem;
+    color: #334155;
+    margin-bottom: 1.5rem;
+}
+
+/* =========================================================
+   POPUPS
+   ========================================================= */
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    z-index: 1000;
+}
+
+.popup-box {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 1rem;
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+    color: #334155;
+}
+
+.popup-success-box h3 {
+    color: #05af43;
+}
+
+.success-thumb {
+    width: 100%;
+    border-radius: 1rem;
+    margin: 1.5rem 0;
+}
