@@ -73,7 +73,37 @@
    Input Descripción: id="report-description"
    Input Foto:        id="report-photo"
    Botón Enviar:      id="btn-report-submit"
-   
+
+--- REPORTE: Cámara ---
+Pantalla Cámara:                 id="screen-camera"
+Botón Tomar Foto:                id="btn-take-photo"
+
+         --- REPORTE: Preview de Foto ---
+         Pantalla Preview:                id="screen-preview"
+         Imagen Preview (foto):           id="report-photo"
+         Botón Repetir Foto:              id="btn-retake"
+         Botón Continuar Preview:         id="btn-continue-info"
+
+         --- REPORTE: Información del Reporte ---
+         Pantalla Info:                   id="screen-info"
+         Botón Info Cancelar:             id="btn-info-cancel"
+         Botón Info Continuar:            id="btn-info-continue"
+
+         --- REPORTE: Formulario ---
+         Pantalla Formulario:             id="screen-form"
+         Foto Preview en Formulario:      id="report-photo-preview"
+         Input Descripción:               id="report-description"
+         Input Categoría:                 id="report-category"
+         Input Ubicación:                 id="report-location"
+         Botón Enviar Reporte:            id="btn-report-submit"
+
+         --- REPORTE: Popups ---
+         Popup Procesando:                id="popup-processing"
+         Popup Éxito:                     id="popup-success"
+         Foto en popup éxito:             id="success-photo"
+
+
+         
    --- NAVEGACIÓN ---
    Botón Menú (Mobile): id="btn-menu-toggle"
    Sidebar:             id="sidebar-nav" 
