@@ -55,6 +55,19 @@
    --- MAPA ---
    Contenedor Mapa:   id="map-container"
    Input Búsqueda:    id="search-input"
+   Contenedor del mapa:	map-container
+   Input búsqueda:	search-input
+   Panel búsqueda:	panel-search
+   Panel rutas:	panel-route
+   Resultado de rutas → destino: 	route-destination
+   Contenedor rutas:	routes-container
+   Botón cierre búsqueda:	btn-close-search
+   Botón filtros (opcional): 	btn-filters
+   Botón hora actual: 	btn-time-now
+   Botón programar hora:	btn-time-schedule
+   Botón compartir ruta:	btn-share-route
+   Botón guardar ruta:	btn-save-route
+   Botón iniciar navegación:	btn-start-navigation
 
    --- REPORTE ---
    Input Descripción: id="report-description"
