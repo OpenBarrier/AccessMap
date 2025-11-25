@@ -80,7 +80,8 @@
     
     /* El Sidebar se queda fijo y visible siempre */
     .sidebar {
-        transform: translateX(0); 
+        transform: translateX(0);
+        justify-content: space-between;
     }
 
     /* Ocultamos el botón hamburguesa */
@@ -92,5 +93,6 @@
     .main-content {
         margin-left: 300px; /* Mismo ancho que el sidebar */
         padding: 2rem; /* Más espacio */
+        padding-top: 0;
     }
 }

@@ -12,21 +12,22 @@
 <body>
     <!-- ========= CABECERA / NAVEGACIÓN ========= -->
 		<aside id="sidebar" class="sidebar">
-			<div class="sidebar-brand">Access<span>MAP</span></div>
-
-			<nav class="sidebar-nav">
-				<a href="#home-view" class="nav-link">Inicio</a>
-				<a href="../app/map.html" class="nav-link">Mapa</a>
-				<a href="#community-view" class="nav-link">Comunidad</a>
-				<a href="#profile-view" class="nav-link">Perfil</a>
-			</nav>
+      <div class="sidebar-item">
+			  <div class="sidebar-brand">Access<span>MAP</span></div>
+        <nav class="sidebar-nav options-bar">
+          <a href="#home-view" class="nav-link">Inicio</a><hr class="line-stats">
+          <a href="../app/map.html" class="nav-link">Mapa</a><hr class="line-stats">
+          <a href="#community-view" class="nav-link">Comunidad</a><hr class="line-stats">
+          <a href="#profile-view" class="nav-link">Perfil</a><hr class="line-stats">
+        </nav>
+      </div>
+      <div class="sidebar-item"></div>
 		</aside>
 
     <div id="overlay" class="overlay" aria-hidden="true"></div>
 
     <header class="site-header app-header">
       <div class="dashboard-header">
-        <!--<p class="dashboard-greeting">Hola, Explorador</p> (Eliminar) -->
       	<h1 id="home-title" class="dashboard-title">Inicio</h1>
       </div>
 			<div class="container header-inner">
@@ -90,7 +91,7 @@
                     role="img"
                     aria-label="85% del nivel completado"
                   >
-                    <div class="progress-bar-fill" style="width: 85%;"></div>
+                    <div class="progress-bar-fill"></div>
                   </div>
                 </article>
 
@@ -122,7 +123,7 @@
           </div>
 
           <!-- Columna lateral: estadísticas -->
-          <section class="" aria-labelledby="stats-title">
+          <section class="dashboard" aria-labelledby="stats-title">
               <div class="panel-header">
 								<div class="title-panel">
 									<h2 id="stats-title" class="panel-title">
@@ -139,11 +140,7 @@
 							</div>
 
               <div class="panel panel--stats panel-body stats-body">
-                <div
-                  class="progress-ring"
-                  data-progress="68"
-                  aria-label="68% de la ciudad accesible"
-                >
+                <div class="progress-ring" data-progress="68" aria-label="68% de la ciudad accesible">
                   <div class="progress-ring-inner">
                     <p class="progress-ring-value">68%</p>
                     <span class="progress-ring-label">Accesible</span>
@@ -170,12 +167,6 @@
           </section>
         </div>
       </section>
-
-      <!-- Secciones vacías para otros módulos (mapa, comunidad, perfil) -->
-      <section id="map-view" hidden aria-hidden="true"></section>
-      <section id="community-view" hidden aria-hidden="true"></section>
-      <section id="profile-view" hidden aria-hidden="true"></section>
-
 
 			<br>
 			<br>

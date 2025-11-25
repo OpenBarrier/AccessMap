@@ -1,11 +1,11 @@
 /* =======================================================
    home.css – Estilos del módulo HOME / DASHBOARD
-   No interfiere con layout.css ni main.css
+   Mobile first (media queries con min-width)
    ======================================================= */
 
-/* ---------- CONTENEDOR PRINCIPAL ---------- */
+/* ---------- CABECERA GLOBAL ---------- */
 
-.site-header.app-header{
+.site-header.app-header {
   display: flex;
   justify-content: space-between;
   padding-left: 25px;
@@ -13,24 +13,13 @@
   padding-bottom: 25px;
 }
 
+/* ---------- GRID PRINCIPAL ---------- */
 
 .dashboard-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1.2fr);
+  display: flex;
+  flex-direction: column;
   gap: 1.5rem;
   margin-top: 1rem;
-}
-
-@media (max-width: 768px) {
-  .dashboard-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .site-header.app-header{
-  display: flex;
-  justify-content: space-between;
-  padding-left: 25px;
-  }
 }
 
 /* ---------- CABECERA DEL HOME ---------- */
@@ -101,27 +90,19 @@
   gap: 1rem;
 }
 
-
-
-@media (max-width: 1000px) {
-  
-  .dashboard-main {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .card-level {
-  padding: 0rem;
-  }
-}
-
 /* Card nivel */
+
+.dashboard-main {
+  display: flex;
+  flex-direction: column;
+}
 
 .card-level {
   border: 1px solid #e2e8f0;
-  background: linear-gradient(to right,#024260,#317b9d);
-  padding: 1rem;
+  background: linear-gradient(to right, #024260, #317b9d);
+  padding: 0rem; /* Mobile: sin padding extra */
   border-radius: 0.75rem;
+  padding: 1rem;
 }
 
 .card-level-header {
@@ -157,6 +138,7 @@
 }
 
 /* Barra de progreso */
+
 .progress-exp {
   margin-top: 0.6rem;
   display: flex;
@@ -187,7 +169,7 @@
   height: 100%;
   border-radius: 999px;
   background-color: #024260;
-  border-radius: 999px;
+  width: 85%;
 }
 
 /* ---------- BADGES ---------- */
@@ -260,33 +242,101 @@ span.badge-icon {
   display: flex;
   align-items: center;
   gap: 1.4rem;
+  flex-direction: column;
+  text-align: center;
 }
 
-/* DASHBOARD GRID */
-.dashboard-grid {
+.stats-list {
+  flex: 1;
+  list-style: none;
+  padding: 0;
   display: flex;
-  flex-direction: row;
-  gap: 1.5rem;
-  margin-top: 1rem;
+  justify-content: space-between;
+  width: 100%;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-left: 0;
+  padding-right: 0;
 }
 
+.stats-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1rem;
+}
 
+.stats-label {
+  color: #000000;
+}
 
-@media (max-width: 768px) {
-  .container.dashboard-grid {
-    flex-direction: column;
-    width: 100%;
+.stats-value {
+  font-weight: 700;
+  color: #024260;
+}
+
+.stats-value--solved {
+  color: #05af43;
+}
+
+.stats-value--inprogress {
+  color: #e69000;
+}
+
+/* ---------- ANILLO DE PROGRESO ---------- */
+
+.progress-ring {
+  --progress: 70;
+
+  width: 10.5rem;
+  height: 10.5rem;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: conic-gradient(#e2e8f0 0deg 360deg);
+
+  animation: fill-ring 1s ease-out forwards;
+}
+
+@keyframes fill-ring {
+  from {
+    background: conic-gradient(#e2e8f0 0deg 360deg);
   }
-  
-  .container.dashboard-grid{
-    width: 100%;
-    
+  to {
+    background: conic-gradient(
+      #00b592 0deg calc(var(--progress) * 3.6deg),
+      #e2e8f0 calc(var(--progress) * 3.6deg) 360deg
+    );
   }
 }
 
-/* ... (todo lo de panel, card-level, badges, stats, etc., que ya te pasé) ... */
+.progress-ring-inner {
+  width: 7.05rem;
+  height: 7.05rem;
+  border-radius: 999px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
 
-/* NAV INFERIOR - SOLO MOBILE */
+.progress-ring-value {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #024260;
+}
+
+.progress-ring-label {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+/* ---------- NAV INFERIOR (MOBILE) ---------- */
+
 .bottom-nav {
   position: fixed;
   bottom: 0;
@@ -317,6 +367,7 @@ span.badge-icon {
 }
 
 /* Botón central flotante */
+
 .main-action {
   background: #05af43;
   color: white;
@@ -330,150 +381,69 @@ span.badge-icon {
   font-size: 2rem;
 }
 
+/* Separador de stats */
+
 .line-stats {
   border: none;
   border-top: 1px solid #e2e8f0;
   margin: 0;
 }
 
-@media (max-width: 768px) {
-  .stats-body {
-    flex-direction: column;
-    text-align: center;
-  }
+/* =======================================================
+   MEDIA QUERIES - DESKTOP FIRST CON MIN-WIDTH
+   ======================================================= */
 
-  .bottom-nav {
-    display: none;
-  }
+/* >= 768px: layout en columnas, stats alineadas, padding lateral en stats */
 
-  .stats-list{
-    padding-left: 0rem !important;
-    padding-right: 0rem !important;
-  }
-  
-}
-
-.stats-list {
-  flex: 1;
-  list-style: none;
-  padding: 0;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  flex-direction: column;
-  gap: 0.4rem;
-  padding-left: 5rem;
-  padding-right: 5rem;
-}
-
-.stats-item {
-  display: flex;
-  justify-content: space-between;
-  font-size: 1rem;
-
-}
-
-.stats-label {
-  color: #000000;
-}
-
-.stats-value {
-  font-weight: 700;
-  color: #024260;
-}
-
-.stats-value--solved {
-  color: #05af43;
-}
-
-.stats-value--inprogress {
-  color: #e69000;
-}
-
-/* ---------- ANILLO DE PROGRESO ---------- */
-
-.progress-ring {
-  width: 10.5rem;
-  height: 10.5rem;
-  border-radius: 999px;
-  background: conic-gradient(#05af43 0deg, #e2e8f0 0deg 360deg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.progress-ring-inner {
-  width: 7.05rem;
-  height: 7.05rem;
-  border-radius: 999px;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.progress-ring-value {
-  margin: 0;
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #024260;
-}
-
-.progress-ring-label {
-  margin: 0;
-  font-size: 0.75rem;
-  color: #64748b;
-}
-
-/* ===========================
-   NAV INFERIOR (MOBILE)
-=========================== */
-
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 64px;
-  background: #fff;
-  border-top: 1px solid #e5e7eb;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  z-index: 999;
-}
-
-.bottom-link {
-  flex: 1;
-  text-align: center;
-  font-size: 1.4rem;
-  color: #475569;
-  display: flex;
-  flex-direction: column;
-  gap: 0.1rem;
-}
-
-.bottom-link span {
-  font-size: 0.75rem;
-}
-
-.main-action {
-  background-color: #05af43;
-  width: 48px;
-  height: 48px;
-  border-radius: 100px;
-  color: #fff;
-  font-size: 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: -24px;
-}
-
-/* Ocultar barra inferior en desktop */
 @media (min-width: 768px) {
+  .dashboard-grid {
+    margin-top: 0;
+    flex-direction: column;
+  }
+
+  .stats-body {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .stats-list {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Ocultar barra inferior en desktop */
   .bottom-nav {
     display: none;
   }
+
+  .options-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 1.35rem;
+  }
+
+  .sidebar-brand {
+    font-size: 2rem;
+    color: #05af43;
+    font-weight: 700;
+    padding-bottom: 3rem;
+  }
+
 }
+
+/* >= 1000px: ajustes para desktop amplio */
+
+@media (min-width: 1000px) {
+  .dashboard-main {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .card-level {
+    padding: 1rem;
+  }
+}
+
