@@ -2,39 +2,197 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AccessMap</title>
 
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/layout.css">
+    <link rel="stylesheet" href="../styles/community.css">
 </head>
 
 <body>
 
-    <button class="btn-toggle" id="btn-menu-toggle">
-        ☰
-    </button>
+    <!-- Botón para abrir/cerrar sidebar en móviles -->
+    <button class="btn-toggle" id="btn-menu-toggle">☰</button>
 
+    <!-- Sidebar -->
     <nav class="sidebar" id="sidebar-nav">
-        <div style="padding: 1.5rem; color: white; font-weight: bold; font-size: 1.5rem;">
-            AccessMap
-        </div>
+        <div class="sidebar-title">AccessMap</div>
 
         <a href="home.html" class="nav-link">Inicio</a>
         <a href="map.html" class="nav-link">Mapa</a>
         <a href="report.html" class="nav-link">Reportes</a>
         <a href="community.html" class="nav-link">Comunidad</a>
         <a href="profile.html" class="nav-link">Perfil</a>
-        <a href="../index.html" class="nav-link" style="margin-top: auto; color: #e03737;">
-            Cerrar Sesión
-        </a>
+        <a href="../index.html" class="nav-link logout">Cerrar Sesión</a>
     </nav>
 
+    <!-- Contenido principal -->
     <main class="main-content">
-        <!-- Aquí irá el contenido de cada página -->
+
+        <!-- HEADER -->
+        <header class="community-header">
+            <div class="header-text">
+                <h1 class="page-title">Comunidad</h1>
+            </div>
+            <div class="notification-icon">
+                🔔
+            </div>
+        </header>
+
+        <!-- TABS -->
+        <section class="tab-navigation">
+            <a href="#" class="tab-item tab-item--active" data-tab="ranking">
+                🏆 Ranking
+            </a>
+            <a href="#" class="tab-item" data-tab="grupos">
+                👥 Grupos
+            </a>
+        </section>
+
+        <!-- CONTENIDO DE TABS -->
+        <div class="tab-content-container">
+
+            <!-- RANKING -->
+            <div id="ranking-view" class="tab-section active">
+                <section class="search-section">
+                    <div class="search-box">
+                        <input type="text" placeholder="Buscar colaboradores...">
+                        🔍
+                    </div>
+                </section>
+
+                <section class="community-stats">
+                    <h2 class="section-title">Estadísticas de la Comunidad</h2>
+                    <div class="stats-container">
+                        <div class="stat-card">
+                            <span class="stat-number">1,247</span>
+                            <span class="stat-label">Colaboradores</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number">8,932</span>
+                            <span class="stat-label">Reportes</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number stat-number--green">3,456</span>
+                            <span class="stat-label">Solucionados</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="top-ranking-section">
+                    <h2 class="section-title">Top 3 del Mes</h2>
+                    <div class="top-ranking-list">
+                        <div class="ranking-item ranking-item--top1">
+                            <div class="medal-icon">🥇</div>
+                            <div class="avatar-bg avatar-bg--mg">MG</div>
+                            <div class="user-info">
+                                <span class="name">Maria Garcia</span>
+                                <span class="handle">@maria_g</span>
+                            </div>
+                            <span class="points">3420 puntos</span>
+                        </div>
+                        <div class="ranking-item">
+                            <div class="medal-icon">🥈</div>
+                            <div class="avatar-bg avatar-bg--cm">CM</div>
+                            <div class="user-info">
+                                <span class="name">Carlos Mendoza</span>
+                                <span class="handle">@carlos_m</span>
+                            </div>
+                            <span class="points">2150 puntos</span>
+                        </div>
+                        <div class="ranking-item">
+                            <div class="medal-icon">🥉</div>
+                            <div class="avatar-bg avatar-bg--at">AT</div>
+                            <div class="user-info">
+                                <span class="name">Ana Torres</span>
+                                <span class="handle">@ana_t</span>
+                            </div>
+                            <span class="points">1890 puntos</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="full-collaborator-list">
+                    <h2 class="section-title">Todos los Colaboradores</h2>
+                    <div class="collaborator-list">
+                        <div class="collaborator-item">
+                            <span class="rank-number">#1</span>
+                            <div class="avatar-bg avatar-bg--mg">MG</div>
+                            <div class="user-details">
+                                <span class="name">Maria Garcia</span>
+                                <span class="handle">@maria_g</span>
+                                <span class="verified-tag">Verificado</span>
+                            </div>
+                            <div class="reports-info">
+                                <span class="reports-count reports-count--green">342</span>
+                                <span class="reports-label">reportes</span>
+                            </div>
+                        </div>
+                        <div class="collaborator-item">
+                            <span class="rank-number">#2</span>
+                            <div class="avatar-bg avatar-bg--cm">CM</div>
+                            <div class="user-details">
+                                <span class="name">Carlos Mendoza</span>
+                                <span class="handle">@carlos_m</span>
+                                <span class="verified-tag">Verificado</span>
+                            </div>
+                            <div class="reports-info">
+                                <span class="reports-count reports-count--green">215</span>
+                                <span class="reports-label">reportes</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- GRUPOS -->
+            <div id="grupos-view" class="tab-section">
+                <section class="search-section search-groups-section">
+                    <div class="search-box">
+                        <input type="text" placeholder="Buscar grupos...">
+                        🔍
+                    </div>
+                    <button class="add-group-button">+</button>
+                </section>
+
+                <h2 class="section-title">Mis Grupos</h2>
+                <div class="group-list">
+                    <div class="group-item">
+                        <div class="group-icon icon-bg--lima-norte">🧱</div>
+                        <div class="group-details">
+                            <div class="group-name">Accesibilidad Lima Norte</div>
+                            <div class="group-description">Grupo para usuarios de Lima Norte que reportan y mejoran la accesibilidad en la zona.</div>
+                            <div class="group-stats">
+                                <span>👥 87 miembros</span>
+                                <span>📝 342 reportes</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group-item group-item--active">
+                        <div class="group-icon icon-bg--san-isidro">🏢</div>
+                        <div class="group-details">
+                            <div class="group-name">San Isidro Accesible</div>
+                            <div class="group-tag tag-active">Activo</div>
+                            <div class="group-description">Grupo local enfocado en hacer San Isidro más inclusivo para todos.</div>
+                            <div class="group-stats">
+                                <span>👥 52 miembros</span>
+                                <span>📝 156 reportes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
     </main>
 
     <script src="../scripts/main.js"></script>
     <script src="../scripts/report.js"></script>
+    <script src="../scripts/community.js"></script>
 
 </body>
 </html>
+
