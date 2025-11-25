@@ -114,3 +114,51 @@ Botón Tomar Foto:                id="btn-take-photo"
    - class="tag tag-verde"   (Para cosas buenas)
    - class="tag tag-ambar"   (Para precauciones)
    - class="tag tag-rojo"    (Para peligros)
+
+
+6. COPIAR Y PEGAR EN CADA SECCIÓN DEL TAB BAR ORIGINAL (MODIFICAR SOLO EL NOMBRE DE SU SECCION DEL TAB BAR/SIDE BAR EN CADA HOME, PERFIL, COMUNIDAD, REPORTE, MAPA VERSION HTML)
+    <!-- BOTÓN HAMBURGUESA (solo móvil) -->
+    <button class="btn-menu-toggle" id="btn-menu-toggle">☰</button>
+
+    <!-- SIDEBAR -->
+    <aside id="sidebar" class="sidebar">
+        <div class="sidebar-brand">AccessMap</div>
+
+        <nav class="sidebar-nav">
+            <a href="home.html" class="nav-link">Inicio</a>
+            <a href="map.html" class="nav-link">Mapa</a>
+            <a href="report.html" class="nav-link">Reportar</a>
+            <a href="community.html" class="nav-link">Comunidad</a>
+            <a href="profile.html" class="nav-link">Perfil</a>
+            <a href="../index.html" class="nav-link" style="margin-top: auto; color: #e03737;">
+            Cerrar Sesión
+        </nav>
+    </aside>
+
+    <!-- OVERLAY -->
+    <div id="overlay" class="overlay"></div>
+
+    <!-- CONTENIDO PRINCIPAL → CAMBIA EN CADA PÁGINA -->
+    <main class="main-content">
+        <!-- AQUÍ VA EL CONTENIDO DE LA PÁGINA --> lo editan segun su task etc 
+    </main>
+
+    <!-- NAV INFERIOR (MOBILE) -->
+    <nav class="bottom-nav">
+        <a href="home.html" class="bottom-link">🏠<span>Inicio</span></a>
+        <a href="map.html" class="bottom-link">🗺️<span>Mapa</span></a>
+        <a href="report.html" class="main-action">＋</a>
+        <a href="community.html" class="bottom-link">👥<span>Comunidad</span></a>
+        <a href="profile.html" class="bottom-link">👤<span>Perfil</span></a>
+    </nav>
+
+
+✔ SOLO pueden cambiar:
+El contenido dentro de <main class="main-content"> ... </main>
+El título de la página dentro de su <header>
+❌ No deben tocar:
+.btn-menu-toggle
+<aside class="sidebar"> ...
+<div id="overlay">
+<nav class="bottom-nav">
+Estos son componentes globales del layout.
