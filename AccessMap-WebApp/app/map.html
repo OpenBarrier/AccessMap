@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>AccessMap - Mapa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css"/>
+
+  <!-- Estilos del mapa -->
+    <link rel="stylesheet" href="../styles/map.css">
+</head>
+<body>
+  <div class="map-layout">
+    <!-- Sidebar -->
+    <aside id="sidebar-nav" class="sidebar">
+      <div class="sidebar__header">
+        <span class="sidebar__logo">AccessMap</span>
+      </div>
+      <nav class="sidebar__nav">
+        <a href="#" class="sidebar__link sidebar__link--active">Mapa</a>
+        <a href="#" class="sidebar__link">Comunidad</a>
+        <a href="#" class="sidebar__link">Perfil</a>
+      </nav>
+    </aside>
+
+    <!-- Contenido principal -->
+    <main class="map-main">
+      <header class="map-header">
+        <button
+          id="btn-menu-toggle"
+          class="btn-icon btn-menu"
+          aria-label="Abrir menú de navegación"
+        >
+          &#9776;
+        </button>
+
+        <h1 class="map-title">Mapa</h1>
+
+        <button
+          class="btn-icon btn-notifications"
+          aria-label="Ver notificaciones"
+        >
+          &#128276;
+        </button>
+      </header>
+
+      <!-- Barra de búsqueda / chips -->
+      <section class="map-search-bar">
+        <form id="search-form" class="search-form">
+          <div class="search-input-wrapper">
+            <span class="search-icon">&#128269;</span>
+            <input
+              id="search-input"
+              type="text"
+              placeholder="Buscar destino..."
+              autocomplete="off"
+            />
+          </div>
+        </form>
+
+        <!-- Sugerencias de búsqueda -->
+        <ul
+          id="search-suggestions"
+          class="search-suggestions search-suggestions--hidden"
+        ></ul>
+
+        <button class="btn-chip" type="button">
+          <span class="chip-icon">&#9888;</span>
+          <span class="chip-text">3 barreras reportadas</span>
+        </button>
+      </section>
+
+      <!-- Contenedor del mapa -->
+      <section class="map-wrapper">
+        <div id="map-container"></div>
+
+        <!-- Controles flotantes -->
+        <div class="map-floating-controls">
+          <button
+            id="btn-zoom-in"
+            type="button"
+            class="btn-circle"
+            aria-label="Acercar mapa"
+          >
+            +
+          </button>
+          <button
+            id="btn-zoom-out"
+            type="button"
+            class="btn-circle"
+            aria-label="Alejar mapa"
+          >
+            &minus;
+          </button>
+          <button
+            id="btn-center-location"
+            type="button"
+            class="btn-circle"
+            aria-label="Ir a mi ubicación"
+          >
+            &#9673;
+          </button>
+          <button
+            id="btn-open-report"
+            type="button"
+            class="btn-circle btn-circle--alert"
+            aria-label="Reportar barrera"
+          >
+            &#9888;
+          </button>
+        </div>
+
+        <!-- Panel inferior -->
+        <div class="map-bottom-panel">
+          <div class="bottom-card">
+            <div class="bottom-card__top-row">
+              <div class="toggle-accessible">
+                <label class="switch">
+                  <input type="checkbox" id="toggle-accessible" />
+                  <span class="switch__slider"></span>
+                </label>
+                <span class="toggle-accessible__label">Solo accesibles</span>
+              </div>
+
+              <button
+                id="btn-open-route-planner"
+                type="button"
+                class="btn-outline"
+              >
+                Planificar ruta
+              </button>
+            </div>
+
+            <div id="route-info" class="route-info route-info--hidden">
+              <div class="route-info__status">
+                <span class="tag tag-verde">Ruta A · Recomendada</span>
+              </div>
+              <div class="route-info__details">
+                <div class="route-info__metric">
+                  <span class="route-info__label">Duración</span>
+                  <span id="route-duration" class="route-info__value">–</span>
+                </div>
+                <div class="route-info__metric">
+                  <span class="route-info__label">Distancia</span>
+                  <span id="route-distance" class="route-info__value">–</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Toast -->
+        <div id="map-toast" class="map-toast map-toast--hidden">
+          <span id="map-toast-text"></span>
+        </div>
+
+        <!-- BACKDROP del modal de ruta -->
+        <div
+          id="route-modal-backdrop"
+          class="route-modal-backdrop route-modal--hidden"
+        ></div>
+
+        <!-- MODAL / Bottom sheet de planificación de ruta -->
+        <div id="route-modal" class="route-modal route-modal--hidden">
+          <div class="route-modal__header">
+            <h2 class="route-modal__title">Planificación de ruta</h2>
+            <button
+              id="route-modal-close"
+              class="btn-icon route-modal__close"
+              aria-label="Cerrar"
+            >
+              &times;
+            </button>
+          </div>
+
+          <div class="route-modal__body">
+            <div class="route-field">
+              <label for="route-origin-input" class="route-field__label"
+                >Origen</label
+              >
+              <div class="route-field__row">
+                <input
+                  id="route-origin-input"
+                  type="text"
+                  placeholder="Mi ubicación actual o dirección"
+                />
+                <button
+                  id="btn-pick-origin"
+                  type="button"
+                  class="btn-mini"
+                  aria-label="Seleccionar origen en el mapa"
+                >
+                  Mapa
+                </button>
+              </div>
+            </div>
+
+            <div class="route-field">
+              <label for="route-dest-input" class="route-field__label"
+                >Destino</label
+              >
+              <div class="route-field__row">
+                <input
+                  id="route-dest-input"
+                  type="text"
+                  placeholder="Buscar destino o evento"
+                />
+                <button
+                  id="btn-pick-destination"
+                  type="button"
+                  class="btn-mini"
+                  aria-label="Seleccionar destino en el mapa"
+                >
+                  Mapa
+                </button>
+              </div>
+            </div>
+
+            <div class="route-filters">
+              <p class="route-filters__title">Filtros de ruta</p>
+              <div class="route-filters__chips">
+                <button
+                  type="button"
+                  class="chip-filter"
+                  data-filter="ramps"
+                >
+                  Rutas con rampas verificadas
+                </button>
+                <button
+                  type="button"
+                  class="chip-filter"
+                  data-filter="lighting"
+                >
+                  Priorizar iluminación
+                </button>
+                <button
+                  type="button"
+                  class="chip-filter"
+                  data-filter="avoid-barriers"
+                >
+                  Evitar barreras reportadas
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="route-modal__footer">
+            <button
+              id="btn-start-route"
+              type="button"
+              class="btn-primary"
+            >
+              Iniciar navegación
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Scripts Leaflet -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+
+  <!-- Lógica del mapa -->
+  <script src="../scripts/map.js"></script>
+</body>
+</html>

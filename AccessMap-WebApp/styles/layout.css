@@ -69,7 +69,7 @@
    ========================================= */
 .main-content {
     padding: 1rem;
-    padding-top: 4rem; /* Espacio para que el botón hamburguesa no tape el texto */
+    padding-top: 0.5rem; /* Espacio para que el botón hamburguesa no tape el texto */
     transition: margin-left 0.3s ease;
 }
 
@@ -80,7 +80,8 @@
     
     /* El Sidebar se queda fijo y visible siempre */
     .sidebar {
-        transform: translateX(0); 
+        transform: translateX(0);
+        justify-content: space-between;
     }
 
     /* Ocultamos el botón hamburguesa */
@@ -90,7 +91,8 @@
 
     /* Empujamos el contenido a la derecha */
     .main-content {
-        margin-left: 250px; /* Mismo ancho que el sidebar */
+        margin-left: 300px; /* Mismo ancho que el sidebar */
         padding: 2rem; /* Más espacio */
+        padding-top: 0;
     }
 }
