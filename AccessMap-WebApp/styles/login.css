@@ -1,0 +1,305 @@
+/* =========================================
+   ESTILOS ESPECÍFICOS DEL LOGIN (AccessMap)
+   ========================================= */
+
+/* 1. RESET BÁSICO */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* 2. LAYOUT DE PÁGINA (Fondo y Overlay) */
+body {
+    display: block; 
+    padding-top: 5rem; 
+    padding-bottom: 5rem;
+    
+    /* FONDO: Mapa accesible */
+    background-image: url('../assets/img/MapaAccesible.jpg'); 
+    background-size: cover;          
+    background-position: center center; 
+    background-attachment: fixed;    
+    background-repeat: no-repeat;    
+    position: relative;              
+}
+
+/* Overlay Semitransparente */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Oscuridad al 70% */
+    z-index: -1; 
+}
+
+
+/* 3. CONTENEDOR PRINCIPAL */
+.login-container {
+    max-width: 1200px; 
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%; 
+    position: relative; 
+    z-index: 0; 
+}
+
+/* 4. TARJETA DE LOGIN (Card) */
+.login-card {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%; 
+    max-width: 550px; 
+    padding: 4rem; 
+    
+    background-color: #FFFFFF;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 0.5rem;
+}
+
+/* Centrado de Bloques Internos */
+.login-card > * {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 400px; 
+}
+
+/* Logo AccessMap */
+.login-card img {
+    max-width: 140px; 
+    margin-bottom: 0.5rem; 
+    display: block; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* 5. TÍTULOS Y TIPOGRAFÍA */
+
+/* Título Visual (AccessMap) */
+.accessmap-design {
+    display: block;
+    font-size: 1.2rem; 
+    font-weight: 700;
+    margin-bottom: 1.5rem; 
+    text-align: center;
+    max-width: 100%;
+}
+
+.texto-verde-azulado {
+    color: #00b592;
+}
+
+.accessmap-design span {
+    display: inline;
+}
+
+.accessmap-design .design-access {
+    margin-right: -0.2rem; 
+}
+
+/* Título Principal (H2) */
+.login-subtitle {
+    font-size: 1.8rem; 
+    margin-top: 0; 
+    margin-bottom: 0.5rem; 
+    text-align: center;
+    max-width: 100%;
+}
+
+/* Descripción */
+.login-description-text {
+    font-size: 1rem; 
+    color: #334155; 
+    margin-bottom: 3rem; 
+    opacity: 0.9;
+    text-align: center;
+    max-width: 100%;
+}
+
+
+/* 6. FORMULARIOS (Inputs) */
+
+.input-group {
+    margin-bottom: 2rem; 
+    text-align: left; 
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.login-card input[type="email"],
+.login-card input[type="password"] {
+    width: 100%;
+    padding: 0.9rem;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+}
+
+
+/* 7. OPCIONES ADICIONALES (Checkbox) */
+.remember-forgot-container {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+    margin-bottom: 2rem; 
+    font-size: 0.9rem;
+    max-width: 400px; 
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.checkbox-group label {
+    margin: 0;
+}
+
+
+/* 8. BOTÓN PRINCIPAL */
+.button-group {
+    max-width: 400px; 
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 3rem; 
+    text-align: center; 
+}
+
+.button-group button {
+    max-width: 300px; 
+    margin: 0 auto; 
+    display: block; 
+}
+
+
+/* 9. REDES SOCIALES */
+
+/* Separador Visual */
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 3rem 0 2rem; 
+}
+
+.separator .line {
+    flex-grow: 1;
+    height: 1px;
+    background-color: #e2e8f0; 
+}
+
+.separator .text {
+    padding: 0 1rem; 
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+/* Botones Sociales */
+.social-login {
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between; 
+    gap: 1rem;
+    margin-top: 1.5rem; 
+    max-width: 400px; 
+}
+
+.btn-social {
+    width: 48%; 
+    margin: 0; 
+    max-width: none; 
+    text-transform: none;
+    padding: 0.7rem 1.5rem;
+    font-size: 0.95rem;
+}
+
+/* Iconos de Redes */
+.social-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 0.5rem;
+}
+
+.social-facebook {
+    background-image: url('../assets/img/FacebookLogo.png'); 
+}
+
+.social-google {
+    background-image: url('../assets/img/GoogleLogo.png');
+}
+
+.btn-facebook {
+    background-color: #024260; 
+    color: white;
+}
+
+.btn-google {
+    background-color: white;
+    color: #334155; 
+    border: 1px solid #e2e8f0; 
+}
+
+
+/* 10. REGISTRO */
+.register-cta {
+    margin-top: 3rem; 
+    font-size: 0.95rem;
+    text-align: center;
+}
+
+.register-cta span {
+    color: #334155; 
+}
+
+.register-link {
+    text-decoration: underline; 
+    font-weight: 700;
+}
+
+/* Clase de utilidad para ocultar vistas */
+.hidden {
+    display: none !important;
+}
+
+/* --- ESTILOS DEL MODAL --- */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Encima de todo */
+}
+
+.modal-content {
+    background-color: #FFFFFF;
+    padding: 2.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    animation: fadeIn 0.3s ease;
+}
+
+/* Pequeña animación de entrada */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

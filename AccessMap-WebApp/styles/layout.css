@@ -1,0 +1,176 @@
+
+/* ============================================================
+   LAYOUT RESPONSIVE – AccessMap
+   ============================================================ */
+
+/* 1. SIDEBAR (NAV LATERAL) */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100vh;
+    background-color: #024260; /* Azul Principal */
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    z-index: 1000;
+
+    /* Mobile: OCULTA */
+    transform: translateX(-100%);
+    transition: transform 0.35s ease;
+    box-shadow: 2px 0 12px rgba(0,0,0,0.25);
+}
+
+/* Clase activa para mostrar el menú (JS) */
+.sidebar.activo {
+    transform: translateX(0);
+}
+
+.sidebar-brand {
+    color: #05af43; /* Verde Secundario */
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+/* Links del Sidebar */
+.nav-link {
+    color: #ffffff;
+    padding: 0.9rem 1rem;
+    border-radius: 10px;
+    display: block;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: background 0.3s;
+}
+
+.nav-link:hover {
+    background-color: #00b592; /* Verde Acento */
+}
+
+/* Link Activo (Para saber en qué página estás) */
+.nav-link.active {
+    background-color: rgba(255, 255, 255, 0.1);
+    font-weight: 700;
+}
+
+/* 2. BOTÓN HAMBURGUESA (Corregido según Guía) */
+.btn-menu-toggle {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    padding: 0.5rem 0.8rem;
+    border-radius: 8px;
+    background-color: #024260;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    z-index: 1200;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+/* En escritorio lo ocultamos */
+@media (min-width: 768px) {
+    .btn-menu-toggle {
+        display: none;
+    }
+}
+/* 3. OVERLAY (Fondo oscuro) */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(2px); /* Efecto borroso moderno */
+    display: none;
+    z-index: 999;
+}
+
+.overlay.activo {
+    display: block;
+}
+
+/* 4. CONTENIDO PRINCIPAL */
+.main-content {
+    padding: 1rem;
+    padding-top: 5rem; /* Espacio para que el botón no tape el título */
+    padding-bottom: 90px; /* Espacio extra para el Tab Bar */
+    transition: margin-left 0.3s ease;
+}
+
+/* 5. TAB BAR (NAVEGACIÓN INFERIOR) */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 70px; /* Un poquito más alto para comodidad */
+    background: #ffffff;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 950;
+    padding-bottom: env(safe-area-inset-bottom); /* Para iPhone modernos */
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+}
+
+.bottom-link {
+    flex: 1;
+    text-align: center;
+    padding: 0.3rem 0;
+    font-size: 1.2rem;
+    color: #64748b; /* Gris medio */
+    text-decoration: none; /* Quita el subrayado */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.bottom-link span {
+    font-size: 0.7rem;
+    font-weight: 500;
+}
+
+/* BOTÓN CENTRAL FLOTANTE (+) */
+.main-action {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: #05af43; /* Verde Éxito */
+    color: white;
+    margin-top: -30px; /* EFECTO FLOTANTE: Sube el botón */
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none; /* CRÍTICO: Quita la línea de enlace */
+    box-shadow: 0 4px 10px rgba(5, 175, 67, 0.4); /* Sombrita verde */
+    border: 4px solid #ffffff; /* Borde blanco para separarlo de la barra */
+    line-height: 1;
+}
+
+/* 6. RESPONSIVE – ESCRITORIO */
+@media (min-width: 768px) {
+
+    /* Sidebar SIEMPRE visible */
+    .sidebar {
+        transform: translateX(0);
+    }
+
+    /* Ocultar elementos móviles */
+    .btn-menu-toggle, .overlay, .bottom-nav {
+        display: none;
+    }
+
+    /* Empujar contenido a la derecha */
+    .main-content {
+        margin-left: 260px;
+        padding: 2rem 3rem;
+        padding-bottom: 2rem;
+    }
+}
