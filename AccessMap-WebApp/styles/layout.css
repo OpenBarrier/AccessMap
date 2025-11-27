@@ -52,9 +52,12 @@
 }
 
 /* Link Activo (Para saber en qué página estás) */
-.nav-link.active {
-    background-color: rgba(255, 255, 255, 0.1);
+.options-bar .nav-link.active {
+    /*background-color: rgba(255, 255, 255, 0.1);*/
+    background-color: #fff;
+    color: #024260;
     font-weight: 700;
+    border-radius: 0.5rem;
 }
 
 /* 2. BOTÓN HAMBURGUESA (Corregido según Guía) */
@@ -78,6 +81,20 @@
     .btn-menu-toggle {
         display: none;
     }
+
+    .options-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 1.35rem;
+    }
+
+    .line-nav {
+    border: none;
+    border-top: 1px solid #e2e8f0;
+    margin: 0;
+    }
 }
 /* 3. OVERLAY (Fondo oscuro) */
 .overlay {
@@ -96,7 +113,7 @@
 /* 4. CONTENIDO PRINCIPAL */
 .main-content {
     padding: 1rem;
-    padding-top: 5rem; /* Espacio para que el botón no tape el título */
+    padding-top: 0; /* Espacio para que el botón no tape el título */
     padding-bottom: 90px; /* Espacio extra para el Tab Bar */
     transition: margin-left 0.3s ease;
 }
@@ -154,12 +171,133 @@
     line-height: 1;
 }
 
+/* ---------- CABECERA GLOBAL ---------- */
+
+.site-header.app-header {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 25px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+/* ---------- GRID PRINCIPAL ---------- */
+
+.dashboard-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+/* ---------- CABECERA ---------- */
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+}
+
+.dashboard-greeting {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.dashboard-title {
+  font-size: 1.8rem;
+  margin: 0.2rem 0 0;
+  color: #024260;
+}
+
+/* ---------- NAV INFERIOR (MOBILE) ---------- */
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background: #ffffff;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 999;
+}
+
+.bottom-link {
+  flex: 1;
+  text-align: center;
+  padding: 0.4rem 0;
+  font-size: 1.4rem;
+  color: #475569;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.bottom-link span {
+  font-size: 0.7rem;
+}
+
+/* Botón central flotante */
+
+.main-action {
+  background: #05af43;
+  color: white;
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  margin-top: -24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.notification-btn {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  z-index: 1500;
+
+  background: #ffffff;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+  border: 1px solid #e2e8f0;
+
+  cursor: pointer;
+
+}
+
+
 /* 6. RESPONSIVE – ESCRITORIO */
 @media (min-width: 768px) {
 
     /* Sidebar SIEMPRE visible */
     .sidebar {
         transform: translateX(0);
+    }
+    
+    .sidebar-brand {
+    font-size: 2rem;
+    color: #05af43;
+    font-weight: 700;
+    padding-bottom: 3rem;
     }
 
     /* Ocultar elementos móviles */
@@ -170,7 +308,36 @@
     /* Empujar contenido a la derecha */
     .main-content {
         margin-left: 260px;
-        padding: 2rem 3rem;
+        padding: 0rem;
+				padding-left: 5.5rem;
+				padding-right: 1.5rem;
         padding-bottom: 2rem;
     }
+
+		.header-inner {
+			position: absolute;
+			top: 1.2rem;   /* ajusta según te guste */
+			right: 1.5rem; /* ajusta según te guste */
+		}
+
+		.site-header.app-header {
+    position: relative;
+		margin: 0;
+  }
+
+  /* El botón flota dentro del header */
+  .notification-btn {
+    position: fixed;
+    top: 0.2rem;
+    right: 2rem;
+    margin: 0; 
+
+		width: 3rem;
+  	height: 3rem;
+  }
+	.dashboard-header {
+    position: absolute;
+		margin: 0;
+	}
+
 }

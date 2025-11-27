@@ -413,10 +413,3 @@
     }
 }
 
-/* OCULTAR HEADERS GLOBALES (por si layout.css mete alguno) */
-.site-header,
-.app-header,
-.dashboard-header {
-    display: none !important;
-}
-

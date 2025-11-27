@@ -5,35 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AccessMap</title>
 
-    <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/layout.css">
+    <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/community.css">
 </head>
 
 <body>
-    <!-- Sidebar -->
-    <nav class="sidebar" id="sidebar-nav">
-        <div class="sidebar-title">AccessMap</div>
+    <!-- ========= CABECERA / NAVEGACIÓN ========= -->
+			<aside id="sidebar" class="sidebar">
+      <div class="sidebar-item">
+			  <div class="sidebar-brand">Access<span>MAP</span></div>
+        <nav id="sidebar-desktop" class="sidebar-nav options-bar">
+          <a href="../app/home.html" class="nav-link">Inicio</a><hr class="line-nav">
+          <a href="../app/map.html" class="nav-link">Mapa</a><hr class="line-nav">
+          <a href="../app/community.html" class="nav-link active">Comunidad</a><hr class="line-nav">
+          <a href="../app/profile.html" class="nav-link">Perfil</a><hr class="line-nav">
+        </nav>
+      </div>
+      <div class="sidebar-item"></div>
+		</aside>
 
-        <a href="home.html" class="nav-link">Inicio</a>
-        <a href="map.html" class="nav-link">Mapa</a>
-        <a href="report.html" class="nav-link">Reportes</a>
-        <a href="community.html" class="nav-link">Comunidad</a>
-        <a href="profile.html" class="nav-link">Perfil</a>
-        <a href="../index.html" class="nav-link logout">Cerrar Sesión</a>
-    </nav>
+    <div id="overlay" class="overlay" aria-hidden="true"></div>
+
+    <header class="site-header app-header">
+      <div class="dashboard-header">
+      	<h1 id="home-title" class="dashboard-title">Comunidad</h1>
+      </div>
+			<div class="container header-inner">
+          <span class="notification-btn">🔔</span>
+        </div>
+      </div>
+    </header>
 
     <!-- Contenido principal -->
     <main class="main-content">
-
-        <!-- HEADER -->
-        <header class="community-header">
-
-            <h1 class="page-title">Comunidad</h1>
-
-             <div class="notification-icon">🔔</div>
-        </header>
-
 
         <!-- TABS -->
         <section class="tab-navigation">
@@ -183,13 +188,13 @@
         </div>
 
     </main>
-    <!-- NAV inferior (solo mobile) -->
+		<!-- NAV inferior (solo mobile) -->
 		<nav class="bottom-nav" aria-label="Navegación inferior">
-			<a href="#home-view" class="bottom-link">🏠<span>Inicio</span></a>
+			<a href="../app/home.html" class="bottom-link">🏠<span>Inicio</span></a>
 			<a href="../app/map.html" class="bottom-link">🗺️<span>Mapa</span></a>
 			<a href="#report-view" class="bottom-link main-action">＋</a>
-			<a href="#community-view" class="bottom-link active">👥<span>Comunidad</span></a>
-			<a href="#profile-view" class="bottom-link">👤<span>Perfil</span></a>
+			<a href="../app/community.html" class="bottom-link">👥<span>Comunidad</span></a>
+			<a href="../app/profile.html" class="bottom-link">👤<span>Perfil</span></a>
 		</nav>
 
     <script src="../scripts/main.js"></script>
