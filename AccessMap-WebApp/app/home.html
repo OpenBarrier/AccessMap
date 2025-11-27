@@ -14,11 +14,11 @@
 		<aside id="sidebar" class="sidebar">
       <div class="sidebar-item">
 			  <div class="sidebar-brand">Access<span>MAP</span></div>
-        <nav class="sidebar-nav options-bar">
-          <a href="#home-view" class="nav-link">Inicio</a><hr class="line-stats">
-          <a href="../app/map.html" class="nav-link">Mapa</a><hr class="line-stats">
-          <a href="#community-view" class="nav-link">Comunidad</a><hr class="line-stats">
-          <a href="#profile-view" class="nav-link">Perfil</a><hr class="line-stats">
+        <nav id="sidebar-desktop" class="sidebar-nav options-bar">
+          <a href="../app/home.html" class="nav-link active">Inicio</a><hr class="line-nav">
+          <a href="../app/map.html" class="nav-link">Mapa</a><hr class="line-nav">
+          <a href="#community-view" class="nav-link">Comunidad</a><hr class="line-nav">
+          <a href="#profile-view" class="nav-link">Perfil</a><hr class="line-nav">
         </nav>
       </div>
       <div class="sidebar-item"></div>
@@ -31,10 +31,7 @@
       	<h1 id="home-title" class="dashboard-title">Inicio</h1>
       </div>
 			<div class="container header-inner">
-        <button class="btn btn-icon notification-btn" type="button" aria-label="Notificaciones">
-          <span class="notification-icon">🔔</span>
-          <span class="notification-dot" aria-hidden="true"></span>
-        </button>
+          <span class="notification-btn">🔔</span>
         </div>
       </div>
     </header>
@@ -175,14 +172,13 @@
 
 		<!-- NAV inferior (solo mobile) -->
 		<nav class="bottom-nav" aria-label="Navegación inferior">
-			<a href="#home-view" class="bottom-link">🏠<span>Inicio</span></a>
+			<a href="../app/home.html" class="bottom-link">🏠<span>Inicio</span></a>
 			<a href="../app/map.html" class="bottom-link">🗺️<span>Mapa</span></a>
 			<a href="#report-view" class="bottom-link main-action">＋</a>
-			<a href="#community-view" class="bottom-link">👥<span>Comunidad</span></a>
-			<a href="#profile-view" class="bottom-link">👤<span>Perfil</span></a>
+			<a href="../app/community.html" class="bottom-link">👥<span>Comunidad</span></a>
+			<a href="../app/profile.html" class="bottom-link">👤<span>Perfil</span></a>
 		</nav>
 
     <!-- ========= INTERACCIÓN ========= -->
-    <script src="assets/scripts/home.js"></script>
   </body>
 </html>
