@@ -11,10 +11,6 @@
 </head>
 
 <body>
-
-    <!-- Botón para abrir/cerrar sidebar en móviles -->
-    <button class="btn-toggle" id="btn-menu-toggle">☰</button>
-
     <!-- Sidebar -->
     <nav class="sidebar" id="sidebar-nav">
         <div class="sidebar-title">AccessMap</div>
@@ -32,13 +28,12 @@
 
         <!-- HEADER -->
         <header class="community-header">
-            <div class="header-text">
-                <h1 class="page-title">Comunidad</h1>
-            </div>
-            <div class="notification-icon">
-                🔔
-            </div>
+
+            <h1 class="page-title">Comunidad</h1>
+
+             <div class="notification-icon">🔔</div>
         </header>
+
 
         <!-- TABS -->
         <section class="tab-navigation">
@@ -188,6 +183,14 @@
         </div>
 
     </main>
+    <!-- NAV inferior (solo mobile) -->
+		<nav class="bottom-nav" aria-label="Navegación inferior">
+			<a href="#home-view" class="bottom-link">🏠<span>Inicio</span></a>
+			<a href="../app/map.html" class="bottom-link">🗺️<span>Mapa</span></a>
+			<a href="#report-view" class="bottom-link main-action">＋</a>
+			<a href="#community-view" class="bottom-link active">👥<span>Comunidad</span></a>
+			<a href="#profile-view" class="bottom-link">👤<span>Perfil</span></a>
+		</nav>
 
     <script src="../scripts/main.js"></script>
     <script src="../scripts/report.js"></script>

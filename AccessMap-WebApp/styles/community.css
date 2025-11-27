@@ -1,21 +1,43 @@
 /* =============================== */
 /* HEADER DE LA PÁGINA */
 /* =============================== */
+
 .community-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem 1rem;
     margin-bottom: 1.2rem;
 }
 
+/* Botón hamburguesa */
+.btn-toggle {
+    background: #f1f5f9;
+    border: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+/* Título alineado a la izquierda */
 .page-title {
     font-size: 1.7rem;
     font-weight: 700;
+    margin-left: 0.5rem;
+    flex: 1;
 }
 
+/* Icono de notificación */
 .notification-icon {
     font-size: 1.6rem;
+    margin-left: auto;
 }
+
 
 /* =============================== */
 /* TABS SUPERIORES */
@@ -317,6 +339,26 @@
 }
 
 /* =============================== */
+/* BOTÓN HAMBURGUESA (SE ARREGLA AQUÍ) */
+/* =============================== */
+
+/* Estilo base: pequeño, tipo mockup, y oculto por defecto */
+.btn-toggle {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 1100;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 18px;
+    color: #004b63;
+    cursor: pointer;
+    display: none;   /* solo lo mostramos en móviles */
+}
+
+/* =============================== */
 /* RESPONSIVE MEDIA QUERIES */
 /* =============================== */
 @media (max-width: 768px) {
@@ -358,18 +400,9 @@
         left: 0;
     }
 
+    /* aquí SÍ mostramos el botón hamburguesa en móvil */
     .btn-toggle {
-        position: fixed;
-        top: 15px;
-        left: 15px;
-        z-index: 1100;
-        background: #004b63;
-        color: white;
-        border: none;
-        padding: 10px;
-        font-size: 1.3rem;
-        border-radius: 8px;
-        cursor: pointer;
+        display: block;
     }
 
     /* ligero ajuste del botón + en pantallas pequeñas */
@@ -378,5 +411,12 @@
         height: 38px;
         font-size: 1.6rem;
     }
+}
+
+/* OCULTAR HEADERS GLOBALES (por si layout.css mete alguno) */
+.site-header,
+.app-header,
+.dashboard-header {
+    display: none !important;
 }
 
