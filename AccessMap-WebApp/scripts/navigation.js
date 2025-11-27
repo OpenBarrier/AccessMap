@@ -16,6 +16,23 @@ const btnPlanificar = document.getElementById('btn-open-route-planner');
 const backdrop = document.getElementById('route-modal-backdrop');
 const btnCloseRouteModal = document.getElementById('route-modal-close');
 
+//NUEVA PARTE MIERCOLES-26
+
+const routeInfoStatus = document.querySelector('.route-info__status'); // <--- NUEVA REFERENCIA
+
+// Pasos de navegación para la Demo (T-22b)
+const pasosSimulados = [
+    "🏁 Iniciando ruta hacia el destino...",
+    "⬆️ Sigue recto por Av. Arequipa (200m)",
+    "⚠️ Ten cuidado: Cruce peatonal adelante",
+    "➡️ Gira a la derecha en Jr. Risso",
+    "✅ Has llegado a tu destino"
+];
+
+// Datos simulados de rutas (Mock Data)
+
+//NUEVA PARTE MIERCOLES-26
+
 // Datos simulados de rutas (Mock Data)
 const rutasMock = [
     { id: 1, nombre: "Ruta A (Iluminada)", tiempo: "15 min", seguridad: "Alta" },
@@ -83,6 +100,8 @@ if (btnPlanificar) {
 }
 
 // --- Lógica 2: Iniciar Navegación y Alertas (HU Navegación) ---
+//CAMBIOS MIERCOLES - 26
+
 if (btnStartRoute) {
     btnStartRoute.addEventListener('click', () => {
         // 1. Cerrar modal de planificación
@@ -92,18 +111,42 @@ if (btnStartRoute) {
         // 2. Mostrar Header verde (Simula la navegación activa)
         if (routeInfoPanel) routeInfoPanel.classList.remove('route-info--hidden');
 
-        // 3. Simular Escenario 2: Alerta de Notificaciones Desactivadas
+        // 3. INICIO SIMULACIÓN DE PASOS (T-22b) - NUEVO
+        let pasoIndex = 0;
+
+        // Función que cambia el texto cada 4 segundos
+        const intervaloNavegacion = setInterval(() => {
+            if (pasoIndex < pasosSimulados.length) {
+                // Actualizamos el HTML del tag verde
+                if (routeInfoStatus) {
+                    routeInfoStatus.innerHTML = `<span class="tag tag-verde">${pasosSimulados[pasoIndex]}</span>`;
+                }
+                pasoIndex++;
+            } else {
+                clearInterval(intervaloNavegacion); // Detener al terminar
+                // Opcional: Volver al estado original
+                setTimeout(() => {
+                    if (routeInfoStatus) {
+                        routeInfoStatus.innerHTML = `<span class="tag tag-verde">Ruta finalizada</span>`;
+                    }
+                }, 2000);
+            }
+        }, 4000); // Cambia cada 4000ms (4 segundos)
+
+        // 4. Simular Escenario 2: Alerta de Notificaciones Desactivadas
         const notifActivas = false; // Simulación: están desactivadas
         if (!notifActivas && notificationWarning) {
             notificationWarning.classList.remove('route-info--hidden');
         }
 
-        // 4. Simular Escenario 1: Alerta de Obstáculo Crítico (aparece a los 3 segundos)
+        // 5. Simular Escenario 1: Alerta de Obstáculo Crítico (aparece a los 3 segundos)
         setTimeout(() => {
             if (obstacleAlert) obstacleAlert.classList.remove('route-info--hidden');
         }, 3000);
     });
 }
+
+//CAMBIOS MIERCOLES-26
 
 // Botón Recalcular (Acción del banner rojo)
 if (btnRecalculate) {
