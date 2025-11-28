@@ -576,7 +576,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function loadAppearanceSettings() {
     if (darkModeToggle) darkModeToggle.checked = appearance.darkMode;
-    if (textSizeSlider) textSizeSlider.value = appearance.textSize;
+    textSizeSlider.value = appearance.textSize.toFixed(2);
     applyTextScale();
   }
 
@@ -607,7 +607,13 @@ document.addEventListener("DOMContentLoaded", () => {
       loadAppearanceSettings();
     }
   });
-
+resetTextSizeBtn?.addEventListener("click", () => {
+  appearance.textSize = 1;
+  textSizeSlider.value = 1;   // ← FALTABA ESTO
+  localStorage.setItem(APPEAR_KEY, JSON.stringify(appearance));
+  applyTextScale();
+  showSnackbar("Tamaño de texto restablecido.");
+});
   applyDarkMode();
   applyTextScale();
 
