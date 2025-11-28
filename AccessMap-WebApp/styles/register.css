@@ -96,7 +96,7 @@
     align-items: center;
 }
 
-.eye-icon {
+.eye-icon { 
     width: 22px;
     height: 22px;
 }
@@ -140,4 +140,178 @@
 
 .registro-footer a {
     text-decoration: underline;
+}
+
+.view.hidden {
+    display: none !important;
+}
+
+/* REGISTRO EXITOSO */
+.success-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.success-icon {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 4px solid #13c49f;
+    color: #13c49f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+.success-title {
+    font-size: 1.8rem;
+    color: #024260;
+    margin-bottom: 0.5rem;
+}
+
+.success-text {
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    color: #555;
+}
+
+/* SETUP ACCESIBILIDAD */
+.setup-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+}
+
+.setup-card {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 380px;
+    margin: auto;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.setup-title {
+    text-align: center;
+    font-size: 1.7rem;
+    color: #024260;
+}
+
+.setup-subtitle {
+    text-align: center;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+.option-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.9rem;
+    border: 2px solid #cbd5e1;
+    border-radius: 14px;
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+.option-btn input {
+    margin-right: 8px;
+}
+
+.skip {
+    text-align: center;
+    margin-top: 1rem;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* CONTENEDOR DE LA VISTA DE ÉXITO */
+.success-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+}
+
+/* TARJETA BLANCA */
+.success-card {
+    background: #fff;
+    padding: 2.5rem 2rem;
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    text-align: center;
+    width: 100%;
+    max-width: 420px;
+}
+
+/* ICONO CHECK CIRCULAR */
+.success-icon {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 4px solid #13c49f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    color: #13c49f;
+    margin: 0 auto 1.5rem;
+}
+
+/* TITULO */
+.success-title {
+    font-size: 1.8rem;
+    color: #024260;
+    margin-bottom: 0.8rem;
+}
+
+/* SUBTÍTULO */
+.success-text {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 2rem;
+}
+/* TARJETA DE OPCIÓN DE ACCESIBILIDAD */
+.option-btn {
+    padding: 1rem;
+    border: 2px solid #cbd5e1;
+    border-radius: 14px;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #fff;
+}
+
+/* ESTADO SELECCIONADO */
+.option-btn.selected {
+    border-color: #024260;
+    background: #e6f3fa;
+    box-shadow: 0 0 8px rgba(2,66,96,0.25);
+}
+
+/* CENTRAR BOTÓN */
+.btn-center {
+    display: block;
+    margin: 0 auto;
+}
+
+/* Estado desactivado del botón */
+.btn-azul:disabled {
+    background-color: #9db9c8; /* gris azulado */
+    cursor: not-allowed;
+    opacity: 0.7;
 }

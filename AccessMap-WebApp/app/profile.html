@@ -390,68 +390,60 @@
             </div>
         </section>
 
-        <!-- VISTA: ACCESIBILIDAD (FORMULARIO) -->
-        <section id="view-accessibility" class="view">
-            <div class="profile-container">
+ <!-- VISTA: ACCESIBILIDAD COMPLETA CONTAINER -->
+<section id="view-accessibility" class="view">
+    <div class="profile-container">
 
-                <header class="subheader">
-                    <button type="button"
-                            class="subheader-back"
-                            data-view-target="view-profile"
-                            data-lang="backArrow">
-                        ←
-                    </button>
-                    <h2 data-lang="myAccessibilityProfile">
-                        Mi perfil de accesibilidad
-                    </h2>
-                </header>
+        <header class="subheader">
+            <button type="button"
+                    class="subheader-back"
+                    data-view-target="view-profile">
+                ←
+            </button>
+            <h2>Mi perfil de accesibilidad</h2>
+        </header>
 
-                <p class="access-description" data-lang="accessibilityFormDesc">
-                    Selecciona las ayudas de movilidad que utilizas. Esto nos permite recomendarte rutas
-                    y lugares más accesibles para ti.
-                </p>
+        <p class="access-description">
+            Selecciona tus ayudas de movilidad para mejorar las recomendaciones del mapa.
+        </p>
 
-                <form id="accessibilityForm" class="form-card">
+        <form id="accessibilityForm" class="form-card">
 
-                    <div class="form-group">
-                        <label class="checkbox-item">
-                            <input type="checkbox" value="silla" class="access-option">
-                            <span data-lang="wheelchair">Silla de ruedas</span>
-                        </label>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="checkbox-item">
-                            <input type="checkbox" value="andador" class="access-option">
-                            <span data-lang="walker">Andador</span>
-                        </label>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="checkbox-item">
-                            <input type="checkbox" value="muletas" class="access-option">
-                            <span data-lang="crutches">Muletas</span>
-                        </label>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="checkbox-item">
-                            <input type="checkbox" value="baston" class="access-option">
-                            <span data-lang="cane">Bastón</span>
-                        </label>
-                    </div>
-
-                    <button type="submit"
-                            class="btn-azul btn-grande"
-                            data-lang="savePreferences">
-                        Guardar preferencias
-                    </button>
-
-                    <p id="accessSuccessMsg" class="form-success"></p>
-                </form>
-
+            <div class="option-btn-profile" data-value="silla">
+                🦽 <span>Silla de ruedas</span>
             </div>
-        </section>
+
+            <div class="option-btn-profile" data-value="andador">
+                🚶‍♂️ <span>Andador</span>
+            </div>
+
+            <div class="option-btn-profile" data-value="coche">
+                👶 <span>Coche de bebé</span>
+            </div>
+
+            <div class="option-btn-profile" data-value="muletas">
+                🦯 <span>Muletas</span>
+            </div>
+
+            <div class="option-btn-profile" data-value="baston">
+                🦯 <span>Bastón</span>
+            </div>
+
+            <div class="option-btn-profile" data-value="ninguna">
+                ⭕ <span>Ninguna de las anteriores</span>
+            </div>
+
+            <button type="submit"
+                    class="btn-azul btn-center btn-grande">
+                Guardar preferencias
+            </button>
+
+        </form>
+
+    </div>
+</section>
+
+</section>
 
         <!-- VISTA: CONFIGURACIÓN PRINCIPAL -->
         <section id="view-settings" class="view">
