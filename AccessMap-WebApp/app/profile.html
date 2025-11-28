@@ -1,38 +1,764 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>AccessMap - Perfil</title>
+    <meta charset="UTF-8" />
+    <title data-lang="titleProfile">AccessMap – Perfil</title>
 
-    <link rel="stylesheet" href="../styles/main.css">
-    <link rel="stylesheet" href="../styles/layout.css">
+    <!-- Estilos globales -->
+    <link rel="stylesheet" href="../styles/reset.css" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/layout.css" />
+
+    <!-- Estilos propios del módulo Perfil -->
+    <link rel="stylesheet" href="../styles/profile.css" />
 </head>
 
 <body>
 
-    <button class="btn-toggle" id="btn-menu-toggle">
-        ☰
-    </button>
+    <!-- SIDEBAR -->
+    <aside id="sidebar" class="sidebar">
+        <div class="sidebar-brand">AccessMap</div>
 
-    <nav class="sidebar" id="sidebar-nav">
-        <div style="padding: 1.5rem; color: white; font-weight: bold; font-size: 1.5rem;">
-            AccessMap
-        </div>
+        <nav class="sidebar-nav">
+            <a href="home.html" class="nav-link" data-lang="navHome">Inicio</a>
+            <a href="map.html" class="nav-link" data-lang="navMap">Mapa</a>
+            <a href="report.html" class="nav-link" data-lang="navReport">Reportar</a>
+            <a href="community.html" class="nav-link" data-lang="navCommunity">Comunidad</a>
+            <a href="profile.html" class="nav-link active" data-lang="navProfile">Perfil</a>
 
-        <a href="home.html" class="nav-link">Inicio</a>
-        <a href="map.html" class="nav-link">Mapa</a>
-        <a href="report.html" class="nav-link">Reportes</a>
-        <a href="community.html" class="nav-link">Comunidad</a>
-        <a href="profile.html" class="nav-link">Perfil</a>
-        <a href="../index.html" class="nav-link" style="margin-top: auto; color: #e03737;">Cerrar Sesión</a>
-    </nav>
+            <a href="../index.html" class="nav-link" style="margin-top: auto; color:#e03737;" data-lang="logout">
+                Cerrar sesión
+            </a>
+        </nav>
+    </aside>
 
     <main class="main-content">
-        <h1>Perfil del Usuario</h1>
-        <p>Aquí podrás ver y editar tu información personal </p>
+
+        <!-- PERFIL PRINCIPAL -->
+        <section id="view-profile" class="view view--active">
+            <div class="profile-container">
+
+                <!-- TARJETA SUPERIOR -->
+                <section class="profile-card">
+                    <div class="profile-top">
+                        <div class="profile-avatar-wrapper">
+                            <img src="../assets/img/mujeravatar.jpg"
+                                 alt="Avatar de usuario"
+                                 class="profile-avatar">
+
+                            <button type="button"
+                                    class="avatar-edit-btn"
+                                    aria-label="Cambiar foto de perfil"
+                                    data-lang="changePhoto">
+                                📷
+                            </button>
+
+                            <input type="file" id="avatarInput" accept="image/*" capture="user" hidden>
+                        </div>
+
+                        <button type="button"
+                                class="edit-profile-btn btn-borde"
+                                data-view-target="view-edit-profile"
+                                data-lang="editProfileBtn">
+                            Editar perfil
+                        </button>
+                    </div>
+
+                    <div class="profile-info">
+                        <h1 class="profile-username" id="profileName">Maria Gracia</h1>
+                        <p class="profile-email" id="profileEmail">maria-gracia@gmail.com</p>
+                        <span class="tag tag-verde" data-lang="activeMember">Miembro activo</span>
+                    </div>
+
+                    <div class="stats-row">
+                        <div class="stat-box">
+                            <span class="stat-number" id="statContrib">23</span>
+                            <span class="stat-label" data-lang="contributions">Contribuciones</span>
+                        </div>
+
+                        <div class="stat-box">
+                            <span class="stat-number stat-number-amber" id="statRatings">18</span>
+                            <span class="stat-label" data-lang="ratings">Valoraciones</span>
+                        </div>
+
+                        <div class="stat-box">
+                            <span class="stat-number stat-number-blue" id="statPlaces">47</span>
+                            <span class="stat-label" data-lang="places">Lugares</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- MENÚ DE OPCIONES -->
+                <section class="profile-menu">
+                    <h2 class="section-title texto-azul" data-lang="myActivity">Mi actividad</h2>
+
+                    <div class="menu-group">
+                        <a href="#"
+                           class="menu-item"
+                           data-view-target="view-achievements">
+                            <div class="icon-box bg-azul">🏆</div>
+                            <div class="menu-text">
+                                <span class="menu-title" data-lang="achievements">
+                                    Mis logros e insignias
+                                </span>
+                            </div>
+                            <span class="arrow">›</span>
+                        </a>
+
+                        <a href="#"
+                           class="menu-item"
+                           data-view-target="view-contributions">
+                            <div class="icon-box bg-verde">📝</div>
+                            <div class="menu-text">
+                                <span class="menu-title" data-lang="myContributions">
+                                    Mis contribuciones
+                                </span>
+                            </div>
+                            <span class="arrow">›</span>
+                        </a>
+                    </div>
+
+                    <!-- MIS GUARDADOS -->
+                    <h2 class="section-title texto-azul" data-lang="savedItems">Mis guardados</h2>
+
+                    <div class="menu-group">
+                        <a href="#" class="menu-item" data-view-target="view-saved-routes">
+                            <div class="icon-box bg-blanco icon-box-outline">📍</div>
+                            <div class="menu-text">
+                                <span class="menu-title" data-lang="savedRoutes">
+                                    Rutas guardadas
+                                </span>
+                            </div>
+                            <span class="arrow">›</span>
+                        </a>
+
+                        <a href="#" class="menu-item" data-view-target="view-favorites">
+                            <div class="icon-box bg-blanco icon-box-outline">❤️</div>
+                            <div class="menu-text">
+                                <span class="menu-title" data-lang="favoritePlaces">
+                                    Lugares favoritos
+                                </span>
+                            </div>
+                            <span class="arrow">›</span>
+                        </a>
+                    </div>
+                </section>
+
+                <!-- PERFIL DE ACCESIBILIDAD (ÚNICO Y CORRECTO) -->
+                <section class="access-card">
+                    <h2 class="access-title" data-lang="accessibilityProfile">Perfil de accesibilidad</h2>
+                    <p class="access-description" data-lang="accessibilityDesc">
+                        Estos elementos nos ayudan a recomendarte rutas y lugares más cómodos para ti.
+                    </p>
+
+                    <div class="segmented-control" aria-label="Ayudas de movilidad" id="accessSummary">
+                        <button type="button" class="segment active" data-lang="walker">Andador</button>
+                        <button type="button" class="segment active" data-lang="crutches">Muletas</button>
+                    </div>
+
+                    <button type="button"
+                            class="btn-access-edit btn-azul"
+                            data-view-target="view-accessibility"
+                            data-lang="editPreferences">
+                        Editar preferencias
+                    </button>
+                </section>
+
+                <!-- CONFIGURACIÓN -->
+                <section class="profile-settings">
+                    <h2 class="section-title texto-azul" data-lang="settings">Configuración</h2>
+                    <a href="#"
+                       class="menu-item"
+                       data-view-target="view-settings">
+                        <div class="icon-box bg-blanco icon-box-outline">⚙️</div>
+                        <div class="menu-text">
+                            <span class="menu-title" data-lang="accountSettings">
+                                Configuración de cuenta
+                            </span>
+                            <span class="menu-subtitle" data-lang="notifLangPrivacy">
+                                Notificaciones, idioma y privacidad
+                            </span>
+                        </div>
+                        <span class="arrow">›</span>
+                    </a>
+                </section>
+
+                <!-- Cerrar sesión (SOLO MOBILE) -->
+                <div class="logout-wrapper logout-mobile">
+                    <button class="btn-logout btn-rojo"
+                            id="logoutBtn"
+                            data-lang="logout">
+                        Cerrar sesión
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- VISTA: EDITAR MI PERFIL -->
+        <section id="view-edit-profile" class="view">
+            <div class="profile-container">
+                <header class="subheader">
+                    <button type="button"
+                            class="subheader-back"
+                            data-view-target="view-profile"
+                            data-lang="backArrow">
+                        ←
+                    </button>
+                    <h2 data-lang="editMyProfile">Editar mi perfil</h2>
+                </header>
+
+                <form id="editProfileForm" class="form-card">
+                    <div class="form-group">
+                        <label for="editName" data-lang="usernameLabel">Nombre de usuario</label>
+                        <input type="text"
+                               id="editName"
+                               name="name"
+                               placeholder="Ingresa tu nombre"
+                               data-lang-placeholder="usernamePlaceholder"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editEmail" data-lang="emailLabel">
+                            Correo electrónico (no modificable)
+                        </label>
+                        <input type="email"
+                               id="editEmail"
+                               name="email"
+                               disabled>
+                    </div>
+
+                    <hr class="form-divider">
+
+                    <h3 class="section-title texto-azul" data-lang="changePasswordTitle">
+                        Cambiar contraseña (opcional)
+                    </h3>
+
+                    <div class="form-group">
+                        <label for="oldPassword" data-lang="currentPassword">Contraseña actual</label>
+                        <input type="password"
+                               id="oldPassword"
+                               name="oldPassword"
+                               data-lang-placeholder="currentPasswordPlaceholder">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="newPassword" data-lang="newPassword">Nueva contraseña</label>
+                        <input type="password"
+                               id="newPassword"
+                               name="newPassword"
+                               data-lang-placeholder="newPasswordPlaceholder">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword" data-lang="confirmNewPassword">
+                            Confirmar nueva contraseña
+                        </label>
+                        <input type="password"
+                               id="confirmPassword"
+                               name="confirmPassword"
+                               data-lang-placeholder="confirmPasswordPlaceholder">
+                    </div>
+
+                    <p id="passwordError" class="form-error" aria-live="polite"></p>
+
+                    <button type="submit"
+                            id="saveProfileBtn"
+                            class="btn-azul btn-grande"
+                            data-lang="saveChanges">
+                        Guardar cambios
+                    </button>
+
+                    <p id="profileSuccessMsg" class="form-success" aria-live="polite"></p>
+                </form>
+            </div>
+        </section>
+
+        <!-- VISTA: MIS CONTRIBUCIONES -->
+        <section id="view-contributions" class="view">
+            <div class="profile-container">
+                <header class="subheader">
+                    <button type="button"
+                            class="subheader-back"
+                            data-view-target="view-profile"
+                            data-lang="backArrow">
+                        ←
+                    </button>
+                    <h2 data-lang="myContributions">Mis contribuciones</h2>
+                </header>
+
+                <div id="contributionsList" class="list-card"></div>
+
+                <div id="contributionsEmpty" class="empty-state">
+                    <div class="empty-icon">📝</div>
+                    <h3 data-lang="beContributor">¡Sé un colaborador!</h3>
+                    <p data-lang="noReports">No tienes reportes enviados...</p>
+                    <a href="report.html" class="btn-verde btn-grande" data-lang="reportHere">
+                        Reporta aquí
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- VISTA: MIS LOGROS -->
+        <section id="view-achievements" class="view">
+            <div class="profile-container">
+                <header class="subheader">
+                    <button type="button"
+                            class="subheader-back"
+                            data-view-target="view-profile"
+                            data-lang="backArrow">
+                        ←
+                    </button>
+                    <h2 data-lang="myAchievements">Mis logros e insignias</h2>
+                </header>
+
+                <div id="achievementsGrid" class="badges-grid"></div>
+            </div>
+        </section>
+
+        <!-- VISTA: RUTAS GUARDADAS -->
+        <section id="view-saved-routes" class="view">
+            <div class="profile-container">
+
+                <header class="subheader">
+                    <button type="button"
+                            class="subheader-back"
+                            data-view-target="view-profile"
+                            data-lang="backArrow">
+                        ←
+                    </button>
+                    <h2 data-lang="savedRoutes">Rutas guardadas</h2>
+                </header>
+
+                <div id="routesList" class="list-card"></div>
+
+                <div id="routesEmpty" class="empty-state">
+                    <div class="empty-icon">📍</div>
+                    <h3 data-lang="noSavedRoutes">No tienes rutas guardadas aún</h3>
+                    <p data-lang="saveRouteFromMap">
+                        Guarda una ruta desde el mapa para verla aquí.
+                    </p>
+                </div>
+            </div>
+
+            <!-- MODAL: Compartir ruta -->
+            <div id="shareModal" class="modal-overlay">
+                <div class="modal-card">
+                    <h3 data-lang="shareRoute">Compartir ruta</h3>
+                    <p id="shareRouteTitle"></p>
+                    <input type="text" id="shareRouteLink" readonly>
+
+                    <div class="modal-actions">
+                        <button class="btn-verde" id="btnCopyLink" data-lang="copy">
+                            Copiar
+                        </button>
+                        <button class="btn-borde" id="btnCloseShare" data-lang="close">
+                            Cerrar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VISTA: FAVORITOS -->
+        <section id="view-favorites" class="view">
+            <div class="profile-container">
+
+                <header class="subheader">
+                    <button type="button"
+                            class="subheader-back"
+                            data-view-target="view-profile"
+                            data-lang="backArrow">
+                        ←
+                    </button>
+                    <h2 data-lang="favoritePlaces">Mis lugares favoritos</h2>
+                </header>
+
+                <div id="favoritesList" class="list-card"></div>
+
+                <div id="favoritesEmpty" class="empty-state">
+                    <div class="empty-icon">❤️</div>
+                    <h3 data-lang="noFavoritePlaces">
+                        No tienes lugares favoritos todavía
+                    </h3>
+                    <p data-lang="saveFavoriteFromMap">
+                        Guarda un lugar desde el mapa para verlo aquí.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- VISTA: ACCESIBILIDAD (FORMULARIO) -->
+        <section id="view-accessibility" class="view">
+            <div class="profile-container">
+
+                <header class="subheader">
+                    <button type="button"
+                            class="subheader-back"
+                            data-view-target="view-profile"
+                            data-lang="backArrow">
+                        ←
+                    </button>
+                    <h2 data-lang="myAccessibilityProfile">
+                        Mi perfil de accesibilidad
+                    </h2>
+                </header>
+
+                <p class="access-description" data-lang="accessibilityFormDesc">
+                    Selecciona las ayudas de movilidad que utilizas. Esto nos permite recomendarte rutas
+                    y lugares más accesibles para ti.
+                </p>
+
+                <form id="accessibilityForm" class="form-card">
+
+                    <div class="form-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" value="silla" class="access-option">
+                            <span data-lang="wheelchair">Silla de ruedas</span>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" value="andador" class="access-option">
+                            <span data-lang="walker">Andador</span>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" value="muletas" class="access-option">
+                            <span data-lang="crutches">Muletas</span>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" value="baston" class="access-option">
+                            <span data-lang="cane">Bastón</span>
+                        </label>
+                    </div>
+
+                    <button type="submit"
+                            class="btn-azul btn-grande"
+                            data-lang="savePreferences">
+                        Guardar preferencias
+                    </button>
+
+                    <p id="accessSuccessMsg" class="form-success"></p>
+                </form>
+
+            </div>
+        </section>
+
+        <!-- VISTA: CONFIGURACIÓN PRINCIPAL -->
+        <section id="view-settings" class="view">
+            <div class="profile-container">
+
+                <header class="subheader">
+                    <button type="button"
+                            class="subheader-back"
+                            data-view-target="view-profile"
+                            data-lang="backArrow">
+                        ←
+                    </button>
+                    <h2 data-lang="settings">Configuración</h2>
+                </header>
+
+                <p class="settings-description" data-lang="settingsDesc">
+                    Personaliza tu experiencia en AccessMap: notificaciones, idioma, privacidad y más.
+                </p>
+
+                <div class="menu-group">
+
+                    <a href="#"
+                       class="menu-item"
+                       data-view-target="view-settings-notifications">
+                        <div class="icon-box bg-azul">🔔</div>
+                        <div class="menu-text">
+                            <span class="menu-title" data-lang="notifications">
+                                Notificaciones
+                            </span>
+                            <span class="menu-subtitle" data-lang="notificationsDesc">
+                                Alertas, recordatorios y avisos
+                            </span>
+                        </div>
+                        <span class="arrow">›</span>
+                    </a>
+
+                    <a href="#"
+                       class="menu-item"
+                       data-view-target="view-settings-appearance">
+                        <div class="icon-box bg-verde">🎨</div>
+                        <div class="menu-text">
+                            <span class="menu-title" data-lang="appearance">Apariencia</span>
+                            <span class="menu-subtitle" data-lang="appearanceDesc">
+                                Modo oscuro y tamaño de texto
+                            </span>
+                        </div>
+                        <span class="arrow">›</span>
+                    </a>
+
+                    <a href="#"
+                       class="menu-item"
+                       data-view-target="view-settings-language">
+                        <div class="icon-box bg-blanco icon-box-outline">🌐</div>
+                        <div class="menu-text">
+                            <span class="menu-title" data-lang="language">Idioma</span>
+                            <span class="menu-subtitle" data-lang="languageDesc">
+                                Selecciona tu idioma preferido
+                            </span>
+                        </div>
+                        <span class="arrow">›</span>
+                    </a>
+
+                    <a href="#"
+                       class="menu-item"
+                       data-view-target="view-settings-privacy">
+                        <div class="icon-box bg-blanco icon-box-outline">🔒</div>
+                        <div class="menu-text">
+                            <span class="menu-title" data-lang="privacy">
+                                Privacidad y Datos
+                            </span>
+                            <span class="menu-subtitle" data-lang="privacyDesc">
+                                Historial y ahorro de datos
+                            </span>
+                        </div>
+                        <span class="arrow">›</span>
+                    </a>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- VISTA: NOTIFICACIONES -->
+        <section id="view-settings-notifications" class="view">
+            <div class="profile-container">
+
+                <header class="subheader">
+                    <button type="button"
+                            class="subheader-back"
+                            data-view-target="view-settings"
+                            data-lang="backArrow">
+                        ←
+                    </button>
+                    <h2 data-lang="notifications">Notificaciones</h2>
+                </header>
+
+                <p class="settings-description" data-lang="notificationsDesc">
+                    Controla las alertas que deseas recibir.
+                </p>
+
+                <form id="notificationsForm" class="form-card">
+
+                    <label class="switch-row">
+                        <span class="switch-label" data-lang="alertBarriers">
+                            Alertas de barreras
+                        </span>
+                        <input type="checkbox" class="switch-input" id="notifBarriers">
+                    </label>
+
+                    <label class="switch-row">
+                        <span class="switch-label" data-lang="routeReminders">
+                            Recordatorios de rutas
+                        </span>
+                        <input type="checkbox" class="switch-input" id="notifRoutes">
+                    </label>
+
+                    <label class="switch-row">
+                        <span class="switch-label" data-lang="communityUpdates">
+                            Actualizaciones de comunidad
+                        </span>
+                        <input type="checkbox" class="switch-input" id="notifCommunity">
+                    </label>
+
+                    <button type="submit"
+                            class="btn-azul btn-grande"
+                            id="btnSaveNotifs"
+                            data-lang="saveSettings">
+                        Guardar configuración
+                    </button>
+
+                    <p id="notifSuccessMessage" class="form-success"></p>
+                </form>
+            </div>
+        </section>
+
+        <!-- VISTA: APARIENCIA -->
+        <section id="view-settings-appearance" class="view">
+            <div class="profile-container">
+
+                <header class="subheader">
+                    <button type="button"
+                            class="subheader-back"
+                            data-view-target="view-settings"
+                            data-lang="backArrow">
+                        ←
+                    </button>
+                    <h2 data-lang="appearance">Apariencia</h2>
+                </header>
+
+                <p class="settings-description" data-lang="appearanceDesc">
+                    Personaliza la forma en que AccessMap se ve y se siente.
+                </p>
+
+                <div class="form-card">
+
+                    <label class="switch-row">
+                        <span class="switch-label" data-lang="darkMode">Modo oscuro</span>
+                        <input type="checkbox" id="darkModeToggle" class="switch-input">
+                    </label>
+
+                    <hr class="form-divider">
+
+                    <h3 class="section-title texto-azul" data-lang="textSize">
+                        Tamaño de texto
+                    </h3>
+
+                    <div class="text-size-group">
+                        <input type="range" id="textSizeSlider" min="80" max="130" step="5">
+                        <div class="text-size-values">
+                            <span id="textSizePreview">100%</span>
+                        </div>
+                    </div>
+
+                    <button type="button"
+                            id="resetTextSizeBtn"
+                            class="btn-borde"
+                            data-lang="resetDefault">
+                        Restablecer a predeterminado
+                    </button>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- VISTA: IDIOMA -->
+        <section id="view-settings-language" class="view">
+            <div class="profile-container">
+
+                <header class="subheader">
+                    <button type="button"
+                            class="subheader-back"
+                            data-view-target="view-settings"
+                            data-lang="backArrow">
+                        ←
+                    </button>
+                    <h2 data-lang="language">Idioma</h2>
+                </header>
+
+                <p class="settings-description" data-lang="languageDesc">
+                    Selecciona el idioma en el que deseas usar AccessMap.
+                </p>
+
+                <div class="form-card">
+                    <label class="form-group">
+                        <span data-lang="preferredLanguage">Idioma preferido</span>
+                        <select id="languageSelect" class="language-select">
+                            <option value="es" data-lang="langSpanish">Español</option>
+                            <option value="en" data-lang="langEnglish">English</option>
+                            <option value="ru" data-lang="langRussian">Русский (Ruso)</option>
+                        </select>
+                    </label>
+
+                    <button id="saveLanguageBtn"
+                            class="btn-azul btn-grande"
+                            type="button"
+                            data-lang="saveLanguage">
+                        Guardar idioma
+                    </button>
+
+                    <p id="langSuccessMsg" class="form-success"></p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- VISTA: PRIVACIDAD -->
+        <section id="view-settings-privacy" class="view">
+            <div class="profile-container">
+
+                <header class="subheader">
+                    <button type="button"
+                            class="subheader-back"
+                            data-view-target="view-settings"
+                            data-lang="backArrow">
+                        ←
+                    </button>
+                    <h2 data-lang="privacy">Privacidad y Datos</h2>
+                </header>
+
+                <p class="settings-description" data-lang="privacyDesc">
+                    Gestiona cómo AccessMap utiliza tu historial y tus datos.
+                </p>
+
+                <div class="form-card">
+
+                    <label class="switch-row">
+                        <span class="switch-label" data-lang="saveRouteHistory">
+                            Guardar historial de rutas
+                        </span>
+                        <input type="checkbox" id="saveHistoryToggle" class="switch-input">
+                    </label>
+
+                    <p class="note-text" data-lang="privacyNote">
+                        Los datos agregados son anónimos y se utilizan para mejorar el servicio.
+                        Nunca compartimos tu información personal sin tu permiso.
+                    </p>
+
+                    <hr class="form-divider">
+
+                    <label class="switch-row">
+                        <span class="switch-label" data-lang="dataSaver">
+                            Modo de ahorro de datos
+                        </span>
+                        <input type="checkbox" id="dataSaverToggle" class="switch-input">
+                    </label>
+
+                    <button id="savePrivacyBtn"
+                            class="btn-azul btn-grande"
+                            type="button"
+                            data-lang="saveSettings">
+                        Guardar configuración
+                    </button>
+
+                    <p id="privacySuccessMsg" class="form-success"></p>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <script src="../scripts/main.js"></script>
+    <!-- SNACKBAR GLOBAL -->
+    <div id="snackbar" class="snackbar"></div>
+
+    <!-- TAB BAR (SOLO MÓVIL) -->
+    <nav class="bottom-nav">
+        <a href="home.html" class="bottom-link">
+            <span>🏠</span><span data-lang="navHome">Inicio</span>
+        </a>
+
+        <a href="map.html" class="bottom-link">
+            <span>🗺️</span><span data-lang="navMap">Mapa</span>
+        </a>
+
+        <a href="report.html" class="main-action">＋</a>
+
+        <a href="community.html" class="bottom-link">
+            <span>👥</span><span data-lang="navCommunity">Comunidad</span>
+        </a>
+
+        <a href="profile.html" class="bottom-link">
+            <span>👤</span><span data-lang="navProfile">Perfil</span>
+        </a>
+    </nav>
+
+    <!-- JS DEL PERFIL (MODO MÓDULO PARA IMPORTS) -->
+    <script src="../scripts/profile.js"></script>
 
 </body>
 </html>

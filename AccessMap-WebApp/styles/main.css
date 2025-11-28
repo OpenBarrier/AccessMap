@@ -1,42 +1,45 @@
-/* AQUÍ ESTÁN LOS ESTILOS GLOBALES DE LA WEB (Corregido) */
-
-/* 1. La fuente Baloo 2 */
+/* ===============================
+   1. FUENTE GLOBAL
+=============================== */
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;700&display=swap');
 
-/* 3. RESPONSIVIDAD BASE (Mobile First) */
 html {
-    font-size: 16px; /* Tamaño base en celular */
+    font-size: 16px;
 }
-/* Cuando la pantalla es grande (Tablet/Laptop), todo crece un poco */
+
 @media (min-width: 768px) {
     html {
-        font-size: 18px; /* Lo que use 'rem' crecerá automáticamente */
+        font-size: 18px;
     }
 }
 
-/* 4. ESTILOS GENERALES */
+/* ===============================
+   2. ESTILOS BASE
+=============================== */
 body {
-    font-family: 'Baloo 2', sans-serif; /* Fuente */
-    background-color: #f8fafc; /* Gris claro */
-    color: #334155;            /* Gris oscuro texto */
+    font-family: 'Baloo 2', sans-serif;
+    background-color: #f8fafc;
+    color: #334155;
     line-height: 1.6;
-    overflow-x: hidden; /* Evita scroll horizontal accidental */
+    overflow-x: hidden;
 }
 
-/* 5. TIPOGRAFIA (Titulos) */
+/* Tipografía general */
 h1, h2, h3 {
-    color: #024260; /* Azul Primario */
+    color: #024260;
     font-weight: 700;
     line-height: 1.2;
     margin-bottom: 1rem;
 }
-h1 { font-size: 2rem; }      
-h2 { font-size: 1.5rem; }    
-h3 { font-size: 1.25rem; }   
-p  { font-size: 1rem; margin-bottom: 1rem; }
 
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.25rem; }
 
-/* 6. ELEMENTOS BASE */
+p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
 
 /* Enlaces */
 a {
@@ -46,102 +49,102 @@ a {
     cursor: pointer;
 }
 
-a:hover {opacity: 0.8;}
-
-/* Botones genéricos*/
-button {
-    font-family: 'Baloo 2', sans-serif;
-    font-weight: 700; 
-    border-radius: 50px;
-    border: none;
-    padding: 0.8rem 2rem;
-    font-size: 1rem;
-    cursor: pointer;
-    /* 2. Animación suave */
-    transition: transform 0.2s ease, background-color 0.3s;
-    /* RESPONSIVE: Ancho completo en celular */    
-    display: block;
-    width: 100%;    
-    max-width: 350px;
-    margin: 0 auto; 
+a:hover {
+    opacity: 0.8;
 }
 
-/* Efecto Rebote al pasar el mouse */
+/* ===============================
+   3. BOTONES — SISTEMA PROFESIONAL
+=============================== */
+
+/* Tecnología principal: los botones YA NO son 100% width universalmente */
+button {
+    font-family: 'Baloo 2', sans-serif;
+    font-weight: 700;
+    padding: 0.65rem 1.4rem;
+    border-radius: 50px;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.3s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Hover global */
 button:hover {
     transform: scale(1.05);
     filter: brightness(1.1);
 }
 
-/* MEDIA QUERY: En PC el botón vuelve a su tamaño normal */
-@media (min-width: 768px) {
-    button {
-        display: inline-block; 
-        width: auto;          
-    }
+/* BOTONES GRANDES (formularios) */
+.btn-grande {
+    display: block;
+    width: 100%;
+    max-width: 340px;
+    margin: 1rem auto;
 }
 
-/* =========================================
-   CLASES DE COLOR (Alineadas con GUÍA TÉCNICA)
-   ========================================= */
-
-/* Botón Principal (Azul) */
+/* Colores */
 .btn-azul {
     background-color: #024260;
     color: #FFFFFF;
 }
-/* Botón Secundario (Verde) */
+
 .btn-verde {
     background-color: #05af43;
-    color: #FFFFFF;
-}
-/* Botón de Peligro/Cancelar (Rojo) */
-.btn-rojo {
-    background-color: #e03737;
-    color: #FFFFFF;
+    color: white;
 }
 
-/* Botón Transparente/Borde (para "Cancelar") */
+.btn-verde-azulado {
+    background-color: #00b592;
+    color: white;
+}
+
+.btn-rojo {
+    background-color: #e03737;
+    color: white;
+}
+
 .btn-borde {
     background-color: transparent;
     border: 2px solid #024260;
     color: #024260;
 }
 
-/* Textos*/
-.texto-azul  { color: #024260; }
-.texto-verde { color: #05af43; } /*Para cosas positivas, confirmaciones o énfasis amigable.*/
-.texto-rojo  { color: #e03737; } /*Para mensajes de error o advertencias cuando algo sale mal*/
-.texto-gris  { color: #334155; } /*Para textos 
-
-/* Fondos */
-.bg-blanco { background-color: #FFFFFF; }
-
-
-/* 7. ETIQUETAS DE ACCESIBILIDAD (TAGS) */
+/* ===============================
+   4. TAGS
+=============================== */
 .tag {
     display: inline-block;
     padding: 0.25rem 0.75rem;
     border-radius: 50px;
     font-size: 0.85rem;
     font-weight: 700;
-    color: #FFFFFF;
+    color: #ffffff;
     text-transform: uppercase;
-    margin-right: 0.5rem;
+    letter-spacing: 0.5px;
 }
 
-/* Variantes de Color*/
-.tag-verde { background-color: #05af43; } /* Accesible */
-.tag-ambar { background-color: #e69000; } /* Precaución */
-.tag-rojo  { background-color: #e03737; } /* No Accesible */
+.tag-verde  { background-color: #05af43; }
+.tag-ambar  { background-color: #e69000; }
+.tag-rojo   { background-color: #e03737; }
 
+/* ===============================
+   5. UTILIDADES DE TEXTO
+=============================== */
+.texto-azul { color: #024260; }
+.texto-verde { color: #05af43; }
+.texto-rojo { color: #e03737; }
+.texto-gris { color: #334155; }
 
-/* 8. LAYOUT RESPONSIVE */
-/* Contenedor flexible para tarjetas */
+/* ===============================
+   6. CONTENEDORES
+=============================== */
 .grid-container {
     display: flex;
-    flex-wrap: wrap; /* Esto hace que bajen en celular */
+    flex-wrap: wrap;
     gap: 1.5rem;
     justify-content: center;
 }
-
-
