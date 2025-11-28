@@ -974,3 +974,38 @@ body.dark .stat-label {
     color: #d9e7ef !important;
 }
 
+/* TARJETAS DE OPCIONES EN PERFIL */
+.option-btn-profile {
+    padding: 1rem;
+    border: 2px solid #cbd5e1;
+    border-radius: 14px;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #fff;
+}
+
+/* ESTADO SELECCIONADO */
+.option-btn-profile.selected {
+    border-color: #024260;
+    background: #e6f3fa;
+    box-shadow: 0 0 8px rgba(2,66,96,0.25);
+}
+
+/* CENTRAR BOTÓN */
+.btn-center {
+    display: block;
+    margin: 0 auto;
+}
+
+/* ANIMACIÓN */
+.option-btn-profile {
+    transform: scale(1);
+}
+.option-btn-profile:active {
+    transform: scale(0.97);
+}
