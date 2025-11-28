@@ -1,4 +1,4 @@
-/*Este archivo es para que la web se vea igual en todos los navegadores.*/
+/* Reset universal */
 * {
     margin: 0;
     padding: 0;
@@ -15,6 +15,7 @@ img, picture, video, canvas, svg {
     max-width: 100%;
 }
 
+/* Inputs, selects y botones agarran la fuente global */
 input, button, textarea, select {
     font: inherit;
 }
