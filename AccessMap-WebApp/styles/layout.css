@@ -43,6 +43,7 @@
 .nav-link.active {
     background-color: rgba(255, 255, 255, 0.15);
     font-weight: 700;
+    border-radius: 0.5rem;
 }
 
 /* 2. CONTENIDO PRINCIPAL */
@@ -109,6 +110,13 @@
     /* Sidebar SIEMPRE visible */
     .sidebar {
         display: flex;
+    }
+    
+    .sidebar-brand {
+    font-size: 2rem;
+    color: #05af43;
+    font-weight: 700;
+    padding-bottom: 3rem;
     }
 
     /* Tab bar oculto en desktop */
