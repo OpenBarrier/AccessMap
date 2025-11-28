@@ -516,3 +516,4 @@ function getIconColorClass(emoji) {
             return "icon-bg--lima-norte";
     }
 }
+
