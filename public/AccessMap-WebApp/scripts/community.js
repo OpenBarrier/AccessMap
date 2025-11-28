@@ -282,7 +282,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // ============================================================
     const groupModal = document.getElementById("group-modal");
     const openGroupBtn = document.getElementById("btn-open-group-modal");
-    const closeGroupBtn = document.getElementById("btn-profile-close-group");
+    const closeGroupBtn = document.getElementById("btn-group-close");
     const cancelGroupBtn = document.getElementById("btn-group-cancel");
     const groupOverlay = groupModal?.querySelector(".group-modal-overlay");
 
@@ -323,6 +323,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function closeGroupModal() {
+        pendingInvites = [];
+        if (inviteList) inviteList.innerHTML = "";
         if (!groupModal) return;
         groupModal.setAttribute("aria-hidden", "true");
     }
@@ -407,15 +409,21 @@ document.addEventListener("DOMContentLoaded", () => {
         const misGruposList = document.querySelector(
             "#grupos-view .group-list"
         );
+        
+
         if (misGruposList) {
-            const card = document.createElement("div");
-            card.className = "group-item js-open-group-info";
-            card.dataset.groupName = name;
-            card.dataset.groupDescription = desc;
-            card.dataset.groupMembers = "1";
-            card.dataset.groupReports = "0";
-            card.dataset.role = "admin";
-            card.dataset.groupIcon = selectedIcon;
+        const card = document.createElement("div");
+        card.className = "group-item js-open-group-info";
+        card.dataset.groupName = name;
+        card.dataset.groupDescription = desc;
+        const totalMembers = 1 + pendingInvites.length; // tú + invitados
+/*DUDISSSS NO SE SI VA ESOOO */
+        card.dataset.groupInvites = JSON.stringify(pendingInvites);
+        card.dataset.groupMembers = totalMembers.toString();
+        card.dataset.groupReports = "0";
+        card.dataset.role = "admin";  // 👈 tú eres admin del grupo que creas
+        card.dataset.groupIcon = selectedIcon;
+        card.dataset.owner = "Tú";    // 👈 mostrará “Creado por: Tú”
 
             card.innerHTML = `
                 <div class="group-icon icon-bg--lima-norte">${selectedIcon}</div>
@@ -437,6 +445,14 @@ document.addEventListener("DOMContentLoaded", () => {
             ensureOriginalText(card.querySelector(".group-description"));
 
             misGruposList.prepend(card);
+            const stats = card.querySelector(".group-stats");
+            if (stats) {
+                stats.innerHTML = `
+                    <span>👥 ${totalMembers} miembros</span>
+                    <span>📝 0 reportes</span>
+                `;
+            }
+
             attachGroupInfoTrigger(card);
         }
 
@@ -455,6 +471,78 @@ document.addEventListener("DOMContentLoaded", () => {
         closeGroupModal();
         alert("Grupo creado (prototipo).");
     });
+    // ============================================================
+    // 4.1) INVITAR MIEMBROS (Paso 2 del modal Crear Grupo)
+    // ============================================================
+    const inviteInput = document.getElementById("group-invite-input");
+    const inviteBtn = document.querySelector(".group-invite-send");
+    const inviteList = document.getElementById("group-invite-list");
+    let pendingInvites = []; // Lista temporal de invitados
+
+
+    function addInviteFromInput() {
+        if (!inviteInput || !inviteList) return;
+
+        const rawValue = inviteInput.value.trim();
+        if (!rawValue) return;
+
+        // normalizamos a @usuario
+        let value = rawValue;
+        if (!value.startsWith("@")) {
+            value = "@" + value;
+        }
+
+        // evitar duplicados simples
+        const exists = Array.from(inviteList.children).some((li) => {
+            return li.dataset.userHandle === value;
+        });
+        if (exists) {
+            inviteInput.value = "";
+            return;
+        }
+
+        // crear item de invitación
+        // guardar en array
+        pendingInvites.push({
+            handle: value,
+            name: value.replace("@", ""), // Usamos el handle como nombre simplificado
+            role: "Miembro invitado"
+        });
+
+        // crear item en UI
+        const li = document.createElement("li");
+        li.className = "group-invite-item";
+        li.dataset.userHandle = value;
+
+        li.innerHTML = `
+            <span class="group-invite-name">${value}</span>
+            <button type="button" class="group-invite-remove" aria-label="Quitar invitación">
+                ✕
+            </button>
+        `;
+
+        // botón para eliminar invitación
+        li.querySelector(".group-invite-remove").addEventListener("click", () => {
+            li.remove();
+        });
+
+        inviteList.appendChild(li);
+        inviteInput.value = "";
+    }
+
+    // Click en la flecha
+    inviteBtn?.addEventListener("click", (e) => {
+        e.preventDefault();
+        addInviteFromInput();
+    });
+
+    // Enter dentro del input
+    inviteInput?.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            addInviteFromInput();
+        }
+    });
 
     // ============================================================
     // 5) MODAL INFO GRUPO + EDITAR + ABANDONAR
@@ -464,7 +552,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const infoCloseBtn = document.getElementById("btn-group-info-close");
     const infoDismissBtn = document.getElementById("btn-group-info-dismiss");
     const btnLeaveGroup = document.getElementById("btn-leave-group");
-    const btnEditFromInfo = document.getElementById("btn-edit-group-from-info");
     const rolePill = document.getElementById("info-group-role");
     const adminEditSection = document.getElementById("admin-edit-section");
 
@@ -475,6 +562,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const infoStatMembers = document.getElementById("info-stat-members");
     const infoStatReports = document.getElementById("info-stat-reports");
     const infoIcon = document.getElementById("info-group-icon");
+    const infoOwner = document.getElementById("info-group-owner"); // 👈 nuevo
+    // Tabs internos (Información / Miembros)
+    const infoTabs = document.querySelectorAll(".group-info-tab");
+    const infoViewSections = document.querySelectorAll(
+        ".group-info-body .group-info-section:not(.group-info-section--members)"
+    );
+    const membersSection = document.getElementById("group-info-members-section");
+    const membersList = document.getElementById("group-members-list");
+    const membersEmpty = document.getElementById("group-members-empty");
 
     let currentGroupCard = null;
     let currentIsAdmin = false;
@@ -502,11 +598,102 @@ document.addEventListener("DOMContentLoaded", () => {
         if (infoIcon) infoIcon.textContent = icon;
 
         if (rolePill) {
-            rolePill.style.display = currentIsAdmin ? "inline-flex" : "none";
+        rolePill.textContent = currentIsAdmin ? "Admin" : "Miembro";
+        rolePill.style.display = "inline-flex";
         }
+
         if (adminEditSection) {
-            adminEditSection.style.display = currentIsAdmin ? "block" : "none";
+        adminEditSection.style.display = currentIsAdmin ? "block" : "none";
         }
+        if (infoOwner) {
+        infoOwner.textContent = d.owner || "—";
+        }
+
+        // ====== 🔹 Construir lista de miembros (demo) ======
+        if (membersList && membersEmpty) {
+            membersList.innerHTML = "";
+
+            const totalMembers = parseInt(members, 10) || 0;
+            const logicalMembers = [];
+
+            // Propietario siempre admin
+            if (d.owner && d.owner !== "Tú") {
+                logicalMembers.push({
+                    name: d.owner,
+                    role: "Admin",
+                });
+            }
+
+            // (según rol de admin en el grupo)
+            logicalMembers.push({
+                name: "Tú",
+                role: currentIsAdmin ? "Admin" : "Miembro",
+            });
+
+            if (logicalMembers.length === 0 || totalMembers === 0) {
+                // empty state
+                membersList.style.display = "none";
+                membersEmpty.style.display = "block";
+            } else {
+                membersList.style.display = "flex";
+                membersEmpty.style.display = "none";
+
+                // Añadir invitados desde dataset
+                let invitedList = [];
+                try {
+                    invitedList = JSON.parse(d.groupInvites || "[]");
+                } catch { invitedList = []; }
+
+                invitedList.forEach(inv => {
+                    logicalMembers.push({
+                        name: inv.name || inv.handle.replace("@", ""),
+                        role: "Miembro invitado"
+                    });
+                });
+
+                logicalMembers.forEach((m) => {
+                const li = document.createElement("li");
+                li.className = "group-member-item";
+                const initial = m.name.trim().charAt(0).toUpperCase() || "U";
+
+                li.innerHTML = `
+                    <div class="group-member-avatar">${initial}</div>
+                    <div class="group-member-info">
+                        <span class="group-member-name">${m.name}</span>
+                        <span class="group-member-role">${m.role}</span>
+                    </div>
+                    ${currentIsAdmin && m.name !== "Tú"
+                        ? `<button class="member-remove-btn" data-member="${m.name}">✕</button>`
+                        : ""
+                    }
+                `;
+
+                membersList.appendChild(li);
+            });
+
+
+                // Si en el dataset hay más miembros que los que mostramos,
+                // ponemos un "X miembros más"
+                if (totalMembers > logicalMembers.length) {
+                    const liMore = document.createElement("li");
+                    liMore.className = "group-member-extra";
+                    liMore.textContent = `+ ${
+                        totalMembers - logicalMembers.length
+                    } miembros más`;
+                    membersList.appendChild(liMore);
+                }
+            }
+        }
+
+        // Siempre arrancamos en la vista "Información"
+        infoTabs.forEach((btn) => {
+            btn.classList.toggle(
+                "group-info-tab--active",
+                btn.dataset.view === "info"
+            );
+        });
+        infoViewSections.forEach((sec) => (sec.style.display = "block"));
+        if (membersSection) membersSection.style.display = "none";
 
         infoModal.setAttribute("aria-hidden", "false");
     }
@@ -518,6 +705,73 @@ document.addEventListener("DOMContentLoaded", () => {
         currentIsAdmin = false;
     }
 
+    // Tabs internos del modal (Información / Miembros)
+    infoTabs.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            const view = btn.dataset.view;
+            if (!view) return;
+            if (view === "activity") return; // aún no implementamos actividad
+
+            infoTabs.forEach((b) => {
+                b.classList.toggle("group-info-tab--active", b === btn);
+            });
+
+            if (view === "info") {
+                infoViewSections.forEach((sec) => (sec.style.display = "block"));
+                if (membersSection) membersSection.style.display = "none";
+            } else if (view === "members") {
+                infoViewSections.forEach((sec) => (sec.style.display = "none"));
+                if (membersSection) membersSection.style.display = "block";
+            }
+        });
+        });
+
+        // Eliminar miembros (solo admin)
+        membersList?.addEventListener("click", (e) => {
+            const btn = e.target.closest(".member-remove-btn");
+            if (!btn) return;
+
+            const name = btn.dataset.member;
+            if (!name) return;
+
+            const ok = confirm(`¿Eliminar a "${name}" del grupo?`);
+            if (!ok) return;
+
+            // Obtener dataset del grupo actual
+            const d = currentGroupCard.dataset;
+
+            // Convertir lista de invitados JSON
+            let invitedList = [];
+            try {
+                invitedList = JSON.parse(d.groupInvites || "[]");
+            } catch {}
+
+            // Filtrar
+            invitedList = invitedList.filter(
+                (m) => m.name !== name && m.handle !== "@" + name
+            );
+
+            // Guardar de nuevo
+            d.groupInvites = JSON.stringify(invitedList);
+
+            // Recalcular miembros totales
+            const totalMembers = 1 + invitedList.length; // Tú + invitados
+            d.groupMembers = totalMembers.toString();
+
+            // Actualizar card visual
+            const stats = currentGroupCard.querySelector(".group-stats");
+            if (stats) {
+                stats.innerHTML = `
+                    <span>👥 ${totalMembers} miembros</span>
+                    <span>📝 ${d.groupReports || 0} reportes</span>
+                `;
+            }
+
+            openGroupInfo(currentGroupCard);
+            }
+    );
+
+
     function attachGroupInfoTrigger(card) {
         card.addEventListener("click", () => openGroupInfo(card));
     }
@@ -528,6 +782,76 @@ document.addEventListener("DOMContentLoaded", () => {
     infoOverlay?.addEventListener("click", closeGroupInfo);
     infoCloseBtn?.addEventListener("click", closeGroupInfo);
     infoDismissBtn?.addEventListener("click", closeGroupInfo);
+        // ============================================================
+    // 5.1) UNIRSE A GRUPO RECOMENDADO
+    // ============================================================
+    const joinGroupButtons = document.querySelectorAll(".join-group-button");
+
+    joinGroupButtons.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+            e.stopPropagation(); // por si algún día el padre también tiene click
+
+            // Si ya se unió antes, no hacer nada
+            if (btn.disabled) return;
+
+            const d = btn.dataset;
+            const parentCard = btn.closest(".group-item");
+            const iconEl = parentCard?.querySelector(".group-icon");
+            const iconEmoji = iconEl
+                ? iconEl.textContent.trim()
+                : "🧱";
+
+            const name = d.groupName || "Nombre del grupo";
+            const desc =
+                d.groupDescription ||
+                "Grupo local enfocado en hacer la ciudad más inclusiva.";
+            const members = d.groupMembers || "0";
+            const reports = d.groupReports || "0";
+            const owner = d.owner || "—";
+
+            // Lista de "Mis Grupos" (es la primera .group-list dentro de #grupos-view)
+            const misGruposList = document.querySelector("#grupos-view .group-list");
+            if (!misGruposList) return;
+
+            // Crear nueva card como miembro
+            const card = document.createElement("div");
+            card.className = "group-item js-open-group-info";
+            card.dataset.groupName = name;
+            card.dataset.groupDescription = desc;
+            card.dataset.groupMembers = members;
+            card.dataset.groupReports = reports;
+            card.dataset.role = "member";
+            card.dataset.groupIcon = iconEmoji;
+            card.dataset.owner = owner;
+
+            card.innerHTML = `
+                <div class="group-icon icon-bg--transporte">${iconEmoji}</div>
+                <div class="group-details">
+                    <div class="group-name">${name}</div>
+                    <div class="group-description">${desc}</div>
+                    <div class="group-stats">
+                        <span>👥 ${members} miembros</span>
+                        <span>📝 ${reports} reportes</span>
+                    </div>
+                </div>
+            `;
+
+            // Para que la búsqueda funcione con highlight
+            ensureOriginalText(card.querySelector(".group-name"));
+            ensureOriginalText(card.querySelector(".group-description"));
+
+            // Agregar card a "Mis Grupos"
+            misGruposList.appendChild(card);
+
+            // Hacer que la nueva card abra el modal de info
+            attachGroupInfoTrigger(card);
+            openGroupInfo(card);
+
+            // Feedback en el botón
+            btn.disabled = true;
+            btn.textContent = "Te has unido";
+        });
+    });
 
     // Abandonar grupo
     btnLeaveGroup?.addEventListener("click", () => {
@@ -552,7 +876,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const editCloseBtn = document.getElementById("btn-edit-group-close");
     const editCancelBtn = document.getElementById("btn-edit-group-cancel");
     const editContinueBtn = document.getElementById("btn-edit-group-continue");
-
+    
     const headerGroupName = document.getElementById("edit-group-header-name");
     const editInputName = document.getElementById("edit-group-name-input");
     const editInputDesc = document.getElementById("edit-group-description-input");
@@ -564,7 +888,18 @@ document.addEventListener("DOMContentLoaded", () => {
         : [];
 
     function openEditModal(card) {
-        if (!editModal) return;
+            console.log({
+                headerGroupName,
+                editInputName,
+                editInputDesc,
+                editPreviewIcon,
+                editPreviewName,
+                editPreviewDesc
+            });
+        if (!editModal) {
+        console.log("ERROR: editModal es null");
+        return;
+            }
         currentGroupCard = card;
 
         const d = card.dataset;
@@ -663,11 +998,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
         closeEditModal();
     });
+    // Botón "Editar información del grupo" desde el modal info
+    document
+    .getElementById("btn-edit-group-from-info")
+    ?.addEventListener("click", () => {
+        console.log("CLICK DETECTADO → ADMIN =", currentIsAdmin);
 
-    // Desde la info (solo admin) → abrir editar
-    btnEditFromInfo?.addEventListener("click", () => {
-        if (!currentGroupCard || !currentIsAdmin) return;
+        if (!currentGroupCard || !currentIsAdmin) {
+            console.log("Bloqueado por rol o falta de card");
+            return;
+        }
+
+        console.log("Abriendo modal editar...");
         closeGroupInfo();
         openEditModal(currentGroupCard);
     });
+
 });

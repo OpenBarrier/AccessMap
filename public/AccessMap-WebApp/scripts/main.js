@@ -1,38 +1,36 @@
-// assets/scripts/main.js
-
-// Esperamos a que todo el HTML esté listo antes de ejecutar nada
 document.addEventListener('DOMContentLoaded', () => {
 
    console.log("✅ Main script cargado y DOM listo");
 
-   const btnMenu = document.getElementById('btn-menu-toggle');
-   const sidebar = document.getElementById('sidebar-nav');
+   // IDs reales de tu HTML
+   const btnMenu = document.getElementById('btn-menu-toggle'); 
+   const sidebar = document.getElementById('sidebar'); 
    const sidebarLinks = document.querySelectorAll('.sidebar__link');
 
-   // Verificación de seguridad
+   // Activar menú solo si la página tiene botón y sidebar
    if (btnMenu && sidebar) {
-      console.log("🔹 Elementos del menú encontrados. Activando listeners...");
+      console.log("🔹 Sidebar móvil habilitado.");
 
-      // 1. Abrir/Cerrar Sidebar
       btnMenu.addEventListener('click', (e) => {
          e.stopPropagation();
          sidebar.classList.toggle('is-open');
          console.log("🍔 Menú alternado");
       });
 
-      // 2. Cerrar al hacer clic fuera
       document.addEventListener('click', (e) => {
          if (sidebar.classList.contains('is-open') &&
-            !sidebar.contains(e.target) &&
-            e.target !== btnMenu) {
+             !sidebar.contains(e.target) &&
+             e.target !== btnMenu) {
             sidebar.classList.remove('is-open');
          }
       });
+
    } else {
-      console.warn("⚠️ Advertencia: No se encontró el botón o el sidebar en este HTML.");
+      // No mostrar warning porque hay páginas como community.html sin toggle
+      return;
    }
 
-   // 3. Navegación SPA (Links activos)
+   // Activar estados de los links del sidebar (opcional)
    sidebarLinks.forEach(link => {
       link.addEventListener('click', (e) => {
          const href = link.getAttribute('href');
@@ -40,11 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             sidebarLinks.forEach(l => l.classList.remove('sidebar__link--active'));
             link.classList.add('sidebar__link--active');
-
-            // Cerrar menú en móvil al seleccionar
-            if (sidebar && sidebar.classList.contains('is-open')) {
-               sidebar.classList.remove('is-open');
-            }
+            sidebar.classList.remove('is-open');
          }
       });
    });

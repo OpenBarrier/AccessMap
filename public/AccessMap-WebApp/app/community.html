@@ -607,9 +607,166 @@
 
     </div> <!-- fin container -->
 </section>
+
 <!-- ============================================================= -->
-<!-- 🔵 MODAL: EDITAR INFORMACIÓN DEL GRUPO -->
+<!-- 🔵 MODAL: INFORMACIÓN DEL GRUPO (VER + ABANDONAR + EDITAR) -->
 <!-- ============================================================= -->
+<section id="group-info-modal" class="group-modal group-modal--info" aria-hidden="true">
+
+    <!-- Overlay -->
+    <div class="group-modal-overlay" id="group-info-overlay"></div>
+
+    <!-- Contenedor -->
+    <div class="group-modal-container group-info-container"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="info-group-name">
+
+        <!-- =============== HEADER =============== -->
+        <header class="group-info-header">
+
+            <div class="group-info-main">
+
+                <!-- Ícono -->
+                <div class="group-info-icon" id="info-group-icon">🧱</div>
+
+                <!-- Texto -->
+                <div class="group-info-text">
+                    <h2 class="group-info-title" id="info-group-name">
+                        Nombre del grupo
+                    </h2>
+
+                    <p class="group-info-description" id="info-group-description">
+                        Aquí va la descripción del grupo.
+                    </p>
+
+                    <div class="group-info-meta">
+                        <span id="info-group-members">👥 0 miembros</span>
+                        <span id="info-group-reports">📝 0 reportes</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botón cerrar -->
+            <button
+                type="button"
+                class="group-modal-close"
+                id="btn-group-info-close"
+                aria-label="Cerrar"
+            >
+                ✕
+            </button>
+        </header>
+
+        <!-- =============== PILLS (Rol) =============== -->
+        <div class="group-info-role-wrapper">
+            <span class="group-role-tag" id="info-group-role">Miembro</span>
+        </div>
+
+        <!-- =============== TABS VISUALES =============== -->
+        <nav class="group-info-tabs">
+    <button
+        class="group-info-tab group-info-tab--active"
+        type="button"
+        data-view="info">
+        Información
+    </button>
+    <button
+        class="group-info-tab"
+        type="button"
+        data-view="members">
+        Miembros
+    </button>
+    <button
+        class="group-info-tab"
+        type="button"
+        data-view="activity"
+        disabled>
+        Actividad
+    </button>
+        </nav>
+
+
+        <!-- =============== BODY =============== -->
+        <div class="group-info-body">
+
+            <!-- Sección solo si eres admin -->
+            <div id="admin-edit-section" class="admin-section" style="display:none;">
+                <button id="btn-edit-group-from-info" class="btn-edit-group">
+                    ✏️ Editar información del grupo
+                </button>
+            </div>
+
+
+            <!-- Info del creador -->
+            <section class="group-info-section">
+                <h3 class="group-info-subtitle">Creado por</h3>
+                <p class="group-info-value" id="info-group-owner">
+                    —
+                </p>
+            </section>
+
+            <!-- Estadísticas -->
+            <section class="group-info-section">
+                <h3 class="group-info-subtitle">Estadísticas</h3>
+
+                <div class="group-info-stats-row">
+
+                    <div class="group-info-stat-box">
+                        <span class="group-info-stat-label">
+                            Miembros Activos
+                        </span>
+                        <span class="group-info-stat-number" id="info-stat-members">
+                            —
+                        </span>
+                    </div>
+
+                    <div class="group-info-stat-box group-info-stat-box--accent">
+                        <span class="group-info-stat-label">
+                            Reportes del Grupo
+                        </span>
+                        <span class="group-info-stat-number" id="info-stat-reports">
+                            —
+                        </span>
+                    </div>
+
+                </div>
+
+            </section>
+                        <!-- Miembros -->
+            <section
+                class="group-info-section group-info-section--members"
+                id="group-info-members-section"
+                style="display:none;">
+                <h3 class="group-info-subtitle">Miembros</h3>
+
+                <ul class="group-members-list" id="group-members-list">
+                    <!-- JS rellena aquí -->
+                </ul>
+
+                <p class="group-members-empty" id="group-members-empty" style="display:none;">
+                    Este grupo aún no tiene miembros. Invita a otras personas para comenzar.
+                </p>
+            </section>
+
+        </div> <!-- Fin body -->
+
+        <!-- =============== FOOTER =============== -->
+        <footer class="group-info-footer">
+
+            <!-- Abandonar (solo si eres miembro) -->
+            <button type="button" class="group-btn-danger" id="btn-leave-group">
+                ⟵ Abandonar Grupo
+            </button>
+
+            <button type="button" class="group-btn-primary" id="btn-group-info-dismiss">
+                Cerrar
+            </button>
+        </footer>
+
+    </div>
+</section>
+
 <section id="edit-group-modal" class="group-modal" aria-hidden="true">
 
     <!-- Overlay -->
@@ -726,12 +883,12 @@
                         <p id="edit-preview-group-description">
                             Aquí aparecerá la descripción actualizada del grupo.
                         </p>
-
+                        <!----
                         <div class="group-preview-meta">
                             <span id="edit-preview-group-members">👥 —</span>
                             <span id="edit-preview-group-reports">📝 —</span>
                         </div>
-
+                    -->
                     </div>
 
                 </article>
@@ -753,148 +910,8 @@
     </div> <!-- Fin contenedor -->
 
 </section>
-<!-- ============================================================= -->
-<!-- 🔵 MODAL: INFORMACIÓN DEL GRUPO (VER + ABANDONAR + EDITAR) -->
-<!-- ============================================================= -->
-<section id="group-info-modal" class="group-modal group-modal--info" aria-hidden="true">
-
-    <!-- Overlay -->
-    <div class="group-modal-overlay" id="group-info-overlay"></div>
-
-    <!-- Contenedor -->
-    <div class="group-modal-container group-info-container"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="info-group-name">
-
-        <!-- =============== HEADER =============== -->
-        <header class="group-info-header">
-
-            <div class="group-info-main">
-
-                <!-- Ícono -->
-                <div class="group-info-icon" id="info-group-icon">🧱</div>
-
-                <!-- Texto -->
-                <div class="group-info-text">
-                    <h2 class="group-info-title" id="info-group-name">
-                        Nombre del grupo
-                    </h2>
-
-                    <p class="group-info-description" id="info-group-description">
-                        Aquí va la descripción del grupo.
-                    </p>
-
-                    <div class="group-info-meta">
-                        <span id="info-group-members">👥 0 miembros</span>
-                        <span id="info-group-reports">📝 0 reportes</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Botón cerrar -->
-            <button
-                type="button"
-                class="group-modal-close"
-                id="btn-group-info-close"
-                aria-label="Cerrar"
-            >
-                ✕
-            </button>
-        </header>
-
-        <!-- =============== PILLS (Rol) =============== -->
-        <div class="group-info-role-wrapper">
-            <span class="group-role-tag" id="info-group-role">Miembro</span>
-        </div>
-
-        <!-- =============== TABS VISUALES =============== -->
-        <nav class="group-info-tabs">
-            <button class="group-info-tab group-info-tab--active" type="button">
-                Información
-            </button>
-            <button class="group-info-tab" type="button" disabled>
-                Miembros
-            </button>
-            <button class="group-info-tab" type="button" disabled>
-                Actividad
-            </button>
-        </nav>
-
-        <!-- =============== BODY =============== -->
-        <div class="group-info-body">
-
-            <!-- Sección solo si eres admin -->
-            <section class="group-info-section" id="admin-edit-section">
-                <button type="button" class="group-btn-outline" id="btn-edit-group-from-info">
-                    ✏️ Editar información del Grupo
-                </button>
-            </section>
-
-            <!-- Info del creador -->
-            <section class="group-info-section">
-                <h3 class="group-info-subtitle">Creado por</h3>
-                <p class="group-info-value" id="info-group-owner">
-                    —
-                </p>
-            </section>
-
-            <!-- Estadísticas -->
-            <section class="group-info-section">
-                <h3 class="group-info-subtitle">Estadísticas</h3>
-
-                <div class="group-info-stats-row">
-
-                    <div class="group-info-stat-box">
-                        <span class="group-info-stat-label">
-                            Miembros Activos
-                        </span>
-                        <span class="group-info-stat-number" id="info-stat-members">
-                            —
-                        </span>
-                    </div>
-
-                    <div class="group-info-stat-box group-info-stat-box--accent">
-                        <span class="group-info-stat-label">
-                            Reportes del Grupo
-                        </span>
-                        <span class="group-info-stat-number" id="info-stat-reports">
-                            —
-                        </span>
-                    </div>
-
-                </div>
-
-            </section>
-
-        </div> <!-- Fin body -->
-
-        <!-- =============== FOOTER =============== -->
-        <footer class="group-info-footer">
-
-            <!-- Abandonar (solo si eres miembro) -->
-            <button type="button" class="group-btn-danger" id="btn-leave-group">
-                ⟵ Abandonar Grupo
-            </button>
-
-            <button type="button" class="group-btn-primary" id="btn-group-info-dismiss">
-                Cerrar
-            </button>
-        </footer>
-
-    </div>
-</section>
-
 
     </main>
-		<!-- NAV inferior (solo mobile) -->
-		<nav class="bottom-nav" aria-label="Navegación inferior">
-			<a href="../app/home.html" class="bottom-link">🏠<span>Inicio</span></a>
-			<a href="../app/map.html" class="bottom-link">🗺️<span>Mapa</span></a>
-			<a href="#report-view" class="bottom-link main-action">＋</a>
-			<a href="../app/community.html" class="bottom-link">👥<span>Comunidad</span></a>
-			<a href="../app/profile.html" class="bottom-link">👤<span>Perfil</span></a>
-		</nav>
 
     <!-- SNACKBAR GLOBAL -->
     <div id="snackbar" class="snackbar"></div>
@@ -921,7 +938,6 @@
     </nav>
 
     <script src="../scripts/main.js"></script>
-    <script src="../scripts/report.js"></script>
     <script src="../scripts/community.js"></script>
 
 </body>
