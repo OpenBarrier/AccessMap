@@ -356,3 +356,53 @@ span.badge-icon {
 }
 
 
+/* Grid tipo Perfil */
+.achievements-grid-b {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+/* Tarjeta */
+.badge-item {
+    background: #fff;
+    padding: 1.4rem 1.2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.badge-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+.badge-item.unlocked {
+    border-left: 6px solid #5cb85c;
+}
+
+.badge-item.locked {
+    opacity: 0.55;
+}
+
+/* Icono */
+.badge-icon {
+    font-size: 2.6rem;
+    margin-bottom: 0.6rem;
+}
+
+/* Título */
+.badge-name {
+    font-size: 1.1rem;
+    color: #013a59;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+
+/* Descripción */
+.badge-desc {
+    color: #5a7184;
+    font-size: 0.9rem;
+}

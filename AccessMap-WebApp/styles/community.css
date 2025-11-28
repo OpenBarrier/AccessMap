@@ -1,415 +1,303 @@
-/* =============================== */
-/* HEADER DE LA PÁGINA */
-/* =============================== */
+/* ============================================================
+   COMMUNITY MODULE – AccessMap (100% COMPATIBLE CON TU HTML)
+   ============================================================ */
+
+/* ------------------------------
+   GENERAL
+------------------------------ */
+.page-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #024260;
+}
 
 .community-header {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    padding: 0.8rem 1rem;
-    margin-bottom: 1.2rem;
+    align-items: center;
 }
 
-/* Botón hamburguesa */
-.btn-toggle {
-    background: #f1f5f9;
-    border: none;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.4rem;
+.notification-icon {
+    font-size: 1.6rem;
     cursor: pointer;
 }
 
-/* Título alineado a la izquierda */
-.page-title {
-    font-size: 1.7rem;
-    font-weight: 700;
-    margin-left: 0.5rem;
-    flex: 1;
-}
-
-/* Icono de notificación */
-.notification-icon {
-    font-size: 1.6rem;
-    margin-left: auto;
-}
-
-
-/* =============================== */
-/* TABS SUPERIORES */
-/* =============================== */
+/* ------------------------------
+   TABS
+------------------------------ */
 .tab-navigation {
     display: flex;
-    background-color: #f2f6f9;
+    background: #f1f5f9;
+    padding: 0.5rem;
     border-radius: 12px;
-    padding: 6px;
-    margin-bottom: 1rem;
+    margin: 1rem 0 1.5rem;
 }
 
 .tab-item {
     flex: 1;
-    padding: 0.6rem;
+    padding: 0.9rem;
     text-align: center;
     border-radius: 10px;
     font-weight: 600;
-    color: #4b4b4b;
+    color: #024260;
+    cursor: pointer;
+    transition: 0.25s;
 }
 
 .tab-item--active {
-    background-color: #ffffff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    background: white;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.08);
 }
 
-/* =============================== */
-/* SEARCH INPUT */
-/* =============================== */
+.tab-section { display: none; }
+.tab-section.active { display: block; }
+
+/* ------------------------------
+   SEARCH BOX
+------------------------------ */
 .search-section {
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.5rem;
 }
 
 .search-box {
-    background: #fff;
-    border-radius: 12px;
+    width: 100%;
+    background: white;
     padding: 0.7rem 1rem;
+    border-radius: 12px;
     display: flex;
+    gap: 0.5rem;
     align-items: center;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
-}
-
-/* layout especial para "Buscar grupos" + botón + */
-.search-groups-section {
-    display: flex;
-    align-items: center;
-    gap: 0.7rem;
-}
-
-/* el input ocupa todo el ancho disponible en la sección de grupos */
-.search-groups-section .search-box {
-    flex: 1;
+    border: 2px solid #d7e2ee;
 }
 
 .search-box input {
-    border: none;
     flex: 1;
-    font-size: 1rem;
+    border: none;
+    outline: none;
+    background: none;
 }
 
-.search-icon {
-    margin-left: 10px;
-}
-
-/* =============================== */
-/* ESTADÍSTICAS */
-/* =============================== */
-.community-stats {
-    margin-bottom: 1.3rem;
-}
-
+/* ------------------------------
+   COMMUNITY STATS
+------------------------------ */
 .stats-container {
     display: flex;
-    justify-content: space-between;
+    gap: 1rem;
     flex-wrap: wrap;
 }
 
 .stat-card {
-    background: #fff;
-    flex: 1 1 30%;
-    margin: 0.3rem;
-    border-radius: 10px;
+    flex: 1;
+    min-width: 130px;
+    background: white;
     padding: 1rem;
+    border-radius: 12px;
     text-align: center;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
 .stat-number {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 700;
 }
 
-.stat-number--green {
-    color: #2ecc71;
+.stat-number--green { color: #05af43; }
+
+/* ------------------------------
+   TOP 3 — Tus clases reales
+------------------------------ */
+.top-ranking-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
-.stat-label {
-    color: #666;
-    font-size: 0.9rem;
-}
-
-/* =============================== */
-/* TOP 3 */
-/* =============================== */
-.top-ranking-section {
-    margin-bottom: 1.2rem;
-}
-
-.top-ranking-list .ranking-item {
-    background: #004b63;
-    color: white;
-    border-radius: 12px;
-    padding: 0.9rem;
+.ranking-item {
     display: flex;
     align-items: center;
-    margin-bottom: 0.6rem;
-    flex-wrap: wrap;
+    gap: 1rem;
+    background: #024260;
+    color: white;
+    padding: 1rem;
+    border-radius: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    cursor: pointer;
+    justify-content: space-between;
 }
 
-.ranking-item--top1 {
-    background: #005f80;
-}
-
-.medal-icon {
+.ranking-item .medal-icon {
     font-size: 1.8rem;
-    margin-right: 12px;
 }
 
-/* =============================== */
-/* AVATARES */
-/* =============================== */
 .avatar-bg {
-    width: 42px;
-    height: 42px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
-    background: #ccc;
-    color: white;
+    background: #0ea5e9;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    color: white;
     font-weight: 700;
-    margin-right: 12px;
+    flex-shrink: 0;
 }
 
-/* Colores de avatares */
-.avatar-bg--mg { background: #3498db; }
-.avatar-bg--cm { background: #9b59b6; }
-.avatar-bg--at { background: #e67e22; }
-.avatar-bg--lp { background: #27ae60; }
-.avatar-bg--ps { background: #c0392b; }
+.avatar-bg--mg { background: #0284c7; }
+.avatar-bg--cm { background: #9333ea; }
+.avatar-bg--at { background: #f97316; }
 
-/* =============================== */
-/* LISTA COMPLETA DE COLABORADORES */
-/* =============================== */
+.ranking-item .user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.ranking-item .name {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.ranking-item .handle {
+    font-size: 0.85rem;
+    opacity: .8;
+}
+
+.ranking-item .points {
+    font-size: 1.2rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* ------------------------------
+   FULL COLLABORATOR LIST
+------------------------------ */
+.collaborator-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
 .collaborator-item {
-    background: #fff;
-    border-radius: 12px;
-    padding: 0.8rem;
     display: flex;
     align-items: center;
-    margin-bottom: 0.7rem;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    cursor: pointer;
+    justify-content: space-between;
 }
 
-.rank-number {
-    font-weight: 700;
-    margin-right: 12px;
+.collaborator-item .user-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-.user-details {
-    flex: 1 1 60%;
+.collaborator-item .name {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.collaborator-item .handle {
+    font-size: 0.85rem;
+    opacity: .7;
 }
 
 .verified-tag {
-    background: #d4fbe2;
-    color: #2ecc71;
-    padding: 2px 6px;
+    margin-top: 3px;
     font-size: 0.75rem;
+    padding: 2px 7px;
     border-radius: 6px;
+    background: #d1fae5;
+    color: #059669;
     display: inline-block;
-    margin-left: 4px;
 }
 
-.reports-count--green {
-    color: #2ecc71;
+.reports-info {
+    text-align: right;
+}
+
+.reports-count {
+    font-size: 1.4rem;
     font-weight: 700;
 }
 
-/* =============================== */
-/* GRUPOS */
-/* =============================== */
-.group-item {
-    background: #fff;
-    border-radius: 12px;
-    padding: 1rem;
-    display: flex;
-    margin-bottom: 0.7rem;
-    align-items: center;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-    flex-wrap: wrap;
+.reports-count--green { color: #05af43; }
+
+.reports-label {
+    font-size: 0.75rem;
+    opacity: .7;
 }
 
-.group-item--active {
-    border: 2px solid #2ecc71;
+/* ------------------------------
+   GROUP LIST
+------------------------------ */
+.group-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.group-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    cursor: pointer;
 }
 
 .group-icon {
-    min-width: 50px;
-    min-height: 50px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 12px;
-}
-
-.tag-active {
-    background: #2ecc71;
-    color: white;
-    padding: 2px 8px;
-    font-size: 0.75rem;
-    border-radius: 6px;
-    margin-top: 2px;
-}
-
-/* =============================== */
-/* BOTONES */
-/* =============================== */
-
-/* Botón grande (unirse al grupo) */
-.join-group-button {
-    width: 100%;
-    padding: 0.8rem;
-    margin-top: 0.5rem;
-    border: none;
-    border-radius: 10px;
-    font-size: 1rem;
-    font-weight: 600;
+    width: 55px;
+    height: 55px;
+    border-radius: 14px;
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
-    background: #004b63;
-    color: white;
+    font-size: 28px;
 }
 
-/* Botón pequeño verde con "+" para crear grupo */
-.add-group-button {
-    width: 42px;
-    height: 42px;
-    background: #2ecc71;
-    color: white;
-    font-size: 1.8rem;
-    font-weight: 700;
-    border: none;
-    border-radius: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+.icon-bg--lima-norte { background: #e0f2fe; }
+.icon-bg--san-isidro { background: #fee2e2; }
+.icon-bg--transporte { background: #ede9fe; }
+
+.group-details {
+    flex: 1;
 }
 
-/* =============================== */
-/* ICONOS DE FONDO PARA GRUPOS */
-/* =============================== */
-.icon-bg--lima-norte { background: #3498db; color: white; }
-.icon-bg--san-isidro { background: #27ae60; color: white; }
-.icon-bg--transporte { background: #e67e22; color: white; }
-
-/* =============================== */
-/* ESTILOS GENERALES DE TEXTO */
-/* =============================== */
 .group-name {
     font-size: 1.1rem;
     font-weight: 700;
 }
 
 .group-description {
-    font-size: 0.9rem;
-    color: #555;
-    margin: 4px 0;
+    font-size: .9rem;
+    color: #475569;
+}layout
+
+.group-stats {
+    margin-top: 4px;
+    font-size: .8rem;
+    color: #64748b;
 }
 
-.group-stats span {
-    margin-right: 12px;
-    font-size: 0.85rem;
-    color: #333;
-}
-
-.tab-section {
-    display: none;
-}
-
-.tab-section.active {
-    display: block;
-}
-
-/* =============================== */
-/* BOTÓN HAMBURGUESA (SE ARREGLA AQUÍ) */
-/* =============================== */
-
-/* Estilo base: pequeño, tipo mockup, y oculto por defecto */
-.btn-toggle {
-    position: fixed;
-    top: 12px;
-    left: 12px;
-    z-index: 1100;
-    background: #ffffff;
-    border: 1px solid #e0e0e0;
-    padding: 6px 10px;
+.join-group-button {
+    margin-top: .6rem;
+    background: #05af43;
+    color: white;
+    font-weight: 600;
+    border: none;
+    padding: .4rem 1rem;
     border-radius: 8px;
-    font-size: 18px;
-    color: #004b63;
-    cursor: pointer;
-    display: none;   /* solo lo mostramos en móviles */
 }
 
-/* =============================== */
-/* RESPONSIVE MEDIA QUERIES */
-/* =============================== */
-@media (max-width: 768px) {
-    .stats-container {
-        flex-direction: column;
-    }
-
-    .stat-card {
-        margin: 0.3rem 0;
-    }
-
-    .top-ranking-list .ranking-item {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .collaborator-item {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .group-item {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    /* sidebar móvil */
-    .sidebar {
-        position: fixed;
-        left: -250px;
-        top: 0;
-        width: 250px;
-        height: 100%;
-        z-index: 1000;
-        transition: left 0.3s ease;
-    }
-
-    .sidebar.active {
-        left: 0;
-    }
-
-    /* aquí SÍ mostramos el botón hamburguesa en móvil */
-    .btn-toggle {
-        display: block;
-    }
-
-    /* ligero ajuste del botón + en pantallas pequeñas */
-    .add-group-button {
-        width: 38px;
-        height: 38px;
-        font-size: 1.6rem;
-    }
+/* ------------------------------
+   RESPONSIVE
+------------------------------ */
+@media (min-width: 768px) {
+    .ranking-item { padding: 1.3rem; }
+    .collaborator-item { padding: 1.3rem; }
+    .points { font-size: 1.5rem; }
 }
-

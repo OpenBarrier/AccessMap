@@ -12,26 +12,34 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
 
   <!-- Estilos del mapa -->
-  <link rel="stylesheet" href="../styles/layout.css">
-  <link rel="stylesheet" href="../styles/main.css">
+
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/layout.css">
+    <link rel="stylesheet" href="../styles/reset.css">
+
   <link rel="stylesheet" href="../styles/map.css">
   
 </head>
 
 <body>
     <!-- ========= CABECERA / NAVEGACIÓN ========= -->
-		<aside id="sidebar" class="sidebar">
-      <div class="sidebar-item">
-			  <div class="sidebar-brand">Access<span>MAP</span></div>
-        <nav id="sidebar-desktop" class="sidebar-nav options-bar">
-          <a href="../app/home.html" class="nav-link">Inicio</a><hr class="line-nav">
-          <a href="../app/map.html" class="nav-link active">Mapa</a><hr class="line-nav">
-          <a href="../app/community.html" class="nav-link">Comunidad</a><hr class="line-nav">
-          <a href="../app/profile.html" class="nav-link">Perfil</a><hr class="line-nav">
+		    <!-- SIDEBAR -->
+    <aside id="sidebar" class="sidebar">
+        <div class="sidebar-brand">AccessMap</div>
+
+        <nav class="sidebar-nav">
+            <a href="home.html" class="nav-link" data-lang="navHome">Inicio</a>
+            <a href="map.html" class="nav-link active" data-lang="navMap">Mapa</a>
+            <a href="report.html" class="nav-link" data-lang="navReport">Reportar</a>
+            <a href="community.html" class="nav-link" data-lang="navCommunity">Comunidad</a>
+            <a href="profile.html" class="nav-link" data-lang="navProfile">Perfil</a>
+
+            <a href="../index.html" class="nav-link" style="margin-top: auto; color:#e03737;" data-lang="logout">
+                Cerrar sesión
+            </a>
         </nav>
-      </div>
-      <div class="sidebar-item"></div>
-		</aside>
+    </aside>
+
 
     <div id="overlay" class="overlay" aria-hidden="true"></div>
 
@@ -287,13 +295,36 @@
   <!-- Lógica del mapa -->
   <script src="../scripts/map.js"></script>
 
-  <!--PARTE DE MANUEL, PUEDE SER CANVIADA PERO PREGUNTAME-->
-
-
   <script src="../scripts/report.js"></script>
   <script src="../scripts/navigation.js"></script>
   <script src="../scripts/main.js"></script>
-  <!--PARTE DE MANUEL, PUEDE SER CANVIADA PERO PREGUNTAME-->
 </body>
+   <!-- SNACKBAR GLOBAL -->
+    <div id="snackbar" class="snackbar"></div>
+
+    <!-- TAB BAR (SOLO MÓVIL) -->
+    <nav class="bottom-nav">
+        <a href="home.html" class="bottom-link">
+            <span>🏠</span><span data-lang="navHome">Inicio</span>
+        </a>
+
+        <a href="map.html" class="bottom-link">
+            <span>🗺️</span><span data-lang="navMap">Mapa</span>
+        </a>
+
+        <a href="report.html" class="main-action">＋</a>
+
+        <a href="community.html" class="bottom-link">
+            <span>👥</span><span data-lang="navCommunity">Comunidad</span>
+        </a>
+
+        <a href="profile.html" class="bottom-link">
+            <span>👤</span><span data-lang="navProfile">Perfil</span>
+        </a>
+    </nav>
+    
+    <!-- Scripts -->
+    <script src="../scripts/main.js"></script>
+    <script src="../scripts/report.js"></script>
 
 </html>

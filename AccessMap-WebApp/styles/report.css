@@ -1,231 +1,624 @@
-/* =========================================================
-   ESTILOS GENERALES DEL MÓDULO REPORTE
-   ========================================================= */
+/* ============================================================
+   REPORT.CSS – Flujo de Reportar barrera
+   ============================================================ */
 
-.screen {
-    display: none;
-    padding: 2rem;
+/* CONTENEDOR GENERAL DEL MÓDULO */
+.report-container {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0.5rem 0.75rem 5rem;
 }
 
-.screen.active {
-    display: block;
+/* HEADER SUPERIOR DE FLUJO */
+.report-header {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    width: 100%;
+    height: 56px;
+    background-color: #024260;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* centra el título */
+    padding: 0 1rem;
+    color: white;
+    border-radius: 0 0 14px 14px; /* solo bordes abajo */
+    margin-bottom: 1.5rem;
+}
+
+/* Flecha a la izquierda, dentro de la barra */
+.header-back {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.4rem;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.header-back:hover {
+    filter: brightness(1.1);
+}
+
+/* Título centrado y blanco (por encima del h1 global azul) */
+#report-header-title {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffffff !important;
+}
+
+
+/* VISTAS DEL FLUJO */
+.report-view {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    min-height: calc(100vh - 190px); /* header + bottom-nav aprox */
+}
+
+.report-view--active {
+    display: flex;
+}
+
+/* CARDS GENERALES */
+.card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 1rem 1.1rem;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+    border: 1px solid #e5e7eb;
+}
+
+/* ============================================================
+   BANDA DE ESTADO (offline, etc.)
+   ============================================================ */
+.state-banner {
+    padding: 0.7rem 1rem;
+    border-radius: 12px;
+    margin-bottom: 0.8rem;
+    font-size: 0.9rem;
+}
+
+.state-banner--warning {
+    background: #fff7ed;
+    color: #9a3412;
+    border: 1px solid #fed7aa;
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
-.label {
-    display: block;
+/* ============================================================
+   VISTA 1 – CÁMARA
+   ============================================================ */
+
+.tips-card h2 {
+    font-size: 1rem;
     margin-bottom: 0.5rem;
-    font-weight: bold;
-    color: #024260;
 }
 
-.input {
-    width: 100%;
-    padding: 0.9rem;
-    border: 2px solid #334155;
-    border-radius: 0.6rem;
-    font-size: 1rem;
-    background: #fff;
-    color: #334155;
-    margin-bottom: 1.5rem;
-}
-
-.input:focus {
-    outline: none;
-    border-color: #00b592;
-}
-
-/* =========================================================
-   BOTONES
-   ========================================================= */
-
-.btn-primary {
-    background: #024260;
-    color: #fff;
-    padding: 1rem;
-    border-radius: 0.6rem;
-    width: 100%;
-    text-align: center;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 1rem;
-}
-
-.btn-primary:hover {
-    background: #003347;
-}
-
-.btn-secondary {
-    background: #e5e7eb;
-    color: #334155;
-    padding: 1rem;
-    border-radius: 0.6rem;
-    width: 100%;
-    text-align: center;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.btn-secondary:hover {
-    background: #d8dce1;
-}
-
-.btn-full {
-    width: 100%;
-}
-
-/* =========================================================
-   PANTALLA: CÁMARA
-   ========================================================= */
-
-.camera-tips {
-    text-align: center;
-    font-size: 1rem;
-    color: #334155;
-    margin-bottom: 2rem;
+.tips-card ul {
+    list-style: disc;
+    padding-left: 1.25rem;
+    font-size: 0.9rem;
 }
 
 .camera-frame {
+    margin-top: 1rem;
+    background-color: #031824;
+    border-radius: 18px;
+    padding: 1.5rem 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.camera-inner {
     width: 100%;
-    height: 380px;
-    background: #000;
-    border-radius: 1rem;
-    position: relative;
-    margin-bottom: 2rem;
-}
-
-.frame-box {
-    position: absolute;
-    border: 3px solid #00b592;
-    border-radius: 0.5rem;
-    width: 60%;
-    height: 60%;
-    top: 20%;
-    left: 20%;
-}
-
-.camera-icon {
-    position: absolute;
-    bottom: 1rem;
-    right: 1rem;
-    font-size: 2rem;
-    color: #fff;
-}
-
-.camera-footer {
-    margin-top: 2rem;
-}
-
-/* =========================================================
-   PANTALLA: PREVIEW DE FOTO
-   ========================================================= */
-
-.photo-preview {
-    width: 100%;
-    border-radius: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.preview-status {
-    background: #05af43;
-    color: #fff;
-    padding: 1rem;
-    border-radius: 0.6rem;
+    max-width: 260px;
+    aspect-ratio: 1 / 1;
+    border-radius: 18px;
+    border: 3px solid #0ea5e9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    color: #e5f2ff;
     text-align: center;
-    margin-bottom: 1.5rem;
+}
+
+.camera-icon-big {
+    font-size: 2rem;
+}
+
+.camera-text {
+    font-weight: 700;
+}
+
+.camera-subtext {
+    font-size: 0.8rem;
+    opacity: 0.85;
+}
+
+.camera-shutter-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.camera-shutter {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 6px solid #f1f5f9;
+    background-color: #ffffff;
+    position: relative;
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.35);
+}
+
+.camera-shutter::after {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    border-radius: 50%;
+    background-color: #e2e8f0;
+}
+
+.camera-shutter--pulse {
+    animation: shutterPulse 0.4s ease-out;
+}
+
+@keyframes shutterPulse {
+    0%   { transform: scale(1);   opacity: 1;   }
+    50%  { transform: scale(0.9); opacity: 0.6; }
+    100% { transform: scale(1);   opacity: 1;   }
+}
+
+/* ============================================================
+   VISTA 2 – PREVIEW
+   ============================================================ */
+
+/* PREVIEW */
+.preview-check {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #16a34a;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    margin: 0.75rem auto 0.25rem;
+    font-size: 1.1rem;
+}
+
+.preview-title {
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+}
+
+.preview-image-wrapper {
+    background: #0f172a;
+    border-radius: 18px;
+    padding: 0.9rem;
+    max-height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.preview-image-wrapper img {
+    border-radius: 12px;
+    max-height: 280px;
+    width: 100%;
+    object-fit: cover;
 }
 
 .preview-actions {
     display: flex;
-    gap: 1rem;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-top: 1.2rem;
 }
 
-/* =========================================================
-   PANTALLA: INFO PREVIA
-   ========================================================= */
 
-.info-card {
-    background: #f8fafc;
-    padding: 2rem;
-    border-radius: 1rem;
-    border: 2px solid #024260;
-}
+/* ============================================================
+   VISTA 3 – SHEET INFORMATIVO
+   ============================================================ */
 
-.info-card h2 {
+.sheet-title {
+    font-weight: 700;
     color: #024260;
-    margin-bottom: 1rem;
+    margin-bottom: 0.2rem;
 }
 
-.info-list {
-    list-style: none;
-    padding-left: 0;
+.sheet-subtitle {
+    font-size: 0.9rem;
+    color: #16a34a;
+    margin-bottom: 0.6rem;
+}
+
+.sheet-text {
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+}
+
+.sheet-list {
+    list-style: disc;
+    padding-left: 1.2rem;
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+}
+
+.sheet-highlight {
+    background: #ecfdf3;
+    border-radius: 10px;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.85rem;
+    color: #166534;
+}
+
+.sheet-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
     margin-top: 1rem;
 }
 
-.info-list li {
-    margin-bottom: 0.8rem;
-    color: #334155;
-}
+/* ============================================================
+   VISTA 4 – FORMULARIO
+   ============================================================ */
 
-.info-footer {
-    margin-top: 2rem;
+.form-header-row {
     display: flex;
-    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
 }
 
-/* =========================================================
-   PANTALLA: FORMULARIO DEL REPORTE
-   ========================================================= */
+.link-button {
+    border: none;
+    background: transparent;
+    color: #024260;
+    font-size: 0.9rem;
+    text-decoration: underline;
+    padding: 0;
+}
 
-#report-location {
-    width: 100%;
-    padding: 1rem;
-    border: 2px solid #334155;
+.hint-card {
+    background: #e0f2fe;
+    border-radius: 12px;
+    padding: 0.7rem 0.9rem;
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+}
+
+.hint-card--secondary {
+    background: #ecfeff;
+    margin-top: 0.8rem;
+}
+
+.form-photo-card {
     background: #e5e7eb;
-    border-radius: 0.6rem;
-    color: #334155;
-    margin-bottom: 1.5rem;
+    border-radius: 12px;
+    padding: 0.6rem;
+    margin-bottom: 0.8rem;
 }
 
-/* =========================================================
-   POPUPS
-   ========================================================= */
+.form-photo-card img {
+    border-radius: 10px;
+    max-height: 220px;
+    object-fit: cover;
+}
 
-.popup {
-    position: fixed;
-    top: 0;
-    left: 0;
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.form-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #0f172a;
+}
+
+.form-input {
     width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.55);
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+    padding: 0.55rem 0.7rem;
+    font-size: 0.95rem;
+    background-color: #ffffff;
+}
+
+.form-input:focus {
+    outline: 2px solid #0ea5e9;
+    outline-offset: 1px;
+}
+
+/* ============================================================
+   VISTA 5 – BORRADORES
+   ============================================================ */
+.report-header h1 {
+    color: #fff !important;
+}
+
+.drafts-header h2 {
+    margin-bottom: 0.3rem;
+}
+
+.drafts-header p {
+    font-size: 0.9rem;
+    margin-bottom: 0.8rem;
+}
+
+.drafts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.draft-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 0.8rem 0.9rem;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 3px 10px rgba(15, 23, 42, 0.08);
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.draft-main {
+    flex: 1;
+}
+
+.draft-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.2rem;
+}
+
+.draft-id {
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.draft-place {
+    font-size: 0.9rem;
+    color: #0f172a;
+}
+
+.draft-date {
+    font-size: 0.8rem;
+    color: #6b7280;
+}
+
+.draft-actions {
+    display: flex;
+    align-items: center;
+}
+
+.btn-sm {
+    padding: 0.35rem 0.9rem;
+    font-size: 0.85rem;
+}
+
+/* Estados */
+.draft-status {
+    padding: 0.1rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+.draft-status--pending { background: #eab308; }
+.draft-status--sending { background: #0ea5e9; }
+.draft-status--error   { background: #ef4444; }
+
+/* ============================================================
+   OVERLAYS (procesando, éxito, snackbar)
+   ============================================================ */
+
+.overlay-message {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.55);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1200;
+}
+
+.overlay-card {
+    background: #024260;
+    color: #ffffff;
+    padding: 1.2rem 1.5rem;
+    border-radius: 14px;
+    max-width: 320px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.7);
+}
+
+.overlay-card h3 {
+    margin-bottom: 0.4rem;
+    color: #ffffff;
+}
+
+/* ÉXITO – BANNER SUPERIOR */
+.overlay-top-banner {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1300;
+}
+
+.success-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 0.7rem 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.25);
+    border-top: 4px solid #10b981;
+    max-width: 360px;
+}
+
+.success-text h3 {
+    margin-bottom: 0.1rem;
+    font-size: 0.95rem;
+}
+
+.success-text p {
+    margin: 0;
+    font-size: 0.8rem;
+}
+
+.success-sub {
+    color: #64748b;
+}
+
+.success-thumb img {
+    width: 70px;
+    height: 50px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+/* SNACKBAR (ya lo usabas antes) */
+.snackbar {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #111827;
+    color: white;
+    padding: 0.8rem 1.3rem;
+    border-radius: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease;
+    z-index: 1500;
+    font-size: 0.9rem;
+}
+
+.snackbar.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-4px);
+}
+
+/* ============================================================
+   RESPONSIVE (Tablet / Desktop)
+   ============================================================ */
+
+@media (min-width: 768px) {
+    .report-container {
+        max-width: 480px;
+        margin: 0 auto;
+        padding: 0.5rem 0.75rem 5rem;
+    }
+
+    .report-header {
+        border-radius: 18px;
+    }
+
+    .report-view {
+        min-height: auto;
+    }
+}
+@media (min-width: 768px) {
+    .report-container {
+        max-width: 540px;
+        padding-top: 1.5rem;
+        padding-bottom: 3rem;
+    }
+
+    .report-view {
+        min-height: auto;
+    }
+}
+
+@media (min-width: 1024px) {
+    .report-container {
+        max-width: 640px;
+    }
+
+    .preview-image-wrapper img,
+    .form-photo-card img {
+        max-height: 320px;
+    }
+}
+
+.photo-upload-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.75rem;
+}
+
+/* =============================
+   OVERLAY SOBRE LA IMAGEN
+============================= */
+
+.preview-image-wrapper {
+    position: relative; /* NECESARIO */
+    overflow: hidden;
+}
+
+.preview-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45); /* negro transparentoso */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+    backdrop-filter: blur(2px); /* MUY moderne */
+}
+
+.preview-overlay-content {
+    text-align: center;
+    color: white;
+}
+
+.overlay-check {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: #16a34a;
+    color: white;
+    font-size: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
-    z-index: 1000;
+    margin: 0 auto 0.4rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
-.popup-box {
-    background: #fff;
-    padding: 2rem;
-    border-radius: 1rem;
-    width: 100%;
-    max-width: 380px;
-    text-align: center;
-    color: #334155;
-}
-
-.popup-success-box h3 {
-    color: #05af43;
-}
-
-.success-thumb {
-    width: 100%;
-    border-radius: 1rem;
-    margin: 1.5rem 0;
+.overlay-text {
+    font-size: 1.1rem;
+    font-weight: 700;
 }
