@@ -82,12 +82,39 @@
         <!-- Sugerencias de búsqueda -->
         <ul id="search-suggestions" class="search-suggestions search-suggestions--hidden"></ul>
 
-        <button class="btn-chip" type="button">
-          <span class="chip-icon">&#9888;</span>
-          <span class="chip-text">3 barreras reportadas</span>
+        <button id="btn-open-place-filter" class="btn-chip" type="button">
+          <span class="chip-icon">🔎</span>
+          <span class="chip-text">Buscar lugares</span>
         </button>
-      </section>
 
+        <!-- Panel de filtros de lugares y reportes -->
+        <div id="place-filter-panel" class="place-filter place-filter--hidden">
+          <h3 class="place-filter__title">Lugares</h3>
+
+          <div class="place-filter__group">
+            <p class="place-filter__subtitle">Categorías</p>
+            <button class="place-filter__chip" data-layer="hospitales">Hospitales</button>
+            <button class="place-filter__chip" data-layer="parques">Parques y plazas</button>
+            <button class="place-filter__chip" data-layer="transporte">Transporte</button>
+          </div>
+
+          <div class="place-filter__group">
+            <p class="place-filter__subtitle">Filtros</p>
+            <label class="place-filter__toggle">
+              <input type="checkbox" id="toggle-visible-accessible" checked />
+              <span>Ver accesibles</span>
+            </label>
+            <label class="place-filter__toggle">
+              <input type="checkbox" id="toggle-visible-warning" checked />
+              <span>Ver precaución</span>
+            </label>
+            <label class="place-filter__toggle">
+              <input type="checkbox" id="toggle-visible-barrier" checked />
+              <span>Ver barreras</span>
+            </label>
+          </div>
+        </div>
+      </section>
       <!-- Contenedor del mapa -->
       <section class="map-wrapper">
         <div id="map-container"></div>
