@@ -115,6 +115,9 @@
 .profile-info {
     margin-top: 1rem;
 }
+.profile-card .profile-username {
+    color: #ffffff !important;
+}
 
 .profile-username {
     font-size: 1.45rem;
@@ -814,3 +817,160 @@ body {
     display: none;
   }
 }
+
+/* ============================
+   AJUSTES PUNTUALES DARK MODE
+   ============================ */
+
+body.dark {
+    /* Textos que se volvían muy apagados */
+    --fix-light-text: #e8faff;
+}
+
+/* Textos generales que se perdían */
+body.dark h1,
+body.dark h2,
+body.dark h3,
+body.dark p,
+body.dark label,
+body.dark span,
+body.dark .menu-title,
+body.dark .menu-subtitle,
+body.dark .section-title,
+body.dark .contribution-title,
+body.dark .contribution-meta,
+body.dark .badge-name,
+body.dark .badge-desc,
+body.dark .route-title {
+    color: var(--fix-light-text) !important;
+}
+
+/* Cards oscuras que se mezclaban con el fondo */
+body.dark .menu-item,
+body.dark .contribution-item,
+body.dark .route-item,
+body.dark .favorite-item,
+body.dark .badge-card,
+body.dark .form-card,
+body.dark .access-card {
+    background-color: #143247 !important; /* azul oscuro pero más claro que tu fondo */
+}
+
+/* Inputs muy oscuros */
+body.dark .form-group input {
+    background-color: #1b3b52 !important;
+    border-color: #3a5f75 !important;
+    color: #e8faff !important;
+}
+
+/* Botones oscuros que desaparecían */
+body.dark .btn-azul {
+    background-color: #046092 !important; /* más claro que #024260 */
+    color: white !important;
+}
+
+body.dark .btn-borde {
+    border-color: #e8faff !important;
+    color: #e8faff !important;
+}
+
+body.dark .btn-verde {
+    background-color: #07c654 !important; 
+}
+
+/* Flechitas / iconos */
+body.dark .arrow,
+body.dark .icon-box {
+    color: #e8faff !important;
+}
+
+/* Placeholder */
+body.dark input::placeholder {
+    color: #9ac8d6 !important;
+}
+
+
+/* =============================
+   STATS — MISMO TAMAÑO + CENTRADO
+   ============================= */
+
+/* Centrar contenido dentro de cada stat-box */
+.stat-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;   /* Centra vertical */
+    align-items: center;       /* Centra horizontal */
+    text-align: center;        /* Texto centrado */
+    min-height: 70px;          /* MISMA ALTURA para todas */
+    flex: 1;                   /* MISMO ANCHO para todas */
+    padding: 0.8rem 0.7rem;
+}
+
+/* Alineación del contenedor */
+.stats-row {
+    display: flex;
+    gap: 0.6rem;
+}
+
+/* ===========================================
+   STATS — DISEÑO GLASS (iOS / Dribbble)
+   =========================================== */
+
+.stats-row {
+    display: flex;
+    gap: 0.9rem;
+}
+
+.stat-box {
+    flex: 1;
+    min-height: 80px;
+    padding: 1rem;
+    border-radius: 20px;
+
+    /* GLASS EFFECT */
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    box-shadow:
+        0 8px 18px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.35);
+
+    /* CENTRADO TOTAL */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover suave estilo iOS */
+.stat-box:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow:
+        0 12px 26px rgba(0, 0, 0, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+/* =============================
+   DARK MODE — GLASS PERFECTO
+   ============================= */
+body.dark .stat-box {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.18);
+    box-shadow:
+        0 8px 18px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+body.dark .stat-number {
+    color: #ffffff !important;
+}
+
+body.dark .stat-label {
+    color: #d9e7ef !important;
+}
+

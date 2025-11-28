@@ -3,13 +3,19 @@
 =============================== */
 @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;700&display=swap');
 
-html {
-    font-size: 16px;
+:root {
+    --text-scale: 1;
 }
 
+/* Tamaño base escalable */
+html {
+    font-size: calc(16px * var(--text-scale));
+}
+
+/* Tu breakpoints siguen funcionando PEEERO escalados */
 @media (min-width: 768px) {
     html {
-        font-size: 18px;
+        font-size: calc(18px * var(--text-scale));
     }
 }
 
