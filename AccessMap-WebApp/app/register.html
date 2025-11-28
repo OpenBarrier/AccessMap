@@ -11,11 +11,13 @@
 </head>
 
 <body>
-    <main class="registro-container">
 
+<main class="registro-container">
+    
+    <!-- 🔵 VISTA 1: FORMULARIO DE REGISTRO -->
+    <section id="view-register" class="view view--active">
         <div class="registro-layout">
 
-            <!-- TARJETA DE REGISTRO -->
             <div class="registro-card">
 
                 <h1 class="texto-azul titulo-registro">Crear Cuenta</h1>
@@ -49,13 +51,13 @@
                         </ul>
                     </div>
                     
-                    <!-- CONFIRM -->
+                    <!-- CONFIRM PASSWORD -->
                     <div id="confirm-wrapper" class="form-group" style="display: none;">
                         <label for="reg-pass-confirm" class="texto-azul">Confirmar Contraseña</label>
 
                         <div class="password-wrapper">
                             <input type="password" id="reg-pass-confirm" class="input-estilo" placeholder="********">
-                                <span class="toggle-pass" data-target="reg-pass-confirm">
+                            <span class="toggle-pass" data-target="reg-pass-confirm">
                                 <img src="../assets/img/eye-open.svg" class="eye-icon eye-open" alt="Mostrar contraseña">
                                 <img src="../assets/img/eye-closed.svg" class="eye-icon eye-closed" alt="Ocultar contraseña" style="display:none;">
                             </span>
@@ -68,28 +70,96 @@
                     <div class="form-group checkbox-group">
                         <input type="checkbox" id="reg-terms">
                         <label for="reg-terms" class="texto-gris">
-                            Acepto los <a href="#" class="texto-azul" style="text-decoration: underline;">Términos y Condiciones</a>
+                            Acepto los 
+                            <a href="#" class="texto-azul" style="text-decoration: underline;">Términos y Condiciones</a>
                         </label>
                         <p id="terms-error" class="texto-rojo mensaje-error"></p>
                     </div>
 
                     <!-- BOTÓN -->
-                    <button type="submit" id="btn-register-submit" class="btn-azul">
+                    <button type="submit" id="btn-register-submit" class="btn-azul" disabled>
                         Registrarse
                     </button>
+
                 </form>
 
-                <!-- FOOTER creo que ya quedó -->
+                <!-- FOOTER -->
                 <div class="registro-footer">
                     <p class="texto-gris footer-text">
                         ¿Ya tienes cuenta?
-                        <a href="../app/login.html" class="texto-azul enlace-subrayado" style="font-weight: 700;">Inicia Sesión</a>
+                        <a href="../index.html" class="texto-azul enlace-subrayado" style="font-weight: 700;">Inicia Sesión</a>
                     </p>
                 </div>
+
             </div>
         </div>
-    </main>
+    </section>
 
-    <script src="../scripts/auth.js"></script>
+    <!-- 🟢 VISTA 2: REGISTRO EXITOSO -->
+    <section id="view-success" class="view hidden">
+    <div class="success-container">
+        <div class="success-card">
+
+            <div class="success-icon">✔</div>
+
+            <h1 class="success-title">Registro exitoso</h1>
+            <p class="success-text">
+                Tu cuenta ha sido creada. Ahora personaliza tu perfil de accesibilidad.
+            </p>
+
+            <button id="btnGoToSetup" class="btn-azul">
+                Ir a mi perfil
+            </button>
+
+        </div>
+    </div>
+    </section>
+
+
+    <!-- 🟣 VISTA 3: CONFIGURACIÓN INICIAL -->
+    <section id="view-setup" class="view hidden">
+    <div class="setup-container">
+        <div class="setup-card">
+
+            <h2 class="setup-title">Perfil de Accesibilidad</h2>
+            <p class="setup-subtitle">
+                Estas preferencias nos ayudan a recomendarte rutas mejores.
+            </p>
+
+            <div class="option-btn" data-value="silla">
+                🦽 <span>Silla de ruedas</span>
+            </div>
+
+            <div class="option-btn" data-value="andador">
+                🚶‍♂️ <span>Andador</span>
+            </div>
+
+            <div class="option-btn" data-value="coche">
+                👶 <span>Coche de bebé</span>
+            </div>
+
+            <div class="option-btn" data-value="muletas">
+                🦯 <span>Muletas</span>
+            </div>
+
+            <div class="option-btn" data-value="ninguna">
+                ⭕ <span>Ninguna de las anteriores</span>
+            </div>
+
+            <button id="btnSaveSetup" class="btn-azul btn-center">
+                Guardar preferencias
+            </button>
+
+            <p id="skipSetup" class="skip">Omitir por ahora</p>
+
+        </div>
+        </div>
+    </section>
+
+
+</main>
+
+<script src="../scripts/auth.js"></script>
+
 </body>
 </html>
