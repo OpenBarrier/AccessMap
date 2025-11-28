@@ -420,3 +420,790 @@
     display: none !important;
 }
 
+/* ========================================================= */
+/* ============= PANEL PERFIL DE COLABORADOR =============== */
+/* ========================================================= */
+
+.user-profile-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    z-index: 9999;
+    overflow-y: auto;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.user-profile-panel.active {
+    display: block;
+    opacity: 1;
+}
+
+/* ========================= */
+/* HEADER DEL PANEL */
+/* ========================= */
+.user-profile-header {
+    background: #024260; /* color principal del proyecto */
+    padding: 2.4rem 1.4rem 3.4rem;
+    text-align: center;
+    color: white;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    position: relative;
+}
+
+.user-profile-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+/* Avatar */
+.user-profile-avatar {
+    width: 85px;
+    height: 85px;
+    margin: 0 auto 0.6rem;
+    border-radius: 50%;
+    background: #00b592; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+}
+
+/* ========================= */
+/* INFORMACIÓN DEL USUARIO */
+/* ========================= */
+.user-profile-info {
+    text-align: center;
+    margin-top: -10px;
+}
+
+.user-profile-info .name {
+    font-size: 1.6rem;
+    font-weight: 700;
+}
+
+.user-profile-info .handle {
+    color: #334155;
+    font-size: 0.95rem;
+}
+
+/* ========================= */
+/* CONTADORES DE REPORTES */
+/* ========================= */
+.user-profile-stats {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.4rem;
+}
+
+.user-profile-stat-box {
+    background: #f8fafc;
+    padding: 0.9rem 1rem;
+    border-radius: 12px;
+    text-align: center;
+    min-width: 90px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.user-profile-stat-box .value {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.user-profile-stat-box .label {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* ========================= */
+/* LISTA DE REPORTES RECIENTES */
+/* ========================= */
+.user-reports-section {
+    margin-top: 2rem;
+    padding: 0 1rem 2rem;
+}
+
+.user-reports-section h3 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.user-report-item {
+    background: #fff;
+    border-radius: 12px;
+    padding: 0.9rem;
+    margin-bottom: 0.8rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.user-report-title {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 4px;
+}
+
+.user-report-date {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.user-report-status {
+    margin-top: 6px;
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+}
+
+/* STATUS COLORS */
+.status-green {
+    background: #d4fbe2;
+    color: #05af43;
+}
+
+.status-amber {
+    background: #ffe9c2;
+    color: #e69000;
+}
+
+.status-red {
+    background: #ffd6d6;
+    color: #e03737;
+}
+
+/* ========================= */
+/* BOTÓN DE VER MÁS */
+/* ========================= */
+.user-profile-viewmore {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.user-profile-viewmore button {
+    background: #024260;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.4rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    width: 100%;
+    max-width: 260px;
+}
+/* ========================================================= */
+/* ========== MODAL: CREAR NUEVO GRUPO (ESCENARIO 4) ======= */
+/* ========================================================= */
+
+.group-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+    font-family: 'Baloo 2', sans-serif;
+}
+
+/* Cuando el JS agrega .is-visible */
+.group-modal.is-visible {
+    display: flex;
+}
+
+/* Fondo oscuro detrás del modal */
+.group-modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.35);
+}
+
+/* Contenedor del modal (bottom sheet estilo app móvil) */
+.group-modal-container {
+    position: relative;
+    width: 100%;
+    max-width: 480px;
+    max-height: 90vh;
+    background: #ffffff;
+    border-top-left-radius: 24px;
+    border-top-right-radius: 24px;
+    box-shadow: 0 -8px 30px rgba(15, 23, 42, 0.35);
+    padding: 1.2rem 1.2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* En pantallas grandes, que se vea más tipo tarjeta centrada */
+@media (min-width: 769px) {
+    .group-modal {
+        align-items: center;
+    }
+    .group-modal-container {
+        border-radius: 24px;
+        max-height: 80vh;
+    }
+}
+
+/* ================= HEADER DEL MODAL ================= */
+
+.group-modal-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.8rem;
+}
+
+.group-modal-back,
+.group-modal-close {
+    background: #f1f5f9;
+    border: none;
+    border-radius: 999px;
+    width: 2.2rem;
+    height: 2.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.group-modal-title-box {
+    flex: 1;
+}
+
+.group-modal-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #024260;
+}
+
+.group-modal-step {
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+/* ================= CUERPO DEL MODAL ================= */
+
+.group-modal-body {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 0.2rem;
+}
+
+/* Cada paso */
+.group-step {
+    display: none;
+}
+
+.group-step--active {
+    display: block;
+}
+
+/* Bloques de contenido */
+.group-section {
+    margin-bottom: 1rem;
+}
+
+.group-section-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #024260;
+    margin-bottom: 0.4rem;
+}
+
+/* Campos */
+.group-field-label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+    color: #334155;
+}
+
+.group-input,
+.group-textarea {
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid #cbd5f5;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.95rem;
+    outline: none;
+    background: #ffffff;
+}
+
+.group-input:focus,
+.group-textarea:focus {
+    border-color: #00b592;
+    box-shadow: 0 0 0 1px rgba(0, 181, 146, 0.25);
+}
+
+/* ================= SELECTOR DE ICONOS ================= */
+
+.group-icon-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 0.4rem;
+}
+
+.group-icon-option {
+    border-radius: 14px;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    padding: 0.4rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.4rem;
+    transition: all 0.15s ease;
+}
+
+.group-icon-option.is-selected {
+    border-color: #00b592;
+    background: #ecfdf5;
+    box-shadow: 0 0 0 1px rgba(0, 181, 146, 0.35);
+}
+
+/* ================= VISTA PREVIA DEL GRUPO ================= */
+
+.group-preview-card {
+    display: flex;
+    gap: 0.8rem;
+    background: #f8fafc;
+    border-radius: 14px;
+    padding: 0.8rem;
+    align-items: flex-start;
+}
+
+.group-preview-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: #00b592;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #ffffff;
+}
+
+.group-preview-content {
+    flex: 1;
+}
+
+.group-preview-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.4rem;
+    margin-bottom: 0.2rem;
+}
+
+.group-preview-header h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.group-preview-role {
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: #e0f2fe;
+    color: #0369a1;
+    font-weight: 600;
+}
+
+.group-preview-content p {
+    font-size: 0.9rem;
+    color: #475569;
+    margin-bottom: 0.3rem;
+}
+
+.group-preview-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    font-size: 0.8rem;
+    color: #64748b;
+}
+
+/* ================= PASO 2: INVITAR MIEMBROS ================= */
+
+.group-helper-text {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-bottom: 0.4rem;
+}
+
+.group-invite-row {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.6rem;
+}
+
+.group-invite-send {
+    border: none;
+    border-radius: 50%;
+    width: 2.3rem;
+    height: 2.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #024260;
+    color: #ffffff;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.group-invite-list {
+    list-style: none;
+    padding-left: 0;
+    font-size: 0.85rem;
+    color: #475569;
+}
+
+.group-invite-list li::before {
+    content: "• ";
+    color: #00b592;
+}
+
+/* Caja de reglas / info */
+.group-rules-box {
+    font-size: 0.85rem;
+    color: #475569;
+    background: #f1f5f9;
+    border-radius: 12px;
+    padding: 0.7rem 0.8rem;
+    border-left: 4px solid #00b592;
+}
+
+/* ================= FOOTER DEL MODAL ================= */
+
+.group-modal-footer {
+    display: flex;
+    gap: 0.6rem;
+    padding-top: 0.6rem;
+    border-top: 1px solid #e2e8f0;
+    margin-top: 0.4rem;
+}
+
+.group-btn-secondary,
+.group-btn-primary {
+    flex: 1;
+    border-radius: 999px;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+}
+
+.group-btn-secondary {
+    background: #e2e8f0;
+    color: #0f172a;
+}
+
+.group-btn-primary {
+    background: #024260;
+    color: #ffffff;
+}
+
+/* Botón "Finalizar" oculto por defecto (el JS lo maneja) */
+#btn-group-finish {
+    display: none;
+}
+
+/* ========================================================= */
+/* ============= MODAL EDITAR INFORMACIÓN GRUPO ============ */
+/* ========================================================= */
+
+.group-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.35);
+    display: none;
+    justify-content: center;
+    align-items: flex-end;
+    z-index: 10000;
+}
+
+.group-modal.is-visible {
+    display: flex;
+}
+
+.group-modal-container {
+    background: #ffffff;
+    width: 100%;
+    max-width: 420px;
+    border-radius: 24px 24px 0 0;
+    box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.2);
+    padding: 1.3rem 1.2rem 1.1rem;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+    .group-modal {
+        align-items: center;
+    }
+
+    .group-modal-container {
+        border-radius: 24px;
+    }
+}
+
+.group-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.7rem;
+    margin-bottom: 1rem;
+}
+
+.group-modal-title-box {
+    flex: 1;
+}
+
+.group-modal-subtitle {
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-bottom: 0.1rem;
+}
+
+.group-modal-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #024260;
+}
+
+.group-modal-close {
+    background: #e2e8f0;
+    border: none;
+    border-radius: 999px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+/* separamos el contenido */
+.group-modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.group-section {
+    background: #ffffff;
+}
+
+.group-section-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    color: #0f172a;
+}
+
+.group-field-label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #0f172a;
+    margin-bottom: 0.25rem;
+}
+
+.group-input,
+.group-textarea {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid #cbd5f1;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.95rem;
+    outline: none;
+}
+
+.group-input:focus,
+.group-textarea:focus {
+    border-color: #00b592;
+    box-shadow: 0 0 0 1px rgba(0, 181, 146, 0.35);
+}
+
+.group-textarea {
+    resize: vertical;
+}
+
+/* iconos de selección */
+.group-icon-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.4rem;
+}
+
+.group-icon-option {
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.4rem;
+}
+
+.group-icon-option.is-selected {
+    border-color: #00b592;
+    background: #e0f7f3;
+}
+
+/* Vista previa */
+.group-preview-card {
+    display: flex;
+    gap: 0.7rem;
+    background: #f8fafc;
+    border-radius: 14px;
+    padding: 0.8rem;
+}
+
+.group-preview-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 10px;
+    background: #024260;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    color: #ffffff;
+}
+
+.group-preview-content {
+    flex: 1;
+}
+
+.group-preview-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.2rem;
+}
+
+.group-preview-header h4 {
+    font-size: 0.98rem;
+    font-weight: 700;
+}
+
+.group-preview-role {
+    font-size: 0.75rem;
+    background: #e0f7f3;
+    color: #00b592;
+    padding: 2px 8px;
+    border-radius: 999px;
+}
+
+.group-preview-meta {
+    margin-top: 0.3rem;
+    font-size: 0.8rem;
+    color: #475569;
+    display: flex;
+    gap: 0.7rem;
+}
+
+/* Footer botones */
+.group-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.6rem;
+}
+
+.group-btn-secondary,
+.group-btn-primary {
+    border-radius: 10px;
+    border: none;
+    font-size: 0.95rem;
+    padding: 0.55rem 1.2rem;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.group-btn-secondary {
+    background: #e2e8f0;
+    color: #0f172a;
+}
+
+.group-btn-primary {
+    background: #024260;
+    color: #ffffff;
+}
+
+.group-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.group-admin-tag {
+    background: #2ecc71;
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+/* ===== Colores de fondo para los iconos ===== */
+.icon-bg--blue-red {
+    background-color: #e85d4f; /* estilo accesibilidad lima norte */
+}
+
+.icon-bg--orange {
+    background-color: #f39c12; /* estilo silla de ruedas */
+}
+
+.icon-bg--green {
+    background-color: #27ae60; /* estilo san isidro */
+}
+
+.icon-bg--purple {
+    background-color: #8e44ad;
+}
+
+.icon-bg--teal {
+    background-color: #1abc9c;
+}
+
+.icon-bg--gray {
+    background-color: #bdc3c7;
+}
+
+.group-icon {
+    color: white;
+    padding: 14px;
+    border-radius: 12px;
+    font-size: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
