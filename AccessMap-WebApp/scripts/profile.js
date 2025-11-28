@@ -1,3 +1,4 @@
+
 /* ==========================================================
    ACCESIBILIDAD — SISTEMA NUEVO (tarjetas seleccionables)
    ========================================================== */
@@ -117,6 +118,31 @@ if (accessibilityForm) {
 
 document.addEventListener("DOMContentLoaded", () => {
 
+  // ===============================
+//  ABRIR VISTA SEGÚN PARÁMETRO
+// ===============================
+const params = new URLSearchParams(window.location.search);
+const viewParam = params.get("view");
+
+if (viewParam === "achievements") {
+    openViewFromOutside("view-achievements");
+}
+
+// ===============================
+//  FUNCIÓN PARA ABRIR VISTAS
+// ===============================
+function openViewFromOutside(viewId) {
+    // Oculta todas las vistas
+    document.querySelectorAll(".view").forEach(v =>
+        v.classList.remove("view--active")
+    );
+
+    // Muestra la vista solicitada
+    const target = document.getElementById(viewId);
+    if (target) {
+        target.classList.add("view--active");
+    }
+}
   /* ==========================================================
      PERFIL PRINCIPAL → nombre, email
      ========================================================== */
@@ -141,9 +167,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const views = document.querySelectorAll(".view");
 
-  function openView(id) {
-    views.forEach(v => v.classList.remove("view--active"));
-    const target = document.getElementById(id);
+  function openView(viewId) {
+  document.querySelectorAll(".view").forEach(v => v.classList.remove("view--active"));
+  document.getElementById(viewId).classList.add("view--active");
 
     if (target) {
       target.classList.add("view--active");

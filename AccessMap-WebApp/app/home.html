@@ -6,23 +6,29 @@
 
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/layout.css">
+    <link rel="stylesheet" href="../styles/reset.css">
+
     <link rel="stylesheet" href="../styles/home.css">
 </head>
 
 <body>
-    <!-- ========= CABECERA / NAVEGACIÓN ========= -->
-		<aside id="sidebar" class="sidebar">
-      <div class="sidebar-item">
-			  <div class="sidebar-brand">Access<span>MAP</span></div>
-        <nav id="sidebar-desktop" class="sidebar-nav options-bar">
-          <a href="../app/home.html" class="nav-link active">Inicio</a><hr class="line-nav">
-          <a href="../app/map.html" class="nav-link">Mapa</a><hr class="line-nav">
-          <a href="../app/community.html" class="nav-link">Comunidad</a><hr class="line-nav">
-          <a href="../app/profile.html" class="nav-link">Perfil</a><hr class="line-nav">
+        <!-- SIDEBAR -->
+    <aside id="sidebar" class="sidebar">
+        <div class="sidebar-brand">AccessMap</div>
+
+        <nav class="sidebar-nav">
+            <a href="home.html" class="nav-link active" data-lang="navHome">Inicio</a>
+            <a href="map.html" class="nav-link" data-lang="navMap">Mapa</a>
+            <a href="report.html" class="nav-link" data-lang="navReport">Reportar</a>
+            <a href="community.html" class="nav-link" data-lang="navCommunity">Comunidad</a>
+            <a href="profile.html" class="nav-link" data-lang="navProfile">Perfil</a>
+
+            <a href="../index.html" class="nav-link" style="margin-top: auto; color:#e03737;" data-lang="logout">
+                Cerrar sesión
+            </a>
         </nav>
-      </div>
-      <div class="sidebar-item"></div>
-		</aside>
+    </aside>
+
 
     <div id="overlay" class="overlay" aria-hidden="true"></div>
 
@@ -55,15 +61,16 @@
                   Mis logros recientes
                 </h2>
 								</div>
-								<div class="title-panel">
-                <button type="button" class="panel-link">
-                  Ver más
-                  <span aria-hidden="true">›</span>
+                <a href="profile.html?view=achievements" class="panel-link">
+                  Ver más <span aria-hidden="true">›</span>
+                </a>
+
                 </button>
 								</div>
 							</div>
 
-              <div class="panel-body achievements-grid">
+
+
                 <!-- Card de nivel -->
                 <article class="card card-level" aria-label="Nivel actual">
                   <div class="card-level-header">
@@ -92,31 +99,27 @@
                   </div>
                 </article>
 
-                <!-- Badges -->
-                <section
-                  class=""
-                  aria-label="Insignias desbloqueadas"
-                >
-                  <ul class="badge-list" role="list">
-                    <li class="card card-badges badge-card badge-card--unlocked">
-											<span class="badge-status">📊</span>
-                      <h3 class="badge-title">Explorador</h3>
-                      <p class="badge-status">✓ Desbloqueado</p>
-                    </li>
-                    <li class="card card-badges badge-card badge-card--unlocked">
-											<span class="badge-status">📊</span>
-                      <h3 class="badge-title">Colaborador</h3>
-                      <p class="badge-status">✓ Desbloqueado</p>
-                    </li>
-                    <li class="card card-badges badge-card badge-card--locked">
-											<span class="badge-status">📊</span>
-                      <h3 class="badge-title">Pionero</h3>
-                      <p class="badge-status">Bloqueado</p>
-                    </li>
-                  </ul>
-                </section>
               </div>
             </section>
+                          <div class="achievements-grid-b">
+              <div class="badge-item unlocked">
+                  <div class="badge-icon">🌱</div>
+                  <h3 class="badge-name">Primer aporte</h3>
+                  <p class="badge-desc">Crea tu primer reporte accesible</p>
+              </div>
+
+              <div class="badge-item unlocked">
+                  <div class="badge-icon">🗺️</div>
+                  <h3 class="badge-name">Explorador</h3>
+                  <p class="badge-desc">Reporta en 5 distritos diferentes</p>
+              </div>
+
+              <div class="badge-item locked">
+                  <div class="badge-icon">⭐</div>
+                  <h3 class="badge-name">Colaborador constante</h3>
+                  <p class="badge-desc">Envía 20 reportes verificados</p>
+              </div>
+          </div>
           </div>
 
           <!-- Columna lateral: estadísticas -->
@@ -169,16 +172,33 @@
 			<br>
 			<br>
     </main>
+   <!-- SNACKBAR GLOBAL -->
+    <div id="snackbar" class="snackbar"></div>
 
-		<!-- NAV inferior (solo mobile) -->
-		<nav class="bottom-nav" aria-label="Navegación inferior">
-			<a href="../app/home.html" class="bottom-link">🏠<span>Inicio</span></a>
-			<a href="../app/map.html" class="bottom-link">🗺️<span>Mapa</span></a>
-			<a href="#report-view" class="bottom-link main-action">＋</a>
-			<a href="../app/community.html" class="bottom-link">👥<span>Comunidad</span></a>
-			<a href="../app/profile.html" class="bottom-link">👤<span>Perfil</span></a>
-		</nav>
+    <!-- TAB BAR (SOLO MÓVIL) -->
+    <nav class="bottom-nav">
+        <a href="home.html" class="bottom-link">
+            <span>🏠</span><span data-lang="navHome">Inicio</span>
+        </a>
 
-    <!-- ========= INTERACCIÓN ========= -->
+        <a href="map.html" class="bottom-link">
+            <span>🗺️</span><span data-lang="navMap">Mapa</span>
+        </a>
+
+        <a href="report.html" class="main-action">＋</a>
+
+        <a href="community.html" class="bottom-link">
+            <span>👥</span><span data-lang="navCommunity">Comunidad</span>
+        </a>
+
+        <a href="profile.html" class="bottom-link">
+            <span>👤</span><span data-lang="navProfile">Perfil</span>
+        </a>
+    </nav>
+    
+    <!-- Scripts -->
+    <script src="../scripts/main.js"></script>
+    <script src="../scripts/report.js"></script>
+
   </body>
 </html>

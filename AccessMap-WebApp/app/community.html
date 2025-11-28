@@ -2,39 +2,920 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AccessMap</title>
 
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/layout.css">
+    <link rel="stylesheet" href="../styles/community.css">
 </head>
 
 <body>
+    <!-- SIDEBAR -->
+    <aside id="sidebar" class="sidebar">
+        <div class="sidebar-brand">AccessMap</div>
 
-    <button class="btn-toggle" id="btn-menu-toggle">
-        ☰
-    </button>
+        <nav class="sidebar-nav">
+            <a href="home.html" class="nav-link" data-lang="navHome">Inicio</a>
+            <a href="map.html" class="nav-link" data-lang="navMap">Mapa</a>
+            <a href="report.html" class="nav-link" data-lang="navReport">Reportar</a>
+            <a href="community.html" class="nav-link active" data-lang="navCommunity">Comunidad</a>
+            <a href="profile.html" class="nav-link" data-lang="navProfile">Perfil</a>
 
-    <nav class="sidebar" id="sidebar-nav">
-        <div style="padding: 1.5rem; color: white; font-weight: bold; font-size: 1.5rem;">
-            AccessMap
+            <a href="../index.html" class="nav-link" style="margin-top: auto; color:#e03737;" data-lang="logout">
+                Cerrar sesión
+            </a>
+        </nav>
+    </aside>
+
+
+    <!-- Contenido principal -->
+    <main class="main-content">
+    <div class="community-container">
+
+        <!-- ========================================================= -->
+        <!-- HEADER -->
+        <!-- ========================================================= -->
+        <header class="community-header">
+            <h1 class="page-title">Comunidad</h1>
+            <div class="notification-icon">🔔</div>
+        </header>
+
+        <!-- ========================================================= -->
+        <!-- TABS -->
+        <!-- ========================================================= -->
+        <section class="tab-navigation">
+            <a href="#" class="tab-item tab-item--active" data-tab="ranking">
+                🏆 Ranking
+            </a>
+            <a href="#" class="tab-item" data-tab="grupos">
+                👥 Grupos
+            </a>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- CONTENEDOR DE TABS -->
+        <!-- ========================================================= -->
+        <div class="tab-content-container">
+
+            <!-- ===================================================== -->
+            <!-- 🔵 TAB: RANKING -->
+            <!-- ===================================================== -->
+            <div id="ranking-view" class="tab-section active">
+
+                <!-- Buscador -->
+                <section class="search-section">
+                    <div class="search-box">
+                        <input type="text" id="search-collaborators" placeholder="Buscar colaboradores…">
+                        <span class="search-icon">🔍</span>
+                    </div>
+                </section>
+
+                <!-- Estadísticas -->
+                <section class="community-stats">
+                    <h2 class="section-title">Estadísticas de la Comunidad</h2>
+
+                    <div class="stats-container">
+                        <div class="stat-card">
+                            <span class="stat-number">1,247</span>
+                            <span class="stat-label">Colaboradores</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number">8,932</span>
+                            <span class="stat-label">Reportes</span>
+                        </div>
+                        <div class="stat-card">
+                            <span class="stat-number stat-number--green">3,456</span>
+                            <span class="stat-label">Solucionados</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Top 3 -->
+                <section class="top-ranking-section">
+                    <h2 class="section-title">Top 3 del Mes</h2>
+
+                    <div class="top-ranking-list">
+
+                        <!-- #1 -->
+                        <div
+                            class="ranking-item ranking-item--top1 js-open-user-profile"
+                            data-initials="MG"
+                            data-name="María García"
+                            data-handle="@maria_g"
+                            data-points="3420"
+                            data-validated="342"
+                            data-solved="156"
+                            data-bio="Activista de accesibilidad urbana. Me apasiona hacer las ciudades más inclusivas."
+                            data-member-since="Miembro desde Enero 2024"
+                            data-last-activity="Reportó una vereda rota en Av. Arequipa."
+                            data-last-activity-time="Hace 2 horas"
+                        >
+                            <div class="medal-icon">🥇</div>
+                            <div class="avatar-bg avatar-bg--mg">MG</div>
+
+                            <div class="user-info">
+                                <span class="name">María García</span>
+                                <span class="handle">@maria_g</span>
+                            </div>
+
+                            <span class="points">3420 puntos</span>
+                        </div>
+
+                        <!-- #2 -->
+                        <div
+                            class="ranking-item js-open-user-profile"
+                            data-initials="CM"
+                            data-name="Carlos Mendoza"
+                            data-handle="@carlos_m"
+                            data-points="2910"
+                            data-validated="215"
+                            data-solved="120"
+                            data-bio="Ingeniero de transporte enfocado en movilidad accesible."
+                            data-member-since="Miembro desde Marzo 2023"
+                            data-last-activity="Validó un reporte sobre semáforo sonoro en Miraflores."
+                            data-last-activity-time="Hace 5 horas"
+                        >
+                            <div class="medal-icon">🥈</div>
+                            <div class="avatar-bg avatar-bg--cm">CM</div>
+
+                            <div class="user-info">
+                                <span class="name">Carlos Mendoza</span>
+                                <span class="handle">@carlos_m</span>
+                            </div>
+
+                            <span class="points">2910 puntos</span>
+                        </div>
+
+                        <!-- #3 -->
+                        <div
+                            class="ranking-item js-open-user-profile"
+                            data-initials="AT"
+                            data-name="Ana Torres"
+                            data-handle="@ana_t"
+                            data-points="1890"
+                            data-validated="189"
+                            data-solved="90"
+                            data-bio="Arquitecta especializada en diseño universal."
+                            data-member-since="Miembro desde Agosto 2022"
+                            data-last-activity="Reportó una escalera sin rampa en un centro comercial."
+                            data-last-activity-time="Hace 1 día"
+                        >
+                            <div class="medal-icon">🥉</div>
+                            <div class="avatar-bg avatar-bg--at">AT</div>
+
+                            <div class="user-info">
+                                <span class="name">Ana Torres</span>
+                                <span class="handle">@ana_t</span>
+                            </div>
+
+                            <span class="points">1890 puntos</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Lista completa -->
+                <section class="full-collaborator-list">
+                    <h2 class="section-title">Todos los Colaboradores</h2>
+
+                    <div class="collaborator-list">
+
+                        <!-- María -->
+                        <div
+                            class="collaborator-item js-open-user-profile"
+                            data-initials="MG"
+                            data-name="María García"
+                            data-handle="@maria_g"
+                            data-points="3420"
+                            data-validated="342"
+                            data-solved="156"
+                            data-bio="Activista de accesibilidad urbana."
+                            data-member-since="Miembro desde Enero 2024"
+                            data-last-activity="Reportó una vereda rota en Av. Arequipa."
+                            data-last-activity-time="Hace 2 horas"
+                        >
+                            <span class="rank-number">#1</span>
+                            <div class="avatar-bg avatar-bg--mg">MG</div>
+
+                            <div class="user-details">
+                                <span class="name">María García</span>
+                                <span class="handle">@maria_g</span>
+                                <span class="verified-tag">Verificado</span>
+                            </div>
+
+                            <div class="reports-info">
+                                <span class="reports-count reports-count--green">342</span>
+                                <span class="reports-label">reportes</span>
+                            </div>
+                        </div>
+
+                        <!-- Carlos -->
+                        <div
+                            class="collaborator-item js-open-user-profile"
+                            data-initials="CM"
+                            data-name="Carlos Mendoza"
+                            data-handle="@carlos_m"
+                            data-points="2910"
+                            data-validated="215"
+                            data-solved="120"
+                            data-bio="Ingeniero de transporte."
+                            data-member-since="Miembro desde Marzo 2023"
+                            data-last-activity="Validó un reporte sobre semáforo sonoro."
+                            data-last-activity-time="Hace 5 horas"
+                        >
+                            <span class="rank-number">#2</span>
+                            <div class="avatar-bg avatar-bg--cm">CM</div>
+
+                            <div class="user-details">
+                                <span class="name">Carlos Mendoza</span>
+                                <span class="handle">@carlos_m</span>
+                                <span class="verified-tag">Verificado</span>
+                            </div>
+
+                            <div class="reports-info">
+                                <span class="reports-count reports-count--green">215</span>
+                                <span class="reports-label">reportes</span>
+                            </div>
+                        </div>
+
+                        <!-- Ana -->
+                        <div
+                            class="collaborator-item js-open-user-profile"
+                            data-initials="AT"
+                            data-name="Ana Torres"
+                            data-handle="@ana_t"
+                            data-points="1890"
+                            data-validated="189"
+                            data-solved="90"
+                            data-bio="Arquitecta especializada en diseño universal."
+                            data-member-since="Miembro desde Agosto 2022"
+                            data-last-activity="Reportó una escalera sin rampa."
+                            data-last-activity-time="Hace 1 día"
+                        >
+                            <span class="rank-number">#3</span>
+                            <div class="avatar-bg avatar-bg--at">AT</div>
+
+                            <div class="user-details">
+                                <span class="name">Ana Torres</span>
+                                <span class="handle">@ana_t</span>
+                                <span class="verified-tag">Verificado</span>
+                            </div>
+
+                            <div class="reports-info">
+                                <span class="reports-count reports-count--green">189</span>
+                                <span class="reports-label">reportes</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+            </div> <!-- fin ranking-view -->
+            <!-- ===================================================== -->
+<!-- 🟣 TAB: GRUPOS -->
+<!-- ===================================================== -->
+<div id="grupos-view" class="tab-section">
+
+    <!-- ================================================= -->
+    <!-- Buscador + Botón Crear Grupo -->
+    <!-- ================================================= -->
+    <section class="search-section search-groups-section">
+        <div class="search-box">
+            <input type="text" id="search-groups" placeholder="Buscar grupos...">
+            <span class="search-icon">🔍</span>
         </div>
 
-        <a href="home.html" class="nav-link">Inicio</a>
-        <a href="map.html" class="nav-link">Mapa</a>
-        <a href="report.html" class="nav-link">Reportes</a>
-        <a href="community.html" class="nav-link">Comunidad</a>
-        <a href="profile.html" class="nav-link">Perfil</a>
-        <a href="../index.html" class="nav-link" style="margin-top: auto; color: #e03737;">
-            Cerrar Sesión
+        <button class="add-group-button" id="btn-open-group-modal">+</button>
+    </section>
+
+    <!-- ================================================= -->
+    <!-- MIS GRUPOS -->
+    <!-- ================================================= -->
+    <h2 class="section-title">Mis Grupos</h2>
+
+    <div class="group-list">
+
+        <!-- Grupo 1 -->
+        <div
+            class="group-item js-open-group-info"
+            data-group-name="Accesibilidad Lima Norte"
+            data-group-description="Grupo para usuarios de Lima Norte que reportan y mejoran la accesibilidad en la zona."
+            data-group-members="87"
+            data-group-reports="342"
+            data-role="member"
+            data-owner="María García"
+        >
+            <div class="group-icon icon-bg--lima-norte">🧱</div>
+
+            <div class="group-details">
+                <div class="group-name">Accesibilidad Lima Norte</div>
+                <div class="group-description">
+                    Grupo para usuarios de Lima Norte que reportan y mejoran la accesibilidad en la zona.
+                </div>
+
+                <div class="group-stats">
+                    <span>👥 87 miembros</span>
+                    <span>📝 342 reportes</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grupo 2 -->
+        <div
+            class="group-item js-open-group-info"
+            data-group-name="Usuarios de Silla de Ruedas - Perú"
+            data-group-description="Comunidad de personas que usan silla de ruedas para compartir rutas accesibles y barreras en la ciudad."
+            data-group-members="145"
+            data-group-reports="521"
+            data-role="member"
+            data-owner="Carlos Mendoza"
+        >
+            <div class="group-icon icon-bg--transporte">♿</div>
+
+            <div class="group-details">
+                <div class="group-name">Usuarios de Silla de Ruedas - Perú</div>
+                <div class="group-description">
+                    Comunidad de personas que usan silla de ruedas para compartir rutas accesibles y barreras en la ciudad.
+                </div>
+
+                <div class="group-stats">
+                    <span>👥 145 miembros</span>
+                    <span>📝 521 reportes</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grupo 3 (Admin) -->
+        <div
+            class="group-item group-item--active js-open-group-info"
+            data-group-name="San Isidro Accesible"
+            data-group-description="Grupo local enfocado en hacer San Isidro más inclusivo para todos."
+            data-group-members="52"
+            data-group-reports="156"
+            data-role="admin"
+            data-owner="Tú"
+        >
+            <div class="group-icon icon-bg--san-isidro">🏢</div>
+
+            <div class="group-details">
+                <div class="group-header-row">
+                    <div class="group-name">San Isidro Accesible</div>
+                    <div class="group-tag tag-active">Admin</div>
+                </div>
+
+                <div class="group-description">
+                    Grupo local enfocado en hacer San Isidro más inclusivo para todos.
+                </div>
+
+                <div class="group-stats">
+                    <span>👥 52 miembros</span>
+                    <span>📝 156 reportes</span>
+                </div>
+            </div>
+        </div>
+
+    </div> <!-- fin mis grupos -->
+
+    <!-- ================================================= -->
+    <!-- GRUPOS RECOMENDADOS -->
+    <!-- ================================================= -->
+    <h2 class="section-title">Grupos Recomendados</h2>
+
+    <div class="group-list">
+
+        <div class="group-item">
+            <div class="group-icon icon-bg--transporte">🚌</div>
+
+            <div class="group-details">
+                <div class="group-name">Accesibilidad en Transporte Público</div>
+                <div class="group-description">
+                    Reportamos barreras en buses, metro y estaciones para mejorar el transporte accesible.
+                </div>
+
+                <div class="group-stats">
+                    <span>👥 234 miembros</span>
+                    <span>📝 678 reportes</span>
+                </div>
+
+                <button
+                    class="join-group-button"
+                    type="button"
+                    data-group-name="Accesibilidad en Transporte Público"
+                    data-group-description="Reportamos barreras en buses, metro y estaciones para mejorar el transporte accesible."
+                    data-group-members="234"
+                    data-group-reports="678"
+                    data-owner="Ana Torres"
+                >
+                    Unirse al Grupo
+                </button>
+            </div>
+        </div>
+
+    </div> <!-- fin grupos recomendados -->
+
+</div> <!-- fin grupos-view -->
+<!-- ============================================================= -->
+<!-- 🟣 MODAL: CREAR NUEVO GRUPO -->
+<!-- ============================================================= -->
+<section id="group-modal" class="group-modal" aria-hidden="true">
+    <div class="group-modal-overlay"></div>
+
+    <div class="group-modal-container">
+
+        <!-- ================= HEADER DEL MODAL ================ -->
+        <header class="group-modal-header">
+
+            <button class="group-modal-back" id="btn-group-back" type="button">
+                ←
+            </button>
+
+            <div class="group-modal-title-box">
+                <h2 class="group-modal-title">Crear Nuevo Grupo</h2>
+                <p class="group-modal-step" id="group-modal-step-label">
+                    Paso 1: Información del grupo
+                </p>
+            </div>
+
+            <button class="group-modal-close" id="btn-group-close" type="button">
+                ✕
+            </button>
+        </header>
+
+        <!-- ======================= CUERPO ===================== -->
+        <div class="group-modal-body">
+
+            <!-- ============= PASO 1 — INFORMACIÓN ============= -->
+            <div id="group-step-1" class="group-step group-step--active">
+
+                <!-- Selector de icono -->
+                <section class="group-section">
+                    <h3 class="group-section-title">Icono del Grupo</h3>
+
+                    <div class="group-icon-grid">
+                        <button type="button" class="group-icon-option is-selected" data-icon="🧱">
+                            <span class="group-icon-emoji">🧱</span>
+                        </button>
+
+                        <button type="button" class="group-icon-option" data-icon="🏢">
+                            <span class="group-icon-emoji">🏢</span>
+                        </button>
+
+                        <button type="button" class="group-icon-option" data-icon="🚍">
+                            <span class="group-icon-emoji">🚍</span>
+                        </button>
+
+                        <button type="button" class="group-icon-option" data-icon="🌳">
+                            <span class="group-icon-emoji">🌳</span>
+                        </button>
+
+                        <button type="button" class="group-icon-option" data-icon="♿">
+                            <span class="group-icon-emoji">♿</span>
+                        </button>
+
+                        <button type="button" class="group-icon-option" data-icon="🏙️">
+                            <span class="group-icon-emoji">🏙️</span>
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Nombre del grupo -->
+                <section class="group-section">
+                    <label class="group-field-label" for="group-name-input">
+                        Nombre del Grupo *
+                    </label>
+                    <input
+                        id="group-name-input"
+                        type="text"
+                        class="group-input"
+                        placeholder="Ej. Miraflores Accesible"
+                    >
+                </section>
+
+                <!-- Descripción -->
+                <section class="group-section">
+                    <label class="group-field-label" for="group-description-input">
+                        Descripción *
+                    </label>
+                    <textarea
+                        id="group-description-input"
+                        class="group-textarea"
+                        rows="3"
+                        placeholder="Grupo enfocado en hacer Miraflores más inclusivo para todos."
+                    ></textarea>
+                </section>
+
+                <!-- Vista previa -->
+                <section class="group-section">
+                    <h3 class="group-section-title">Vista previa</h3>
+
+                    <article class="group-preview-card">
+                        <div class="group-preview-icon">
+                            <span id="preview-group-icon">🧱</span>
+                        </div>
+
+                        <div class="group-preview-content">
+                            <div class="group-preview-header">
+                                <h4 id="preview-group-name">Nombre del grupo</h4>
+                                <span class="group-preview-role">Admin</span>
+                            </div>
+
+                            <p id="preview-group-description">
+                                Aquí aparecerá la descripción corta del grupo que estás creando.
+                            </p>
+
+                            <div class="group-preview-meta">
+                                <span>👥 0 miembros</span>
+                                <span>📝 0 reportes</span>
+                            </div>
+                        </div>
+                    </article>
+                </section>
+
+            </div> <!-- fin paso 1 -->
+
+            <!-- ============= PASO 2 — INVITAR MIEMBROS ============= -->
+            <div id="group-step-2" class="group-step">
+
+                <section class="group-section">
+                    <article class="group-preview-card">
+                        <div class="group-preview-icon">
+                            <span id="preview-group-icon-step2">🧱</span>
+                        </div>
+
+                        <div class="group-preview-content">
+                            <div class="group-preview-header">
+                                <h4 id="preview-group-name-step2">Miraflores Accesible</h4>
+                                <span class="group-preview-role">Admin</span>
+                            </div>
+
+                            <p id="preview-group-description-step2">
+                                Grupo enfocado en hacer Miraflores más inclusivo para todos.
+                            </p>
+                        </div>
+                    </article>
+                </section>
+
+                <!-- Invitaciones -->
+                <section class="group-section">
+                    <h3 class="group-section-title">Invitar Miembros (opcional)</h3>
+                    <p class="group-helper-text">
+                        Ingresa @usuario o ID de usuario para enviar invitaciones al grupo.
+                    </p>
+
+                    <div class="group-invite-row">
+                        <input
+                            type="text"
+                            id="group-invite-input"
+                            class="group-input"
+                            placeholder="@usuario o ID de usuario"
+                        >
+                        <button type="button" class="group-invite-send">
+                            ➤
+                        </button>
+                    </div>
+
+                    <ul class="group-invite-list" id="group-invite-list">
+                        <!-- JS will push invites here -->
+                    </ul>
+                </section>
+
+                <section class="group-section">
+                    <p class="group-rules-box">
+                        Los usuarios recibirán una notificación para aceptar o rechazar la invitación.
+                        Recuerda mantener un ambiente respetuoso y seguir las normas de la comunidad.
+                    </p>
+                </section>
+
+            </div> <!-- fin paso 2 -->
+
+        </div> <!-- fin body -->
+
+        <!-- ======================= FOOTER ===================== -->
+        <footer class="group-modal-footer">
+            <button type="button" class="group-btn-secondary" id="btn-group-cancel">
+                Cancelar
+            </button>
+
+            <button type="button" class="group-btn-primary" id="btn-group-next">
+                Continuar
+            </button>
+
+            <button type="button" class="group-btn-primary" id="btn-group-finish">
+                Finalizar
+            </button>
+        </footer>
+
+    </div> <!-- fin container -->
+</section>
+<!-- ============================================================= -->
+<!-- 🔵 MODAL: EDITAR INFORMACIÓN DEL GRUPO -->
+<!-- ============================================================= -->
+<section id="edit-group-modal" class="group-modal" aria-hidden="true">
+
+    <!-- Overlay -->
+    <div class="group-modal-overlay" id="edit-group-overlay"></div>
+
+    <!-- Contenedor principal -->
+    <div class="group-modal-container"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="edit-group-title">
+
+        <!-- ================= HEADER ================= -->
+        <header class="group-modal-header">
+
+            <div class="group-modal-title-box">
+                <p class="group-modal-subtitle">Editar información del grupo</p>
+
+                <h2 class="group-modal-title" id="edit-group-title">
+                    <span id="edit-group-header-name">Nombre del grupo</span>
+                </h2>
+            </div>
+
+            <button
+                type="button"
+                class="group-modal-close"
+                id="btn-edit-group-close"
+                aria-label="Cerrar"
+            >
+                ✕
+            </button>
+        </header>
+
+        <!-- ================= BODY ================= -->
+        <div class="group-modal-body">
+
+            <!-- Selector de icono -->
+            <section class="group-section">
+                <h3 class="group-section-title">Icono del Grupo</h3>
+
+                <div class="group-icon-grid" id="edit-group-icon-grid">
+
+                    <button type="button" class="group-icon-option" data-icon="🧱">
+                        <span>🧱</span>
+                    </button>
+
+                    <button type="button" class="group-icon-option" data-icon="🏢">
+                        <span>🏢</span>
+                    </button>
+
+                    <button type="button" class="group-icon-option" data-icon="🚍">
+                        <span>🚍</span>
+                    </button>
+
+                    <button type="button" class="group-icon-option" data-icon="🌳">
+                        <span>🌳</span>
+                    </button>
+
+                    <button type="button" class="group-icon-option" data-icon="♿">
+                        <span>♿</span>
+                    </button>
+
+                    <button type="button" class="group-icon-option" data-icon="🏙️">
+                        <span>🏙️</span>
+                    </button>
+
+                </div>
+            </section>
+
+            <!-- Nombre del grupo -->
+            <section class="group-section">
+                <label class="group-field-label" for="edit-group-name-input">
+                    Nombre del Grupo *
+                </label>
+
+                <input
+                    id="edit-group-name-input"
+                    type="text"
+                    class="group-input"
+                    placeholder="Ej. San Isidro Accesible"
+                >
+            </section>
+
+            <!-- Descripción -->
+            <section class="group-section">
+                <label class="group-field-label" for="edit-group-description-input">
+                    Descripción *
+                </label>
+
+                <textarea
+                    id="edit-group-description-input"
+                    class="group-textarea"
+                    rows="3"
+                    placeholder="Descripción del grupo..."
+                ></textarea>
+            </section>
+
+            <!-- Vista previa -->
+            <section class="group-section">
+                <h3 class="group-section-title">Vista previa</h3>
+
+                <article class="group-preview-card">
+
+                    <div class="group-preview-icon">
+                        <span id="edit-preview-group-icon">🧱</span>
+                    </div>
+
+                    <div class="group-preview-content">
+
+                        <div class="group-preview-header">
+                            <h4 id="edit-preview-group-name">Nombre del grupo</h4>
+                            <span class="group-preview-role">Admin</span>
+                        </div>
+
+                        <p id="edit-preview-group-description">
+                            Aquí aparecerá la descripción actualizada del grupo.
+                        </p>
+
+                        <div class="group-preview-meta">
+                            <span id="edit-preview-group-members">👥 —</span>
+                            <span id="edit-preview-group-reports">📝 —</span>
+                        </div>
+
+                    </div>
+
+                </article>
+            </section>
+
+        </div> <!-- Fin body -->
+
+        <!-- ================= FOOTER ================= -->
+        <footer class="group-modal-footer">
+            <button type="button" class="group-btn-secondary" id="btn-edit-group-cancel">
+                Cancelar
+            </button>
+
+            <button type="button" class="group-btn-primary" id="btn-edit-group-continue">
+                Guardar Cambios
+            </button>
+        </footer>
+
+    </div> <!-- Fin contenedor -->
+
+</section>
+<!-- ============================================================= -->
+<!-- 🔵 MODAL: INFORMACIÓN DEL GRUPO (VER + ABANDONAR + EDITAR) -->
+<!-- ============================================================= -->
+<section id="group-info-modal" class="group-modal group-modal--info" aria-hidden="true">
+
+    <!-- Overlay -->
+    <div class="group-modal-overlay" id="group-info-overlay"></div>
+
+    <!-- Contenedor -->
+    <div class="group-modal-container group-info-container"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="info-group-name">
+
+        <!-- =============== HEADER =============== -->
+        <header class="group-info-header">
+
+            <div class="group-info-main">
+
+                <!-- Ícono -->
+                <div class="group-info-icon" id="info-group-icon">🧱</div>
+
+                <!-- Texto -->
+                <div class="group-info-text">
+                    <h2 class="group-info-title" id="info-group-name">
+                        Nombre del grupo
+                    </h2>
+
+                    <p class="group-info-description" id="info-group-description">
+                        Aquí va la descripción del grupo.
+                    </p>
+
+                    <div class="group-info-meta">
+                        <span id="info-group-members">👥 0 miembros</span>
+                        <span id="info-group-reports">📝 0 reportes</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botón cerrar -->
+            <button
+                type="button"
+                class="group-modal-close"
+                id="btn-group-info-close"
+                aria-label="Cerrar"
+            >
+                ✕
+            </button>
+        </header>
+
+        <!-- =============== PILLS (Rol) =============== -->
+        <div class="group-info-role-wrapper">
+            <span class="group-role-tag" id="info-group-role">Miembro</span>
+        </div>
+
+        <!-- =============== TABS VISUALES =============== -->
+        <nav class="group-info-tabs">
+            <button class="group-info-tab group-info-tab--active" type="button">
+                Información
+            </button>
+            <button class="group-info-tab" type="button" disabled>
+                Miembros
+            </button>
+            <button class="group-info-tab" type="button" disabled>
+                Actividad
+            </button>
+        </nav>
+
+        <!-- =============== BODY =============== -->
+        <div class="group-info-body">
+
+            <!-- Sección solo si eres admin -->
+            <section class="group-info-section" id="admin-edit-section">
+                <button type="button" class="group-btn-outline" id="btn-edit-group-from-info">
+                    ✏️ Editar información del Grupo
+                </button>
+            </section>
+
+            <!-- Info del creador -->
+            <section class="group-info-section">
+                <h3 class="group-info-subtitle">Creado por</h3>
+                <p class="group-info-value" id="info-group-owner">
+                    —
+                </p>
+            </section>
+
+            <!-- Estadísticas -->
+            <section class="group-info-section">
+                <h3 class="group-info-subtitle">Estadísticas</h3>
+
+                <div class="group-info-stats-row">
+
+                    <div class="group-info-stat-box">
+                        <span class="group-info-stat-label">
+                            Miembros Activos
+                        </span>
+                        <span class="group-info-stat-number" id="info-stat-members">
+                            —
+                        </span>
+                    </div>
+
+                    <div class="group-info-stat-box group-info-stat-box--accent">
+                        <span class="group-info-stat-label">
+                            Reportes del Grupo
+                        </span>
+                        <span class="group-info-stat-number" id="info-stat-reports">
+                            —
+                        </span>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div> <!-- Fin body -->
+
+        <!-- =============== FOOTER =============== -->
+        <footer class="group-info-footer">
+
+            <!-- Abandonar (solo si eres miembro) -->
+            <button type="button" class="group-btn-danger" id="btn-leave-group">
+                ⟵ Abandonar Grupo
+            </button>
+
+            <button type="button" class="group-btn-primary" id="btn-group-info-dismiss">
+                Cerrar
+            </button>
+        </footer>
+
+    </div>
+</section>
+
+
+    </main>
+
+    <!-- SNACKBAR GLOBAL -->
+    <div id="snackbar" class="snackbar"></div>
+
+    <!-- TAB BAR (SOLO MÓVIL) -->
+    <nav class="bottom-nav">
+        <a href="home.html" class="bottom-link">
+            <span>🏠</span><span data-lang="navHome">Inicio</span>
+        </a>
+
+        <a href="map.html" class="bottom-link">
+            <span>🗺️</span><span data-lang="navMap">Mapa</span>
+        </a>
+
+        <a href="report.html" class="main-action">＋</a>
+
+        <a href="community.html" class="bottom-link">
+            <span>👥</span><span data-lang="navCommunity">Comunidad</span>
+        </a>
+
+        <a href="profile.html" class="bottom-link">
+            <span>👤</span><span data-lang="navProfile">Perfil</span>
         </a>
     </nav>
 
-    <main class="main-content">
-        <!-- Aquí irá el contenido de cada página -->
-    </main>
-
     <script src="../scripts/main.js"></script>
     <script src="../scripts/report.js"></script>
+    <script src="../scripts/community.js"></script>
 
 </body>
 </html>
+

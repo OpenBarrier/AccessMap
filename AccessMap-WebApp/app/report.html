@@ -1,176 +1,266 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>AccessMap - Reportes</title>
 
     <!-- CSS global -->
-    <link rel="stylesheet" href="../styles/main.css">
-    <link rel="stylesheet" href="../styles/layout.css">
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/reset.css" />
+
+    <link rel="stylesheet" href="../styles/layout.css" />
 
     <!-- CSS específico de reportes -->
-    <link rel="stylesheet" href="../styles/report.css">
+    <link rel="stylesheet" href="../styles/report.css" />
 </head>
 
 <body>
 
-    <!-- Botón menú móvil -->
-    <button id="btn-menu-toggle" class="btn-toggle">☰</button>
+    <!-- SIDEBAR (Desktop) -->
+    <aside id="sidebar" class="sidebar">
+        <div class="sidebar-brand">AccessMap</div>
 
-    <!-- Sidebar -->
-    <nav id="sidebar-nav" class="sidebar">
-        <div class="sidebar-title">AccessMap</div>
+        <nav class="sidebar-nav">
+            <a href="home.html" class="nav-link" data-lang="navHome">Inicio</a>
+            <a href="map.html" class="nav-link" data-lang="navMap">Mapa</a>
+            <a href="report.html" class="nav-link active" data-lang="navReport">Reportar</a>
+            <a href="community.html" class="nav-link" data-lang="navCommunity">Comunidad</a>
+            <a href="profile.html" class="nav-link" data-lang="navProfile">Perfil</a>
 
-        <a href="home.html" class="nav-link">Inicio</a>
-        <a href="map.html" class="nav-link">Mapa</a>
-        <a href="report.html" class="nav-link active">Reportes</a>
-        <a href="community.html" class="nav-link">Comunidad</a>
-        <a href="profile.html" class="nav-link">Perfil</a>
-
-        <a href="../index.html" class="nav-link logout">Cerrar Sesión</a>
-    </nav>
+            <a href="../index.html" class="nav-link logout" data-lang="logout">
+                Cerrar sesión
+            </a>
+        </nav>
+    </aside>
 
     <!-- CONTENIDO PRINCIPAL -->
     <main class="main-content">
 
-        <!-- ===================================== -->
-        <!-- PANTALLA 1 — CÁMARA -->
-        <!-- ===================================== -->
-        <section id="screen-camera" class="screen active">
+        <div class="report-container">
 
-            <div class="camera-tips">
-                Mantén la cámara estable y apunta hacia la barrera.
+            <!-- HEADER DEL FLUJO -->
+            <header class="report-header">
+                <button id="btn-header-back" class="header-back">←</button>
+                <h1 id="report-header-title">Capturar barrera</h1>
+            </header>
+
+            <!-- BANDA DE ESTADO (offline, info, etc.) -->
+            <div id="state-banner-offline" class="state-banner state-banner--warning hidden">
+                <p>Sin conexión. Tu reporte se guardará como borrador y se enviará automáticamente.</p>
             </div>
 
-            <div class="camera-frame">
-                <div class="frame-box"></div>
-                <div class="camera-icon">📷</div>
-            </div>
+            <!-- =======================================
+                 VISTA 1: CÁMARA
+            ======================================== -->
+            <section id="view-camera" class="report-view report-view--active">
 
-            <div class="camera-footer">
-                <button id="btn-take-photo" class="btn-primary btn-full">
-                    Tomar Foto
-                </button>
-            </div>
-        </section>
-
-
-        <!-- ===================================== -->
-        <!-- PANTALLA 2 — PREVIEW DE FOTO -->
-        <!-- ===================================== -->
-        <section id="screen-preview" class="screen hidden">
-
-            <img id="report-photo" class="photo-preview" alt="Foto tomada">
-
-            <div class="preview-status">
-                ✔ Foto tomada correctamente
-            </div>
-
-            <div class="preview-actions">
-                <button id="btn-retake" class="btn-secondary">Volver a tomar</button>
-                <button id="btn-continue-info" class="btn-primary">Continuar</button>
-            </div>
-        </section>
-
-
-        <!-- ===================================== -->
-        <!-- PANTALLA 3 — INFO PREVIA AL REPORTE -->
-        <!-- ===================================== -->
-        <section id="screen-info" class="screen hidden">
-
-            <div class="info-card">
-                <h2>Antes de continuar…</h2>
-                <p>Estás a punto de crear un reporte de accesibilidad. Esto ayudará a otros usuarios y a la comunidad.</p>
-
-                <ul class="info-list">
-                    <li>✔ La foto debe ser clara</li>
-                    <li>✔ Describe el problema con detalle</li>
-                    <li>✔ Verifica la ubicación</li>
-                </ul>
-            </div>
-
-            <div class="info-footer">
-                <button id="btn-info-cancel" class="btn-secondary">Cancelar</button>
-                <button id="btn-info-continue" class="btn-primary">Continuar</button>
-            </div>
-        </section>
-
-
-        <!-- ===================================== -->
-        <!-- PANTALLA 4 — FORMULARIO DEL REPORTE -->
-        <!-- ===================================== -->
-        <section id="screen-form" class="screen hidden">
-
-            <h2>Nuevo Reporte</h2>
-
-            <!-- Foto fijada del preview -->
-            <img id="report-photo-preview" class="photo-preview" alt="Foto previa">
-
-            <form id="report-form">
-
-                <!-- Descripción -->
-                <label for="report-description" class="label">Descripción del problema</label>
-                <textarea
-                    id="report-description"
-                    class="input"
-                    rows="4"
-                    placeholder="Describe la barrera o dificultad…"></textarea>
-
-                <!-- Categoría -->
-                <label for="report-category" class="label">Categoría</label>
-                <select id="report-category" class="input">
-                    <option value="">Selecciona una categoría…</option>
-                    <option value="rampa-rota">Rampa rota</option>
-                    <option value="escaleras">Escaleras</option>
-                    <option value="vereda-danada">Vereda dañada</option>
-                    <option value="iluminacion">Falta de iluminación</option>
-                </select>
-
-                <!-- Ubicación -->
-                <label for="report-location" class="label">Ubicación</label>
-                <div id="report-location" class="location-box">
-                    Detectando ubicación…
+                <div class="card tips-card">
+                    <h2>Consejos para una buena captura:</h2>
+                    <ul>
+                        <li>Asegúrate de tener buena iluminación.</li>
+                        <li>Enfoca claramente la barrera.</li>
+                        <li>Mantén el dispositivo estable.</li>
+                    </ul>
                 </div>
 
-                <!-- Enviar -->
-                <button id="btn-report-submit" type="button" class="btn-primary btn-full">
-                    Enviar Reporte
+                <div class="camera-frame">
+                    <div class="camera-inner">
+                        <div class="camera-icon-big">📷</div>
+                        <p class="camera-text">Enfoca la barrera</p>
+                        <p class="camera-subtext">Centra el obstáculo en el cuadro</p>
+                    </div>
+                </div>
+<div class="photo-upload-wrapper">
+    <input type="file" id="upload-photo" accept="image/*" hidden>
+    <button id="btn-upload-photo" class="btn-borde" style="margin-top: 1rem;">
+        Subir desde galería
+    </button>
+</div>
+
+
+                <div class="camera-shutter-wrapper">
+                    <button id="btn-capture" class="camera-shutter" aria-label="Tomar foto"></button>
+                </div>
+            </section>
+
+
+            <!-- =======================================
+                 VISTA 2: PREVIEW IMAGEN CAPTURADA
+            ======================================== -->
+            <section id="view-preview" class="report-view">
+
+                <div class="preview-check">
+                    ✔
+                </div>
+                <p class="preview-title">Imagen capturada</p>
+
+                <div class="preview-image-wrapper">
+    <img id="preview-image" src="" alt="Imagen capturada" />
+
+    <!-- OVERLAY ENCIMA -->
+    <div class="preview-overlay" id="preview-overlay">
+        <div class="preview-overlay-content">
+            <div class="overlay-check">✔</div>
+            <p class="overlay-text">Imagen capturada</p>
+        </div>
+    </div>
+</div>
+
+
+                <div class="preview-actions">
+                    <button id="btn-preview-retake" class="btn-borde">Tomar otra</button>
+                    <button id="btn-preview-continue" class="btn-azul">Continuar</button>
+                </div>
+            </section>
+
+
+            <!-- =======================================
+                 VISTA 3: HOJA INFORMATIVA
+            ======================================== -->
+            <section id="view-sheet" class="report-view">
+                <div class="card sheet-card">
+                    <p class="sheet-title">Reportar barrera</p>
+                    <p class="sheet-subtitle">Foto capturada ✔</p>
+
+                    <p class="sheet-text">
+                        Tu reporte ayudará a otros usuarios a conocer las barreras de accesibilidad en tiempo real.
+                    </p>
+
+                    <ul class="sheet-list">
+                        <li>Seleccionar la ubicación exacta.</li>
+                        <li>Elegir el tipo de barrera.</li>
+                        <li>Agregar fotos y detalles.</li>
+                    </ul>
+
+                    <div class="sheet-highlight">
+                        <strong>Gana puntos:</strong> cada reporte verificado te da +50 XP.
+                    </div>
+                </div>
+
+                <div class="sheet-actions">
+                    <button id="btn-sheet-cancel" class="btn-borde">Cancelar</button>
+                    <button id="btn-sheet-continue" class="btn-azul">Continuar</button>
+                </div>
+            </section>
+
+
+            <!-- =======================================
+                 VISTA 4: FORMULARIO DE REPORTE
+            ======================================== -->
+            <section id="view-form" class="report-view">
+
+                <div class="form-header-row">
+                    <h2>Creación de reporte</h2>
+                    <button id="btn-open-drafts" class="link-button hidden">
+                        Borradores
+                    </button>
+                </div>
+
+                <div class="hint-card">
+                    Completa los campos faltantes para finalizar tu reporte.
+                </div>
+
+                <div class="form-photo-card">
+                    <img id="form-image" src="" alt="Foto de la barrera" />
+                </div>
+
+                <div class="form-group">
+                    <label for="report-comment" class="form-label">Comentario</label>
+                    <textarea id="report-comment" rows="3" class="form-input"
+                        placeholder="Describe la barrera frente a la entrada, esquina, etc."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="report-location" class="form-label">Ubicación</label>
+                    <select id="report-location" class="form-input">
+                        <option value="actual">Ubicación actual</option>
+                        <option value="manual">Seleccionar en el mapa (próximamente)</option>
+                    </select>
+                </div>
+
+                <button id="btn-send-report" class="btn-azul btn-grande">
+                    Enviar reporte
                 </button>
-            </form>
-        </section>
+
+                <div class="hint-card hint-card--secondary">
+                    Los resultados se priorizan según tu perfil de accesibilidad.
+                </div>
+            </section>
 
 
-        <!-- ===================================== -->
-        <!-- POPUP PROCESANDO -->
-        <!-- ===================================== -->
-        <div id="popup-processing" class="popup hidden">
-            <div class="popup-box">
-                <h3>Procesando…</h3>
-                <p>Estamos enviando tu reporte.</p>
+            <!-- =======================================
+                 VISTA 5: BORRADORES PENDIENTES
+            ======================================== -->
+            <section id="view-drafts" class="report-view">
+
+                <div class="drafts-header">
+                    <h2>Borradores pendientes</h2>
+                    <p>Aquí encontrarás tus borradores de reportes pendientes.</p>
+                </div>
+
+                <div id="drafts-list" class="drafts-list">
+                    <!-- Se llena desde JS -->
+                </div>
+
+                <button id="btn-drafts-back" class="btn-borde btn-grande">
+                    Volver al reporte
+                </button>
+            </section>
+
+        </div> <!-- /report-container -->
+
+        <!-- OVERLAY: PROCESANDO -->
+        <div id="overlay-processing" class="overlay-message hidden">
+            <div class="overlay-card">
+                <h3>Gracias</h3>
+                <p>Reporte en procesamiento. Puedes seguir su estado en el historial del usuario.</p>
             </div>
         </div>
 
-        <!-- ===================================== -->
-        <!-- POPUP ÉXITO -->
-        <!-- ===================================== -->
-        <div id="popup-success" class="popup hidden">
-            <div class="popup-box popup-success-box">
-                <h3>¡Reporte enviado!</h3>
-                <p>Gracias por mejorar la accesibilidad de tu comunidad.</p>
-
-                <img id="success-photo" class="success-thumb" alt="Foto del reporte">
-
-                <button class="btn-primary btn-full" onclick="location.href='report.html'">
-                    Crear otro reporte
-                </button>
+        <!-- OVERLAY: ÉXITO (BANNER SUPERIOR) -->
+        <div id="overlay-success" class="overlay-top-banner hidden">
+            <div class="success-card">
+                <div class="success-text">
+                    <h3>¡Felicidades!</h3>
+                    <p>Tu reporte ha sido procesado.</p>
+                    <p class="success-sub">La barrera identificada será revisada por nuestro equipo.</p>
+                </div>
+                <div class="success-thumb">
+                    <img id="success-image" src="" alt="Foto del reporte procesado" />
+                </div>
             </div>
         </div>
+
+        <!-- SNACKBAR GLOBAL -->
+        <div id="snackbar" class="snackbar"></div>
 
     </main>
+
+    <!-- TAB BAR (Móvil) -->
+    <nav class="bottom-nav">
+        <a href="home.html" class="bottom-link">
+            <span>🏠</span><span data-lang="navHome">Inicio</span>
+        </a>
+
+        <a href="map.html" class="bottom-link">
+            <span>🗺️</span><span data-lang="navMap">Mapa</span>
+        </a>
+
+        <a href="report.html" class="main-action">＋</a>
+
+        <a href="community.html" class="bottom-link">
+            <span>👥</span><span data-lang="navCommunity">Comunidad</span>
+        </a>
+
+        <a href="profile.html" class="bottom-link">
+            <span>👤</span><span data-lang="navProfile">Perfil</span>
+        </a>
+    </nav>
 
     <!-- Scripts -->
     <script src="../scripts/main.js"></script>
     <script src="../scripts/report.js"></script>
 
 </body>
+
 </html>

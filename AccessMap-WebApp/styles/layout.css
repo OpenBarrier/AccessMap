@@ -107,16 +107,16 @@
 /* 4. RESPONSIVE – DESKTOP */
 @media (min-width: 768px) {
 
-    /* Sidebar SIEMPRE visible */
+    /* Sidebar visible */
     .sidebar {
         display: flex;
     }
-    
+
     .sidebar-brand {
-    font-size: 2rem;
-    color: #05af43;
-    font-weight: 700;
-    padding-bottom: 3rem;
+        font-size: 2rem;
+        color: #05af43;
+        font-weight: 700;
+        padding-bottom: 3rem;
     }
 
     /* Tab bar oculto en desktop */
@@ -124,6 +124,7 @@
         display: none;
     }
 
+    /* Contenido principal desplazado a la derecha */
     .main-content {
         margin-left: 260px;
         padding: 2rem;
