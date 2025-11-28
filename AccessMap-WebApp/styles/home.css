@@ -3,45 +3,7 @@
    Mobile first (media queries con min-width)
    ======================================================= */
 
-/* ---------- CABECERA GLOBAL ---------- */
 
-.site-header.app-header {
-  display: flex;
-  justify-content: space-between;
-  padding-left: 25px;
-  padding-top: 25px;
-  padding-bottom: 25px;
-}
-
-/* ---------- GRID PRINCIPAL ---------- */
-
-.dashboard-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  margin-top: 1rem;
-}
-
-/* ---------- CABECERA DEL HOME ---------- */
-
-.dashboard-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0;
-}
-
-.dashboard-greeting {
-  font-size: 0.9rem;
-  color: #64748b;
-  margin: 0;
-}
-
-.dashboard-title {
-  font-size: 1.8rem;
-  margin: 0.2rem 0 0;
-  color: #024260;
-}
 
 /* ---------- PANEL GENÉRICO ---------- */
 
@@ -335,51 +297,8 @@ span.badge-icon {
   color: #64748b;
 }
 
-/* ---------- NAV INFERIOR (MOBILE) ---------- */
 
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 64px;
-  background: #ffffff;
-  border-top: 1px solid #e2e8f0;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  z-index: 999;
-}
 
-.bottom-link {
-  flex: 1;
-  text-align: center;
-  padding: 0.4rem 0;
-  font-size: 1.4rem;
-  color: #475569;
-  display: flex;
-  flex-direction: column;
-  gap: 0.1rem;
-}
-
-.bottom-link span {
-  font-size: 0.7rem;
-}
-
-/* Botón central flotante */
-
-.main-action {
-  background: #05af43;
-  color: white;
-  width: 48px;
-  height: 48px;
-  border-radius: 999px;
-  margin-top: -24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-}
 
 /* Separador de stats */
 
@@ -416,20 +335,9 @@ span.badge-icon {
     display: none;
   }
 
-  .options-bar {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0.5rem;
-    font-size: 1.35rem;
-  }
 
-  .sidebar-brand {
-    font-size: 2rem;
-    color: #05af43;
-    font-weight: 700;
-    padding-bottom: 3rem;
-  }
+
+
 
 }
 

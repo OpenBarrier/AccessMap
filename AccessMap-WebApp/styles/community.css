@@ -413,6 +413,7 @@
     }
 }
 
+<<<<<<< HEAD
 /* OCULTAR HEADERS GLOBALES (por si layout.css mete alguno) */
 .site-header,
 .app-header,
@@ -1207,3 +1208,5 @@
     justify-content: center;
 }
 
+=======
+>>>>>>> 48a4b4c79370e8f8a87aa55bd958f220db7578c2
