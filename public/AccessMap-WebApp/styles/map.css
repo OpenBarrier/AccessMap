@@ -114,7 +114,7 @@
   margin-top: 0.15rem;
 }
 
-.search-suggestions__item + .search-suggestions__item {
+.search-suggestions__item+.search-suggestions__item {
   border-top: 1px solid #e2e8f0;
 }
 
@@ -294,11 +294,11 @@
   transition: 0.2s;
 }
 
-.switch input:checked + .switch__slider {
+.switch input:checked+.switch__slider {
   background-color: #05af43;
 }
 
-.switch input:checked + .switch__slider::before {
+.switch input:checked+.switch__slider::before {
   transform: translateX(1rem);
 }
 
@@ -393,17 +393,17 @@
   display: none;
 }
 
-/* MODAL / bottom sheet de ruta */
-
 .route-modal-backdrop {
-  position: absolute;
+  position: fixed;
   inset: 0;
   background-color: rgba(2, 66, 96, 0.95);
   z-index: 1200;
 }
 
 .route-modal {
-  position: absolute;
+  position: fixed;
+  width: 100vw;
+  margin: 0;
   left: 0;
   right: 0;
   bottom: 0;
@@ -416,6 +416,26 @@
   max-height: 80vh;
   display: flex;
   flex-direction: column;
+
+  /*
+  
+  position: fixed; /* Mantenemos 'fixed' para anclarlo al viewport 
+  width: 100vw; /* ✅ CORRECCIÓN CLAVE: Ocupar 100% del ancho del viewport 
+  margin: 0; /* Aseguramos que no haya márgenes que lo desplacen 
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ffffff;
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+  box-shadow: 0 -0.4rem 1.2rem rgba(15, 23, 42, 0.4);
+  padding: 0.9rem 1rem 1rem 1rem;
+  z-index: 1201;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;*/
+
+
 }
 
 .route-modal--hidden {
@@ -545,6 +565,7 @@
   width: 100%;
 }
 
+
 @media (max-width: 1023px) {
   .place-filter {
     left: 32%;
@@ -614,6 +635,7 @@
     margin-left: 2rem;
     margin-right: 2rem;
   }
+
   .map-wrapper {
     display: flex;
     flex-direction: column;
@@ -641,12 +663,6 @@
     bottom: 8rem;
   }
 
-  .route-modal,
-  .route-modal-backdrop {
-    max-width: 28rem;
-    right: 2.5rem;
-    margin-left: auto;
-  }
 }
 
 /* Left floating controls (toggle filters) */
@@ -668,6 +684,7 @@ body.place-filter-open #place-filter-panel {
   bottom: calc(7rem + 0.5rem);
   z-index: 560;
 }
+
 /* Do NOT show the bottom-card when place-filter is opened via left toggle.
    The bottom-card is only visible when the full-screen search (body.search-open)
    is active. */
@@ -943,6 +960,7 @@ body.search-open .map-search-bar .search-input-wrapper {
   display: none;
 }
 
+
 .search-integrated-bottom {
   display: none;
 }
@@ -1002,12 +1020,171 @@ body.search-open #place-filter-panel {
   body.search-open .map-search-bar .search-input-wrapper {
     top: 8%;
   }
+
   body.search-open #place-filter-panel {
     top: 18%;
     max-width: 92%;
   }
+
   .search-results-container {
     top: 36%;
     max-width: 92%;
   }
+}
+
+
+/*CALMAA*/
+
+/* =========================================
+   ESTILOS ADICIONALES Y CORRECCIÓN (MANUEL)
+   ========================================= */
+
+/* --- 1. Fix de Visibilidad del Sidebar en Móviles --- */
+/* Aumentamos el Z-Index y usamos !important para que el menú se despliegue */
+.sidebar {
+  /* Si ya existe, solo se actualizan las propiedades */
+  z-index: 1000;
+}
+
+.sidebar.is-open {
+  display: block !important;
+  /* CORRECCIÓN CLAVE: Fuerza la visibilidad en móvil */
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 2000;
+  /* Máxima prioridad para estar encima de todo (incluyendo modales) */
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+}
+
+
+/* --- 2. Alertas de Navegación (Notificaciones y Peligro) --- */
+
+.alert-banner {
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+  text-align: center;
+  width: 100%;
+  z-index: 600;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.alert-banner--warning {
+  background-color: #fff3cd;
+  color: #856404;
+  border-bottom: 1px solid #ffeeba;
+}
+
+.alert-banner--danger {
+  background-color: #f8d7da;
+  color: #721c24;
+  border-bottom: 1px solid #f5c6cb;
+  animation: pulse-red 2s infinite;
+  /* Activa la animación del pulso rojo */
+}
+
+.alert-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Animación de palpitación roja */
+@keyframes pulse-red {
+  0% {
+    box-shadow: inset 0 0 0 0 rgba(220, 53, 69, 0.2);
+  }
+
+  50% {
+    box-shadow: inset 0 0 20px 0 rgba(220, 53, 69, 0.1);
+  }
+
+  100% {
+    box-shadow: inset 0 0 0 0 rgba(220, 53, 69, 0);
+  }
+}
+
+/* --- 3. Estilos del Formulario de Reporte y Rutas --- */
+
+.route-field__input {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.8rem;
+  border: 1px solid #cbd5e1;
+  font-family: inherit;
+  font-size: 0.9rem;
+  background-color: #fff;
+}
+
+.route-field__input:focus {
+  border-color: #00b592;
+  outline: none;
+}
+
+.btn-full-width {
+  width: 100%;
+}
+
+.status-text {
+  display: block;
+  margin-top: 0.5rem;
+  color: #64748b;
+}
+
+/* --- 4. Lista de Tarjetas de Ruta --- */
+
+.route-cards-list {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.route-msg-error {
+  color: #e69000;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+}
+
+.route-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.8rem;
+  padding: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: #fff;
+}
+
+.route-card:hover {
+  border-color: #94a3b8;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.route-card--selected {
+  border-color: #00b592;
+  background-color: #f0fdfa;
+  box-shadow: 0 0 0 1px #00b592;
+}
+
+.route-card__header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #334155;
+  margin-bottom: 0.25rem;
+}
+
+.route-card__meta {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+/* --- 5. Utilidades de Botones --- */
+.btn-mini--white {
+  background-color: white;
+  border: 1px solid #f5f5f5;
 }
