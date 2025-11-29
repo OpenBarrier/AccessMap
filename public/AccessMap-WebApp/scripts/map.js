@@ -33,6 +33,9 @@
     var btnOpenPlaceFilter = document.getElementById("btn-open-place-filter");
     var placeFilterPanel = document.getElementById("place-filter-panel");
     var placeFilterChips = document.querySelectorAll(".place-filter__chip");
+    var searchOverlay = document.getElementById("search-overlay");
+    var searchOverlayClose = document.getElementById("search-overlay-close");
+    var searchResultsContainer = document.getElementById("search-results-container");
 
     // Modal de ruta
     var routeModal = document.getElementById("route-modal");
@@ -689,15 +692,67 @@
     }
 
     function renderSuggestions(suggestions) {
-      if (!searchSuggestions) return;
-
       if (!suggestions || !suggestions.length) {
         clearSuggestions();
+        if (searchResultsContainer) searchResultsContainer.innerHTML = "";
         return;
       }
 
-      searchSuggestions.innerHTML = "";
+      // Si el buscador está abierto en pantalla completa, renderizamos como cards
+      var isFullscreen = document.body.classList.contains("search-open");
 
+      if (isFullscreen && searchResultsContainer) {
+        searchResultsContainer.innerHTML = "";
+        suggestions.forEach(function (s) {
+          var card = document.createElement("div");
+          card.className = "search-result-card";
+
+          var title = document.createElement("div");
+          title.className = "search-result-card__title";
+          title.textContent = s.title;
+
+          var sub = document.createElement("div");
+          sub.className = "search-result-card__subtitle";
+          sub.textContent = s.subtitle || s.displayName || "";
+
+          card.appendChild(title);
+          card.appendChild(sub);
+
+          card.addEventListener("click", function () {
+            var lat = s.lat;
+            var lon = s.lon;
+            var latlng = L.latLng(lat, lon);
+
+            // Centrar en mapa y marcar
+            map.setView(latlng, 17);
+            L.marker(latlng)
+              .addTo(map)
+              .bindPopup(s.displayName || s.title)
+              .openPopup();
+
+            // Pasar coordenadas al modal de rutas como ORIGEN
+            if (routeOriginInput) {
+              routeOriginInput.value = s.displayName || s.title;
+            }
+            setStartMarker(latlng);
+            // Abrir modal de rutas
+            openRouteModal();
+
+            // Cerrar búsqueda fullscreen
+            closeSearchModal();
+          });
+
+          searchResultsContainer.appendChild(card);
+        });
+
+        // ocultar la lista tradicional de sugerencias
+        if (searchSuggestions) searchSuggestions.classList.add("search-suggestions--hidden");
+        return;
+      }
+
+      // Render normal como lista de sugerencias (desktop / inline)
+      if (!searchSuggestions) return;
+      searchSuggestions.innerHTML = "";
       suggestions.forEach(function (s) {
         var li = document.createElement("li");
         li.className = "search-suggestions__item";
@@ -986,10 +1041,48 @@
     // ----- Listeners de búsqueda -----
     if (searchForm) {
       searchForm.addEventListener("submit", searchPlace);
+      // abrir búsqueda en pantalla completa al hacer click en el form (o en el input)
+      searchForm.addEventListener("click", function (e) {
+        // evitar abrir si se hace click en botones dentro del form que gestionamos por separado
+        if (e.target && (e.target.id === "btn-open-place-filter" || e.target.id === "search-overlay-close")) return;
+        openSearchModal();
+      });
     }
 
     if (searchInput) {
       searchInput.addEventListener("input", handleSearchInput);
+    }
+
+    // Abrir/cerrar modal de búsqueda (overlay)
+    function openSearchModal() {
+      document.body.classList.add("search-open");
+      if (searchOverlay) searchOverlay.classList.remove("search-overlay--hidden");
+      if (searchOverlayClose) searchOverlayClose.style.display = "block";
+      if (searchInput) {
+        searchInput.focus();
+        // disparar búsqueda inmediata si hay texto
+        if (searchInput.value && searchInput.value.trim().length >= 2) handleSearchInput();
+      }
+    }
+
+    function closeSearchModal() {
+      document.body.classList.remove("search-open");
+      if (searchOverlay) searchOverlay.classList.add("search-overlay--hidden");
+      if (searchOverlayClose) searchOverlayClose.style.display = "none";
+      clearSuggestions();
+      if (searchResultsContainer) searchResultsContainer.innerHTML = "";
+    }
+
+    if (searchOverlayClose) {
+      searchOverlayClose.addEventListener("click", function () {
+        closeSearchModal();
+      });
+    }
+
+    if (searchOverlay) {
+      searchOverlay.addEventListener("click", function () {
+        closeSearchModal();
+      });
     }
 
     // Cerrar sugerencias al hacer click fuera

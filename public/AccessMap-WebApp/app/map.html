@@ -77,43 +77,69 @@
             <span class="search-icon">&#128269;</span>
             <input id="search-input" type="text" placeholder="Buscar destino..." autocomplete="off" />
           </div>
+
+          <!-- Overlay / full-screen search (hidden por defecto) -->
+          <div id="search-overlay" class="search-overlay search-overlay--hidden" aria-hidden="true"></div>
+          <button id="search-overlay-close" class="search-overlay__close" type="button" aria-label="Cerrar búsqueda">&times;</button>
+
+          <!-- Sugerencias / Resultados (cuando se abre la búsqueda se renderiza aquí) -->
+          <ul id="search-suggestions" class="search-suggestions search-suggestions--hidden"></ul>
+
+          <button id="btn-open-place-filter" class="btn-chip" type="button">
+            <span class="chip-icon">🔎</span>
+            <span class="chip-text">Buscar lugares</span>
+          </button>
+
+          <!-- Panel de filtros de lugares y reportes (integrado dentro del form) -->
+          <div id="place-filter-panel" class="place-filter place-filter--hidden">
+            <h3 class="place-filter__title">Lugares</h3>
+
+            <div class="place-filter__group">
+              <p class="place-filter__subtitle">Categorías</p>
+              <button class="place-filter__chip" data-layer="hospitales">Hospitales</button>
+              <button class="place-filter__chip" data-layer="parques">Parques y plazas</button>
+              <button class="place-filter__chip" data-layer="transporte">Transporte</button>
+            </div>
+
+            <div class="place-filter__group">
+              <p class="place-filter__subtitle">Filtros</p>
+              <label class="place-filter__toggle">
+                <input type="checkbox" id="toggle-visible-accessible" checked />
+                <span>Ver accesibles</span>
+              </label>
+              <label class="place-filter__toggle">
+                <input type="checkbox" id="toggle-visible-warning" checked />
+                <span>Ver precaución</span>
+              </label>
+              <label class="place-filter__toggle">
+                <input type="checkbox" id="toggle-visible-barrier" checked />
+                <span>Ver barreras</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Panel inferior (movido dentro del form para mostrarse en la vista de búsqueda) -->
+          <div class="map-bottom-panel search-integrated-bottom">
+            <div class="bottom-card">
+              <div class="bottom-card__top-row">
+                <div class="toggle-accessible">
+                  <label class="switch">
+                    <input type="checkbox" id="toggle-accessible" />
+                    <span class="switch__slider"></span>
+                  </label>
+                  <span class="toggle-accessible__label">Solo accesibles</span>
+                </div>
+
+                <button id="btn-open-route-planner" type="button" class="btn-outline">
+                  Planificar ruta
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contenedor donde se renderizarán las cards de resultados de búsqueda -->
+          <div id="search-results-container" class="search-results-container"></div>
         </form>
-
-        <!-- Sugerencias de búsqueda -->
-        <ul id="search-suggestions" class="search-suggestions search-suggestions--hidden"></ul>
-
-        <button id="btn-open-place-filter" class="btn-chip" type="button">
-          <span class="chip-icon">🔎</span>
-          <span class="chip-text">Buscar lugares</span>
-        </button>
-
-        <!-- Panel de filtros de lugares y reportes -->
-        <div id="place-filter-panel" class="place-filter place-filter--hidden">
-          <h3 class="place-filter__title">Lugares</h3>
-
-          <div class="place-filter__group">
-            <p class="place-filter__subtitle">Categorías</p>
-            <button class="place-filter__chip" data-layer="hospitales">Hospitales</button>
-            <button class="place-filter__chip" data-layer="parques">Parques y plazas</button>
-            <button class="place-filter__chip" data-layer="transporte">Transporte</button>
-          </div>
-
-          <div class="place-filter__group">
-            <p class="place-filter__subtitle">Filtros</p>
-            <label class="place-filter__toggle">
-              <input type="checkbox" id="toggle-visible-accessible" checked />
-              <span>Ver accesibles</span>
-            </label>
-            <label class="place-filter__toggle">
-              <input type="checkbox" id="toggle-visible-warning" checked />
-              <span>Ver precaución</span>
-            </label>
-            <label class="place-filter__toggle">
-              <input type="checkbox" id="toggle-visible-barrier" checked />
-              <span>Ver barreras</span>
-            </label>
-          </div>
-        </div>
       </section>
       <!-- Contenedor del mapa -->
       <section class="map-wrapper">
@@ -136,37 +162,19 @@
           
         </div>
 
-        <!-- Panel inferior -->
-        <div class="map-bottom-panel">
-          <div class="bottom-card">
-            <div class="bottom-card__top-row">
-              <div class="toggle-accessible">
-                <label class="switch">
-                  <input type="checkbox" id="toggle-accessible" />
-                  <span class="switch__slider"></span>
-                </label>
-                <span class="toggle-accessible__label">Solo accesibles</span>
-              </div>
-
-              <button id="btn-open-route-planner" type="button" class="btn-outline">
-                Planificar ruta
-              </button>
+        <!-- Información de ruta (se mantiene en el mapa principal) -->
+        <div id="route-info" class="route-info route-info--hidden">
+          <div class="route-info__status">
+            <span class="tag tag-verde">Ruta A · Recomendada</span>
+          </div>
+          <div class="route-info__details">
+            <div class="route-info__metric">
+              <span class="route-info__label">Duración</span>
+              <span id="route-duration" class="route-info__value">–</span>
             </div>
-
-            <div id="route-info" class="route-info route-info--hidden">
-              <div class="route-info__status">
-                <span class="tag tag-verde">Ruta A · Recomendada</span>
-              </div>
-              <div class="route-info__details">
-                <div class="route-info__metric">
-                  <span class="route-info__label">Duración</span>
-                  <span id="route-duration" class="route-info__value">–</span>
-                </div>
-                <div class="route-info__metric">
-                  <span class="route-info__label">Distancia</span>
-                  <span id="route-distance" class="route-info__value">–</span>
-                </div>
-              </div>
+            <div class="route-info__metric">
+              <span class="route-info__label">Distancia</span>
+              <span id="route-distance" class="route-info__value">–</span>
             </div>
           </div>
         </div>
