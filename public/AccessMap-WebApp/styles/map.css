@@ -37,11 +37,12 @@
 .map-search-bar {
   padding: 0rem 1rem 0.5rem 1rem;
   display: flex;
+  margin-right: 4rem;
   flex-direction: column;
   gap: 0.5rem;
   background-color: #f8fafc;
   position: relative;
-  z-index: 650;
+  z-index: 600;
 }
 
 .search-form {
@@ -127,14 +128,16 @@
   align-self: flex-start;
   display: inline-flex;
   align-items: center;
+  justify-content: flex-start;
   gap: 0.4rem;
   border: none;
-  border-radius: 999px;
+  border-radius: 700px;
   padding: 0.25rem 0.8rem;
   font-size: 0.8rem;
   cursor: pointer;
-  background-color: #e69000;
-  color: #ffffff;
+  background-color: #f5f5f5;
+  border: 1px solid #000;
+  color: #6a7282;
 }
 
 .chip-icon {
@@ -184,6 +187,34 @@
 .btn-circle--alert {
   background-color: #e03737;
   color: #ffffff;
+}
+
+#btn-toggle-place-filter {
+  flex-direction: row;
+  gap: 0.2rem;
+  padding: 0.3rem;
+}
+
+#btn-toggle-place-filter span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #024260;
+}
+
+#btn-toggle-place-filter span:first-child {
+  font-size: 1.4rem;
+}
+
+#btn-toggle-place-filter svg {
+  width: 40px;
+  height: 40px;
+}
+
+#btn-toggle-place-filter span:last-child {
+  font-size: 0.65rem;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 /* Panel inferior */
@@ -367,8 +398,8 @@
 .route-modal-backdrop {
   position: absolute;
   inset: 0;
-  background-color: rgba(15, 23, 42, 0.45);
-  z-index: 650;
+  background-color: rgba(2, 66, 96, 0.95);
+  z-index: 1200;
 }
 
 .route-modal {
@@ -381,7 +412,7 @@
   border-top-right-radius: 1.5rem;
   box-shadow: 0 -0.4rem 1.2rem rgba(15, 23, 42, 0.4);
   padding: 0.9rem 1rem 1rem 1rem;
-  z-index: 700;
+  z-index: 1201;
   max-height: 80vh;
   display: flex;
   flex-direction: column;
@@ -508,9 +539,15 @@
   display: none !important;
 }
 
+.map-search-bar .btn-chip {
+  margin-left: 1.5rem;
+  margin-right: 0.5rem;
+  width: 100%;
+}
+
 @media (max-width: 1023px) {
   .place-filter {
-    left: 50%;
+    left: 32%;
     right: auto;
     transform: translateX(-50%);
   }
@@ -518,13 +555,35 @@
 
 /* Desktop */
 
+@media (min-width: 768px) {
+  .map-search-bar {
+    padding: 1rem 1.5rem 0.75rem 1.5rem;
+  }
+
+  .search-input-wrapper {
+    padding: 0.6rem 1rem;
+  }
+
+  #search-input {
+    font-size: 1rem;
+  }
+
+  .search-suggestions {
+    top: 3.8rem;
+  }
+
+  .search-overlay__close {
+    margin-left: 15rem;
+  }
+}
+
 @media (min-width: 1024px) {
   .btn-menu {
     display: none;
   }
 
-  .place-filter{
-    top: 4rem;
+  .place-filter {
+    margin-left: 1rem;
   }
 
   .map-header {
@@ -552,9 +611,9 @@
   }
 
   .map-search-bar .btn-chip {
-    margin-left: 1rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
   }
-
   .map-wrapper {
     display: flex;
     flex-direction: column;
@@ -589,6 +648,29 @@
     margin-left: auto;
   }
 }
+
+/* Left floating controls (toggle filters) */
+.map-left-controls {
+  position: absolute;
+  left: 1rem;
+  bottom: 8.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 500;
+}
+
+/* When place filter panel is opened via left button, show it to the left */
+body.place-filter-open #place-filter-panel {
+  display: block;
+  position: absolute;
+  right: auto;
+  bottom: calc(7rem + 0.5rem);
+  z-index: 560;
+}
+/* Do NOT show the bottom-card when place-filter is opened via left toggle.
+   The bottom-card is only visible when the full-screen search (body.search-open)
+   is active. */
 
 /*PARTE DE MANUEL, SI VAS A CAMBIAR PREGUNTAME ANTES*/
 .alert-banner {
@@ -726,7 +808,6 @@
   position: absolute;
   z-index: 550;
   right: 1rem;
-  top: 7rem;
   background-color: #ffffff;
   border-radius: 1rem;
   padding: 0.75rem 0.9rem;
@@ -792,11 +873,22 @@
   accent-color: #00b592;
 }
 
+.place-filter__close {
+  position: absolute;
+  right: 0.6rem;
+  top: -0.5rem;
+  background: transparent;
+  border: none;
+  font-size: 1.6rem;
+  color: #0f172a;
+  cursor: pointer;
+}
+
 /* ----- Fullscreen search overlay ----- */
 .search-overlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(2,66,96,0.95); /* azul oscuro semitransparente */
+  background-color: rgba(2, 66, 96, 0.95);
   z-index: 1050;
 }
 
@@ -814,13 +906,29 @@
   color: #ffffff;
   font-size: 2rem;
   cursor: pointer;
+  display: none;
 }
 
-/* start hidden by default */
-.search-overlay__close { display: none; }
+body.search-open .search-overlay__close {
+  display: block;
+}
 
-/* Cuando el buscador está abierto (le agregamos la clase `search-open` al body desde JS) */
+/* Hide search input wrapper by default, show only the filter button */
+.search-input-wrapper {
+  display: none;
+}
+
+#btn-open-place-filter {
+  display: inline-flex;
+}
+
+body.search-open #btn-open-place-filter {
+  display: none;
+}
+
+/* Cuando el buscador está abierto */
 body.search-open .map-search-bar .search-input-wrapper {
+  display: flex;
   position: fixed;
   left: 50%;
   top: 12%;
@@ -830,26 +938,29 @@ body.search-open .map-search-bar .search-input-wrapper {
   z-index: 1110;
 }
 
-/* Mostrar panel de filtros dentro del modal de búsqueda */
-body.search-open #place-filter-panel {
-  position: fixed;
-  left: 50%;
-  top: 22%;
-  transform: translateX(-50%);
-  z-index: 1110;
-  width: calc(100% - 3rem);
-  max-width: 520px;
+/* Hide place filter panel and integrated bottom-card by default */
+.place-filter {
+  display: none;
 }
 
-/* Mostrar el bloque de bottom-card top-row dentro de la vista de búsqueda */
+.search-integrated-bottom {
+  display: none;
+}
+
 body.search-open .search-integrated-bottom {
+  display: block;
   position: fixed;
   left: 50%;
-  bottom: 18%;
+  top: calc(12% + 3.5rem);
   transform: translateX(-50%);
   z-index: 1110;
   width: calc(100% - 3rem);
   max-width: 720px;
+}
+
+/* Ocultar panel de filtros cuando se abre el modal de búsqueda */
+body.search-open #place-filter-panel {
+  display: none !important;
 }
 
 /* Result cards list */
@@ -872,7 +983,7 @@ body.search-open .search-integrated-bottom {
   background: #ffffff;
   padding: 0.8rem;
   border-radius: 0.8rem;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
   cursor: pointer;
 }
 
@@ -888,7 +999,15 @@ body.search-open .search-integrated-bottom {
 
 /* small responsiveness */
 @media (max-width: 520px) {
-  body.search-open .map-search-bar .search-input-wrapper { top: 8%; }
-  body.search-open #place-filter-panel { top: 18%; max-width: 92%; }
-  .search-results-container { top: 36%; max-width: 92%; }
+  body.search-open .map-search-bar .search-input-wrapper {
+    top: 8%;
+  }
+  body.search-open #place-filter-panel {
+    top: 18%;
+    max-width: 92%;
+  }
+  .search-results-container {
+    top: 36%;
+    max-width: 92%;
+  }
 }

@@ -86,37 +86,24 @@
           <ul id="search-suggestions" class="search-suggestions search-suggestions--hidden"></ul>
 
           <button id="btn-open-place-filter" class="btn-chip" type="button">
-            <span class="chip-icon">🔎</span>
-            <span class="chip-text">Buscar lugares</span>
+            <span class="chip-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <g clip-path="url(#clip0_328_4044)">
+                  <path d="M11.9948 5.33079C11.9948 7.73842 9.4166 10.2813 8.40104 11.1916C8.28486 11.2803 8.14273 11.3284 7.99655 11.3284C7.85036 11.3284 7.70823 11.2803 7.59206 11.1916C6.57716 10.2813 3.99828 7.73842 3.99828 5.33079C3.99828 4.27038 4.41952 3.25341 5.16934 2.50359C5.91916 1.75376 6.93614 1.33252 7.99655 1.33252C9.05695 1.33252 10.0739 1.75376 10.8238 2.50359C11.5736 3.25341 11.9948 4.27038 11.9948 5.33079Z" stroke="#024260" stroke-width="1.33276" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M7.99654 6.66356C8.73261 6.66356 9.3293 6.06687 9.3293 5.3308C9.3293 4.59474 8.73261 3.99805 7.99654 3.99805C7.26048 3.99805 6.66379 4.59474 6.66379 5.3308C6.66379 6.06687 7.26048 6.66356 7.99654 6.66356Z" stroke="#024260" stroke-width="1.33276" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M5.80682 9.3291H3.33456C3.19484 9.32916 3.05867 9.37314 2.94531 9.45481C2.83194 9.53648 2.74712 9.65172 2.70283 9.78424L1.36741 13.7825C1.33393 13.8827 1.32474 13.9894 1.34059 14.0938C1.35644 14.1982 1.39688 14.2973 1.45858 14.3831C1.52028 14.4688 1.60147 14.5386 1.69545 14.5868C1.78943 14.6349 1.89352 14.6601 1.99913 14.6601H13.9939C14.0995 14.66 14.2035 14.6349 14.2974 14.5868C14.3913 14.5386 14.4725 14.4689 14.5341 14.3832C14.5958 14.2976 14.6363 14.1986 14.6522 14.0942C14.6681 13.9899 14.659 13.8833 14.6257 13.7832L13.2929 9.7849C13.2487 9.65216 13.1638 9.5367 13.0503 9.45489C12.9368 9.37308 12.8004 9.32907 12.6605 9.3291H10.1869" stroke="#024260" stroke-width="1.33276" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+                <defs>
+                  <clipPath id="clip0_328_4044">
+                    <rect width="15.9931" height="15.9931" fill="white"/>
+                  </clipPath>
+                </defs>
+              </svg>
+            </span>
+            <span class="chip-text">Buscar destino...</span>
           </button>
 
-          <!-- Panel de filtros de lugares y reportes (integrado dentro del form) -->
-          <div id="place-filter-panel" class="place-filter place-filter--hidden">
-            <h3 class="place-filter__title">Lugares</h3>
-
-            <div class="place-filter__group">
-              <p class="place-filter__subtitle">Categorías</p>
-              <button class="place-filter__chip" data-layer="hospitales">Hospitales</button>
-              <button class="place-filter__chip" data-layer="parques">Parques y plazas</button>
-              <button class="place-filter__chip" data-layer="transporte">Transporte</button>
-            </div>
-
-            <div class="place-filter__group">
-              <p class="place-filter__subtitle">Filtros</p>
-              <label class="place-filter__toggle">
-                <input type="checkbox" id="toggle-visible-accessible" checked />
-                <span>Ver accesibles</span>
-              </label>
-              <label class="place-filter__toggle">
-                <input type="checkbox" id="toggle-visible-warning" checked />
-                <span>Ver precaución</span>
-              </label>
-              <label class="place-filter__toggle">
-                <input type="checkbox" id="toggle-visible-barrier" checked />
-                <span>Ver barreras</span>
-              </label>
-            </div>
-          </div>
+          <!-- place-filter-panel removed from here and will be placed as a sibling to the map -->
 
           <!-- Panel inferior (movido dentro del form para mostrarse en la vista de búsqueda) -->
           <div class="map-bottom-panel search-integrated-bottom">
@@ -141,14 +128,63 @@
           <div id="search-results-container" class="search-results-container"></div>
         </form>
       </section>
+      <!-- place-filter-panel moved out of the form -->
+      <div id="place-filter-panel" class="place-filter place-filter--hidden">
+        <button id="place-filter-close" class="place-filter__close" aria-label="Cerrar panel">&times;</button>
+        <h3 class="place-filter__title">Lugares</h3>
+
+        <div class="place-filter__group">
+          <p class="place-filter__subtitle">Categorías</p>
+          <button class="place-filter__chip" data-layer="hospitales">Hospitales</button>
+          <button class="place-filter__chip" data-layer="parques">Parques y plazas</button>
+          <button class="place-filter__chip" data-layer="transporte">Transporte</button>
+        </div>
+
+        <div class="place-filter__group">
+          <p class="place-filter__subtitle">Filtros</p>
+          <label class="place-filter__toggle">
+            <input type="checkbox" id="toggle-visible-accessible" checked />
+            <span>Ver accesibles</span>
+          </label>
+          <label class="place-filter__toggle">
+            <input type="checkbox" id="toggle-visible-warning" checked />
+            <span>Ver precaución</span>
+          </label>
+          <label class="place-filter__toggle">
+            <input type="checkbox" id="toggle-visible-barrier" checked />
+            <span>Ver barreras</span>
+          </label>
+        </div>
+      </div>
+
       <!-- Contenedor del mapa -->
       <section class="map-wrapper">
         <div id="map-container"></div>
 
+        <!-- Controles a la izquierda (botón para desplegar filtros) -->
+        <div class="map-left-controls">
+          <button id="btn-toggle-place-filter" type="button" class="btn-circle" aria-label="Abrir filtros">
+            <span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 16 16" fill="none">
+              <path d="M6.66378 3.33203H1.99913" stroke="#024260" stroke-width="1.33276" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M7.99654 12.6611H1.99913" stroke="#024260" stroke-width="1.33276" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M9.3293 1.99902V4.66454" stroke="#024260" stroke-width="1.33276" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M10.662 11.3286V13.9941" stroke="#024260" stroke-width="1.33276" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M13.9939 7.99658H7.99654" stroke="#024260" stroke-width="1.33276" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M13.9939 12.6611H10.662" stroke="#024260" stroke-width="1.33276" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M13.9939 3.33203H9.3293" stroke="#024260" stroke-width="1.33276" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M5.33102 6.66357V9.32909" stroke="#024260" stroke-width="1.33276" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M5.33102 7.99658H1.99913" stroke="#024260" stroke-width="1.33276" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span>Filtros</span>
+          </button>
+        </div>
+
         <!-- Controles flotantes -->
         <div class="map-floating-controls">
           <button id="btn-zoom-in" type="button" class="btn-circle" aria-label="Acercar mapa">
-            +
+            + 
           </button>
           <button id="btn-zoom-out" type="button" class="btn-circle" aria-label="Alejar mapa">
             &minus;

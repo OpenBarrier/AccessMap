@@ -266,7 +266,7 @@
   position: absolute;
   top: 1.2rem;
   right: 1.2rem;
-  z-index: 1500;
+  z-index: 500;
 
   background: #ffffff;
   border-radius: 50%;
@@ -331,7 +331,7 @@
     top: 0.2rem;
     right: 2rem;
     margin: 0; 
-
+    z-index: 500;
 		width: 3rem;
   	height: 3rem;
   }

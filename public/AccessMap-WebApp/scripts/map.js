@@ -33,9 +33,15 @@
     var btnOpenPlaceFilter = document.getElementById("btn-open-place-filter");
     var placeFilterPanel = document.getElementById("place-filter-panel");
     var placeFilterChips = document.querySelectorAll(".place-filter__chip");
+    var btnTogglePlaceFilter = document.getElementById(
+      "btn-toggle-place-filter"
+    );
+    var placeFilterClose = document.getElementById("place-filter-close");
     var searchOverlay = document.getElementById("search-overlay");
     var searchOverlayClose = document.getElementById("search-overlay-close");
-    var searchResultsContainer = document.getElementById("search-results-container");
+    var searchResultsContainer = document.getElementById(
+      "search-results-container"
+    );
 
     // Modal de ruta
     var routeModal = document.getElementById("route-modal");
@@ -50,7 +56,10 @@
     var filterChips = document.querySelectorAll(".chip-filter");
 
     // ----- Mapa -----
-    var map = L.map("map-container").setView([-12.0464, -77.0428], 14);
+    var map = L.map("map-container", { zoomControl: false }).setView(
+      [-12.0464, -77.0428],
+      14
+    );
 
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,
@@ -746,7 +755,8 @@
         });
 
         // ocultar la lista tradicional de sugerencias
-        if (searchSuggestions) searchSuggestions.classList.add("search-suggestions--hidden");
+        if (searchSuggestions)
+          searchSuggestions.classList.add("search-suggestions--hidden");
         return;
       }
 
@@ -894,6 +904,16 @@
     // ----- Modal de ruta -----
     function openRouteModal() {
       if (!routeModal || !routeModalBackdrop) return;
+      // Close search overlay if it was open
+      if (document.body.classList.contains("search-open")) {
+        closeSearchModal();
+      }
+      // Close filter panel if it was open
+      if (document.body.classList.contains("place-filter-open")) {
+        document.body.classList.remove("place-filter-open");
+        if (placeFilterPanel)
+          placeFilterPanel.classList.add("place-filter--hidden");
+      }
       routeModal.classList.remove("route-modal--hidden");
       routeModalBackdrop.classList.remove("route-modal--hidden");
     }
@@ -1020,7 +1040,33 @@
 
     if (btnOpenPlaceFilter && placeFilterPanel) {
       btnOpenPlaceFilter.addEventListener("click", function () {
-        placeFilterPanel.classList.toggle("place-filter--hidden");
+        openSearchModal();
+      });
+    }
+
+    if (btnTogglePlaceFilter && placeFilterPanel) {
+      btnTogglePlaceFilter.addEventListener("click", function () {
+        var wasHidden = placeFilterPanel.classList.contains(
+          "place-filter--hidden"
+        );
+        if (wasHidden) {
+          // ensure we close the full-screen search overlay if it was open
+          if (document.body.classList.contains("search-open")) {
+            closeSearchModal();
+          }
+          placeFilterPanel.classList.remove("place-filter--hidden");
+          document.body.classList.add("place-filter-open");
+        } else {
+          placeFilterPanel.classList.add("place-filter--hidden");
+          document.body.classList.remove("place-filter-open");
+        }
+      });
+    }
+
+    if (placeFilterClose && placeFilterPanel) {
+      placeFilterClose.addEventListener("click", function () {
+        placeFilterPanel.classList.add("place-filter--hidden");
+        document.body.classList.remove("place-filter-open");
       });
     }
 
@@ -1044,7 +1090,12 @@
       // abrir búsqueda en pantalla completa al hacer click en el form (o en el input)
       searchForm.addEventListener("click", function (e) {
         // evitar abrir si se hace click en botones dentro del form que gestionamos por separado
-        if (e.target && (e.target.id === "btn-open-place-filter" || e.target.id === "search-overlay-close")) return;
+        if (
+          e.target &&
+          (e.target.id === "btn-open-place-filter" ||
+            e.target.id === "search-overlay-close")
+        )
+          return;
         openSearchModal();
       });
     }
@@ -1056,12 +1107,19 @@
     // Abrir/cerrar modal de búsqueda (overlay)
     function openSearchModal() {
       document.body.classList.add("search-open");
-      if (searchOverlay) searchOverlay.classList.remove("search-overlay--hidden");
+      if (searchOverlay)
+        searchOverlay.classList.remove("search-overlay--hidden");
       if (searchOverlayClose) searchOverlayClose.style.display = "block";
+      // Close place-filter panel if it was open
+      if (placeFilterPanel) {
+        placeFilterPanel.classList.add("place-filter--hidden");
+        document.body.classList.remove("place-filter-open");
+      }
       if (searchInput) {
         searchInput.focus();
         // disparar búsqueda inmediata si hay texto
-        if (searchInput.value && searchInput.value.trim().length >= 2) handleSearchInput();
+        if (searchInput.value && searchInput.value.trim().length >= 2)
+          handleSearchInput();
       }
     }
 
