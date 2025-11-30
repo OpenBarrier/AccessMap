@@ -11,7 +11,7 @@ Scenario Outline: E1: Recepción de alerta en tiempo real
     Y pregunta si el usuario desea <accion_usuario>
 
   Examples: Datos de entrada
-    | notificaciones        | reporte_obstaculo        | distancia |
+    | notificaciones        | reporte_obstaculo        | distancia   |
     | "activadas"           | "Rampa dañada"           | "50 metros" |
     | "activadas"           | "Bache profundo"         | "30 metros" |
     | "activadas"           | "Escalera sin rampa"     | "80 metros" |
@@ -21,8 +21,8 @@ Scenario Outline: E1: Recepción de alerta en tiempo real
     | alerta audible y visual                                        | accion_usuario|   
     | "alerta audible y banner visual: Rampa dañada, 50 metros"      | "no Recalcular" |
     | "alerta audible y banner visual: Bache profundo, 30 metros"    | "no Recalcular" |
-    | "alerta audible y banner visual: Escalera sin rampa, 80 metros"| "Recalcular" |
-    | "alerta audible y banner visual: Obstáculo en vía, 90 metros"  | "Recalcular" |
+    | "alerta audible y banner visual: Escalera sin rampa, 80 metros"| "Recalcular"    |
+    | "alerta audible y banner visual: Obstáculo en vía, 90 metros"  | "Recalcular"    |
 
 
 Scenario Outline: E2: Alerta de notificaciones desactivadas
@@ -33,7 +33,7 @@ Scenario Outline: E2: Alerta de notificaciones desactivadas
 
   Examples: Datos de entrada
     | permisos_notificacion |
-    | "desactivados"       |
+    | "desactivados"        |
   Examples: Datos de salida
     | mensaje_sistema                                                                                                       | 
     | "Notificaciones de Alerta Desactivadas. Actívalas en la configuración para recibir avisos de peligro en tiempo real." | 

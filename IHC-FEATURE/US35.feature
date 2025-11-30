@@ -16,12 +16,13 @@ Feature: US35: Filtrado por Accesibilidad Temporal
     | Reportes Urgentes (Últimas 24h)  |
 
   Examples: Datos de salida
-    | barreras_mostradas               |
+    | barreras_mostradas                               |
     | Solo barreras reportadas en las últimas 24 horas |
 
-  Scenario Outline: Análisis de actividad reciente (última semana)
+  Scenario Outline: E2: Análisis de actividad reciente (última semana)
 
-    Dado que el usuario desea conocer las tendencias de accesibilidad a corto plazo y está visualizando la pantalla del Mapa principal,
+    Dado que el usuario desea conocer las tendencias de accesibilidad a corto plazo 
+    Y está visualizando la pantalla del Mapa principal,
     Cuando el usuario accede a las opciones de Filtro del mapa y selecciona <filtro_urgente>,
     Entonces el Mapa se actualiza mostrando los iconos de las barreras reportadas en los últimos 7 días,
     Y oculta automáticamente los reportes no validados o que superen ese periodo <barreras_mostradas>.
