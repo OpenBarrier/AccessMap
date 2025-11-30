@@ -211,20 +211,42 @@ document.addEventListener("chatbot-ready", () => {
     let finalTranscript = "";
 
     recognition.onstart = () => {
-      recognizing = true;
-      micBtn.classList.add("chat-mic--listening");
-      finalTranscript = "";
-    };
+    recognizing = true;
+    micBtn.classList.add("chat-mic--listening");
+    finalTranscript = "";
+
+    hideProcessing();   
+    amShowListening();    
+    startSiriWave();
+    startVolumeMeter();  
+  };
+
 
     recognition.onend = () => {
-      recognizing = false;
-      micBtn.classList.remove("chat-mic--listening");
+    recognizing = false;
+    micBtn.classList.remove("chat-mic--listening");
 
-      if (finalTranscript.trim() !== "") {
+    amHideListening();  
+    showProcessing(); 
+    stopSiriWave(); 
+    stopVolumeMeter(); 
+    setTimeout(() => {
+        hideProcessing(); 
+    }, 800);
+
+    if (finalTranscript.trim() !== "") {
         input.value = finalTranscript;
         sendMessage();
-      }
-    };
+    }
+  };
+
+    recognition.onerror = () => {
+    amHideListening();
+    hideProcessing();
+    stopSiriWave(); 
+    stopVolumeMeter();
+  };
+
 
     recognition.onresult = (event) => {
       let interim = "";
@@ -502,3 +524,132 @@ function processFAQ(question) {
     });
   }
 });
+function amShowListening() {
+    const el = document.getElementById("amListening");
+    if (el) el.classList.remove("hidden");
+}
+
+function amHideListening() {
+    const el = document.getElementById("amListening");
+    if (el) el.classList.add("hidden");
+}
+function showProcessing() {
+  const el = document.getElementById("amProcessing");
+  if (el) el.classList.remove("hidden");
+}
+
+function hideProcessing() {
+  const el = document.getElementById("amProcessing");
+  if (el) el.classList.add("hidden");
+}
+let currentVolume = 0;
+let audioStream = null;
+let analyser = null;
+let audioDataArray = null;
+let audioContext = null;
+let volumeAnimationID = null;
+
+async function startVolumeMeter() {
+  try {
+    audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const source = audioContext.createMediaStreamSource(audioStream);
+
+    analyser = audioContext.createAnalyser();
+    analyser.fftSize = 256;
+
+    const bufferLength = analyser.frequencyBinCount;
+    audioDataArray = new Uint8Array(bufferLength);
+
+    source.connect(analyser);
+
+    animateVolumeWaves();
+  } catch (err) {
+    console.error("Error iniciando micrófono:", err);
+  }
+}
+
+function stopVolumeMeter() {
+  if (audioStream) {
+    audioStream.getTracks().forEach(track => track.stop());
+  }
+
+  if (audioContext) {
+    audioContext.close();
+  }
+
+  cancelAnimationFrame(volumeAnimationID);
+}
+function animateVolumeWaves() {
+  analyser.getByteFrequencyData(audioDataArray);
+
+  let sum = 0;
+  for (let i = 0; i < audioDataArray.length; i++) sum += audioDataArray[i];
+
+  const average = sum / audioDataArray.length;  // volumen promedio (0–255)
+  const volume = Math.min(average / 80, 1);     // normalizado 0–1
+  currentVolume = volume; 
+  // Aplicamos el volumen a cada onda
+  document.querySelectorAll(".am-wave-circle").forEach((circle, i) => {
+    const scale = 1 + volume * (1.5 + i * 0.2); // onda 1 más chica, 3 más grande
+    circle.style.transform = `scale(${scale})`;
+    circle.style.opacity = 0.5 + volume * 0.5;
+  });
+
+  volumeAnimationID = requestAnimationFrame(animateVolumeWaves);
+}
+let siriCtx = null;
+let siriCanvas = null;
+let siriAnimationID = null;
+let siriPhase = 0;
+
+function startSiriWave() {
+  siriCanvas = document.getElementById("siriCanvas");
+  if (!siriCanvas) return;
+
+  siriCanvas.width = siriCanvas.offsetWidth * window.devicePixelRatio;
+  siriCanvas.height = siriCanvas.offsetHeight * window.devicePixelRatio;
+
+  siriCtx = siriCanvas.getContext("2d");
+  siriCtx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+  siriAnimate();
+}
+
+function stopSiriWave() {
+  cancelAnimationFrame(siriAnimationID);
+}
+
+function siriAnimate() {
+  if (!siriCanvas || !siriCtx) return;   // ✔ seguridad
+
+  const w = siriCanvas.width / window.devicePixelRatio;
+  const h = siriCanvas.height / window.devicePixelRatio;
+
+  siriCtx.clearRect(0, 0, w, h);         // ✔ limpiar
+
+  const amplitude = 18 * currentVolume;
+  const frequency = 0.02;
+
+  siriCtx.beginPath();
+  siriCtx.moveTo(0, h / 2);
+
+  for (let x = 0; x < w; x++) {
+      const y = h / 2 + Math.sin(x * frequency + siriPhase) * amplitude;
+      siriCtx.lineTo(x, y);
+  }
+
+  const gradient = siriCtx.createLinearGradient(0, 0, w, 0);
+  gradient.addColorStop(0, "#05af43");
+  gradient.addColorStop(1, "#1bc97c");
+
+  siriCtx.strokeStyle = gradient;
+  siriCtx.lineWidth = 4;
+  siriCtx.lineCap = "round";
+  siriCtx.stroke();
+
+  siriPhase += 0.15;
+
+  siriAnimationID = requestAnimationFrame(siriAnimate);
+}
