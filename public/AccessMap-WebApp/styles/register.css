@@ -1,3 +1,10 @@
+.logo-registro {
+    width: 120px;   /* cámbialo a lo que quieras */
+    height: auto;   /* mantiene proporción */
+    display: block;
+    margin: 0 auto 1rem; /* lo centra */
+}
+
 .registro-container {
     min-height: 100vh;
     padding: 1.5rem;
