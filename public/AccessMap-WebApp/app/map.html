@@ -13,131 +13,107 @@
 
   <!-- Estilos del mapa -->
 
-    <link rel="stylesheet" href="../styles/main.css">
-    <link rel="stylesheet" href="../styles/layout.css">
-    <link rel="stylesheet" href="../styles/reset.css">
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/layout.css">
+  <link rel="stylesheet" href="../styles/reset.css">
 
   <link rel="stylesheet" href="../styles/map.css">
-  
+
 </head>
 
 <body>
-    <!-- ========= CABECERA / NAVEGACIÓN ========= -->
-		    <!-- SIDEBAR -->
-    <aside id="sidebar" class="sidebar">
-        <div class="sidebar-brand">AccessMap</div>
+  <!-- ========= CABECERA / NAVEGACIÓN ========= -->
+  <!-- SIDEBAR -->
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-brand">AccessMap</div>
 
-        <nav class="sidebar-nav">
-            <a href="home.html" class="nav-link" data-lang="navHome">Inicio</a>
-            <a href="map.html" class="nav-link active" data-lang="navMap">Mapa</a>
-            <a href="report.html" class="nav-link" data-lang="navReport">Reportar</a>
-            <a href="community.html" class="nav-link" data-lang="navCommunity">Comunidad</a>
-            <a href="profile.html" class="nav-link" data-lang="navProfile">Perfil</a>
+    <nav class="sidebar-nav">
+      <a href="home.html" class="nav-link" data-lang="navHome">Inicio</a>
+      <a href="map.html" class="nav-link active" data-lang="navMap">Mapa</a>
+      <a href="report.html" class="nav-link" data-lang="navReport">Reportar</a>
+      <a href="community.html" class="nav-link" data-lang="navCommunity">Comunidad</a>
+      <a href="profile.html" class="nav-link" data-lang="navProfile">Perfil</a>
 
-            <a href="../index.html" class="nav-link" style="margin-top: auto; color:#e03737;" data-lang="logout">
-                Cerrar sesión
-            </a>
-        </nav>
-    </aside>
+      <a href="../index.html" class="nav-link" style="margin-top: auto; color:#e03737;" data-lang="logout">
+        Cerrar sesión
+      </a>
+    </nav>
+  </aside>
 
 
-    <div id="overlay" class="overlay" aria-hidden="true"></div>
+  <div id="overlay" class="overlay" aria-hidden="true"></div>
 
-    <header class="site-header app-header">
-      <div class="dashboard-header">
-      	<h1 id="home-title" class="dashboard-title">Mapa</h1>
+  <header class="site-header app-header">
+    <div class="dashboard-header">
+      <h1 id="home-title" class="dashboard-title">Mapa</h1>
+    </div>
+    <div class="container header-inner">
+      <span class="notification-btn">🔔</span>
+    </div>
+    </div>
+  </header>
+
+  <!-- Contenido principal -->
+  <main class="main-content">
+
+    <!--PARTE DE MANUEL, SUJETA A CANVIOS, SI VAS A ELIMINAR AVISAME-->
+    <div id="notification-warning" class="alert-banner alert-banner--warning route-info--hidden">
+      ⚠️ Notificaciones desactivadas. Actívalas para recibir avisos de peligro.
+    </div>
+
+    <div id="obstacle-alert" class="alert-banner alert-banner--danger route-info--hidden">
+      <div class="alert-content">
+        <span>🚨 <strong>Peligro a 80m:</strong> Zanja abierta.</span>
+        <button id="btn-recalculate" class="btn-mini btn-mini--white">Recalcular</button>
       </div>
-			<div class="container header-inner">
-        <span class="notification-btn">🔔</span>
-      </div>
-      </div>
-    </header>
+    </div>
+    <!--PARTE DE MANUEL, SUJETA A CANVIOS, SI VAS A ELIMINAR AVISAME-->
 
-    <!-- Contenido principal -->
-    <main class="main-content">
 
-      <!--PARTE DE MANUEL, SUJETA A CANVIOS, SI VAS A ELIMINAR AVISAME-->
-      <div id="notification-warning" class="alert-banner alert-banner--warning route-info--hidden">
-        ⚠️ Notificaciones desactivadas. Actívalas para recibir avisos de peligro.
-      </div>
-
-      <div id="obstacle-alert" class="alert-banner alert-banner--danger route-info--hidden">
-        <div class="alert-content">
-          <span>🚨 <strong>Peligro a 80m:</strong> Zanja abierta.</span>
-          <button id="btn-recalculate" class="btn-mini btn-mini--white">Recalcular</button>
+    <!-- Barra de búsqueda / chips -->
+    <section class="map-search-bar">
+      <form id="search-form" class="search-form">
+        <div class="search-input-wrapper">
+          <span class="search-icon">&#128269;</span>
+          <input id="search-input" type="text" placeholder="Buscar destino..." autocomplete="off" />
         </div>
-      </div>
-      <!--PARTE DE MANUEL, SUJETA A CANVIOS, SI VAS A ELIMINAR AVISAME-->
 
+        <!-- Overlay / full-screen search (hidden por defecto) -->
+        <div id="search-overlay" class="search-overlay search-overlay--hidden" aria-hidden="true"></div>
+        <button id="search-overlay-close" class="search-overlay__close" type="button"
+          aria-label="Cerrar búsqueda">&times;</button>
 
-      <!-- Barra de búsqueda / chips -->
-      <section class="map-search-bar">
-        <form id="search-form" class="search-form">
-          <div class="search-input-wrapper">
-            <span class="search-icon">&#128269;</span>
-            <input id="search-input" type="text" placeholder="Buscar destino..." autocomplete="off" />
-          </div>
-        </form>
-
-        <!-- Sugerencias de búsqueda -->
+        <!-- Sugerencias / Resultados (cuando se abre la búsqueda se renderiza aquí) -->
         <ul id="search-suggestions" class="search-suggestions search-suggestions--hidden"></ul>
 
         <button id="btn-open-place-filter" class="btn-chip" type="button">
-          <span class="chip-icon">🔎</span>
-          <span class="chip-text">Buscar lugares</span>
+          <span class="chip-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <g clip-path="url(#clip0_328_4044)">
+                <path
+                  d="M11.9948 5.33079C11.9948 7.73842 9.4166 10.2813 8.40104 11.1916C8.28486 11.2803 8.14273 11.3284 7.99655 11.3284C7.85036 11.3284 7.70823 11.2803 7.59206 11.1916C6.57716 10.2813 3.99828 7.73842 3.99828 5.33079C3.99828 4.27038 4.41952 3.25341 5.16934 2.50359C5.91916 1.75376 6.93614 1.33252 7.99655 1.33252C9.05695 1.33252 10.0739 1.75376 10.8238 2.50359C11.5736 3.25341 11.9948 4.27038 11.9948 5.33079Z"
+                  stroke="#024260" stroke-width="1.33276" stroke-linecap="round" stroke-linejoin="round" />
+                <path
+                  d="M7.99654 6.66356C8.73261 6.66356 9.3293 6.06687 9.3293 5.3308C9.3293 4.59474 8.73261 3.99805 7.99654 3.99805C7.26048 3.99805 6.66379 4.59474 6.66379 5.3308C6.66379 6.06687 7.26048 6.66356 7.99654 6.66356Z"
+                  stroke="#024260" stroke-width="1.33276" stroke-linecap="round" stroke-linejoin="round" />
+                <path
+                  d="M5.80682 9.3291H3.33456C3.19484 9.32916 3.05867 9.37314 2.94531 9.45481C2.83194 9.53648 2.74712 9.65172 2.70283 9.78424L1.36741 13.7825C1.33393 13.8827 1.32474 13.9894 1.34059 14.0938C1.35644 14.1982 1.39688 14.2973 1.45858 14.3831C1.52028 14.4688 1.60147 14.5386 1.69545 14.5868C1.78943 14.6349 1.89352 14.6601 1.99913 14.6601H13.9939C14.0995 14.66 14.2035 14.6349 14.2974 14.5868C14.3913 14.5386 14.4725 14.4689 14.5341 14.3832C14.5958 14.2976 14.6363 14.1986 14.6522 14.0942C14.6681 13.9899 14.659 13.8833 14.6257 13.7832L13.2929 9.7849C13.2487 9.65216 13.1638 9.5367 13.0503 9.45489C12.9368 9.37308 12.8004 9.32907 12.6605 9.3291H10.1869"
+                  stroke="#024260" stroke-width="1.33276" stroke-linecap="round" stroke-linejoin="round" />
+              </g>
+              <defs>
+                <clipPath id="clip0_328_4044">
+                  <rect width="15.9931" height="15.9931" fill="white" />
+                </clipPath>
+              </defs>
+            </svg>
+          </span>
+          <span class="chip-text">Buscar destino...</span>
         </button>
 
-        <!-- Panel de filtros de lugares y reportes -->
-        <div id="place-filter-panel" class="place-filter place-filter--hidden">
-          <h3 class="place-filter__title">Lugares</h3>
+        <!-- place-filter-panel removed from here and will be placed as a sibling to the map -->
 
-          <div class="place-filter__group">
-            <p class="place-filter__subtitle">Categorías</p>
-            <button class="place-filter__chip" data-layer="hospitales">Hospitales</button>
-            <button class="place-filter__chip" data-layer="parques">Parques y plazas</button>
-            <button class="place-filter__chip" data-layer="transporte">Transporte</button>
-          </div>
-
-          <div class="place-filter__group">
-            <p class="place-filter__subtitle">Filtros</p>
-            <label class="place-filter__toggle">
-              <input type="checkbox" id="toggle-visible-accessible" checked />
-              <span>Ver accesibles</span>
-            </label>
-            <label class="place-filter__toggle">
-              <input type="checkbox" id="toggle-visible-warning" checked />
-              <span>Ver precaución</span>
-            </label>
-            <label class="place-filter__toggle">
-              <input type="checkbox" id="toggle-visible-barrier" checked />
-              <span>Ver barreras</span>
-            </label>
-          </div>
-        </div>
-      </section>
-      <!-- Contenedor del mapa -->
-      <section class="map-wrapper">
-        <div id="map-container"></div>
-
-        <!-- Controles flotantes -->
-        <div class="map-floating-controls">
-          <button id="btn-zoom-in" type="button" class="btn-circle" aria-label="Acercar mapa">
-            +
-          </button>
-          <button id="btn-zoom-out" type="button" class="btn-circle" aria-label="Alejar mapa">
-            &minus;
-          </button>
-          <button id="btn-center-cation" type="button" class="btn-circle" aria-label="Ir a mi ubicación">
-            &#9673;
-          </button>
-          <a href="report.html" class="btn-circle btn-circle--alert" aria-label="Reportar barrera">
-          &#9888;
-        </a>
-          
-        </div>
-
-        <!-- Panel inferior -->
-        <div class="map-bottom-panel">
+        <!-- Panel inferior (movido dentro del form para mostrarse en la vista de búsqueda) -->
+        <div class="map-bottom-panel search-integrated-bottom">
           <div class="bottom-card">
             <div class="bottom-card__top-row">
               <div class="toggle-accessible">
@@ -152,140 +128,308 @@
                 Planificar ruta
               </button>
             </div>
+          </div>
+        </div>
 
-            <div id="route-info" class="route-info route-info--hidden">
-              <div class="route-info__status">
-                <span class="tag tag-verde">Ruta A · Recomendada</span>
-              </div>
-              <div class="route-info__details">
-                <div class="route-info__metric">
-                  <span class="route-info__label">Duración</span>
-                  <span id="route-duration" class="route-info__value">–</span>
+        <!-- Contenedor donde se renderizarán las cards de resultados de búsqueda -->
+        <div id="search-results-container" class="search-results-container"></div>
+      </form>
+    </section>
+      <!-- place-filter-panel: Modal deslizable desde inferior -->
+      <div id="place-filter-panel" class="place-filter place-filter--hidden">
+        <div class="place-filter__backdrop"></div>
+        
+        <div class="place-filter__modal">
+          <!-- Encabezado -->
+          <div class="place-filter__header">
+            <div>
+              <h2 class="place-filter__title">Filtros del Mapa</h2>
+              <p class="place-filter__active-count" id="place-filter-active-count">4 filtros activos</p>
+            </div>
+            <button id="place-filter-close" class="place-filter__close" aria-label="Cerrar panel">&times;</button>
+          </div>
+
+          <!-- Contenedor scrollable -->
+          <div class="place-filter__content">
+            
+            <!-- Sección 1: Filtros Rápidos -->
+            <div class="place-filter__section">
+              <h3 class="place-filter__section-title">Filtros Rápidos</h3>
+              
+              <div class="place-filter__quick-card place-filter__quick-card--urgent" id="quick-filter-urgent" role="checkbox" aria-checked="false" tabindex="0">
+                <div class="place-filter__quick-icon place-filter__quick-icon--red"></div>
+                <div class="place-filter__quick-content">
+                  <h4 class="place-filter__quick-title">Reportes Urgentes (Últimas 24h)</h4>
+                  <p class="place-filter__quick-desc">Resalta barreras reportadas en las últimas 24 horas</p>
                 </div>
-                <div class="route-info__metric">
-                  <span class="route-info__label">Distancia</span>
-                  <span id="route-distance" class="route-info__value">–</span>
+              </div>
+
+              <div class="place-filter__quick-card place-filter__quick-card--recent" id="quick-filter-recent" role="checkbox" aria-checked="true" tabindex="0">
+                <div class="place-filter__quick-icon place-filter__quick-icon--yellow"></div>
+                <div class="place-filter__quick-content">
+                  <h4 class="place-filter__quick-title">Actividad Reciente (Última Semana)</h4>
+                  <p class="place-filter__quick-desc">Muestra reportes de los últimos 7 días</p>
                 </div>
               </div>
             </div>
+            <hr>
+            <!-- Sección 2: Tipos de Barreras -->
+            <div class="place-filter__section">
+              <div class="place-filter__section-header">
+                <h3 class="place-filter__section-title">Tipos de Barreras</h3>
+                <button class="place-filter__show-all" id="place-filter-show-all" type="button">Mostrar todo</button>
+              </div>
+
+              <!-- Rampas Dañadas -->
+              <label class="place-filter__barrier-item">
+                <div class="place-filter__barrier-dot place-filter__barrier-dot--red"></div>
+                <span class="place-filter__barrier-label">Rampas Dañadas</span>
+                <div class="switch">
+                  <input type="checkbox" class="place-filter-barrier" id="barrier-rampas" checked />
+                  <span class="switch__slider"></span>
+                </div>
+              </label>
+
+              <!-- Obstrucciones en Vía -->
+              <label class="place-filter__barrier-item">
+                <div class="place-filter__barrier-dot place-filter__barrier-dot--orange"></div>
+                <span class="place-filter__barrier-label">Obstrucciones en Vía</span>
+                <div class="switch">
+                  <input type="checkbox" class="place-filter-barrier" id="barrier-obstrucciones" />
+                  <span class="switch__slider"></span>
+                </div>
+              </label>
+
+              <!-- Baches -->
+              <label class="place-filter__barrier-item">
+                <div class="place-filter__barrier-dot place-filter__barrier-dot--yellow"></div>
+                <span class="place-filter__barrier-label">Baches</span>
+                <div class="switch">
+                  <input type="checkbox" class="place-filter-barrier" id="barrier-baches" checked />
+                  <span class="switch__slider"></span>
+                </div>
+              </label>
+
+              <!-- Aceras Estrechas -->
+              <label class="place-filter__barrier-item">
+                <div class="place-filter__barrier-dot place-filter__barrier-dot--red"></div>
+                <span class="place-filter__barrier-label">Aceras Estrechas</span>
+                <div class="switch">
+                  <input type="checkbox" class="place-filter-barrier" id="barrier-aceras" />
+                  <span class="switch__slider"></span>
+                </div>
+              </label>
+
+              <!-- Escaleras sin Rampa -->
+              <label class="place-filter__barrier-item">
+                <div class="place-filter__barrier-dot place-filter__barrier-dot--red"></div>
+                <span class="place-filter__barrier-label">Escaleras sin Rampa</span>
+                <div class="switch">
+                  <input type="checkbox" class="place-filter-barrier" id="barrier-escaleras" checked />
+                  <span class="switch__slider"></span>
+                </div>
+              </label>
+            </div>
+            <hr>
+            <!-- Sección 3: Capa Especial -->
+            <div class="place-filter__section">
+              <div class="place-filter__special-card" id="critical-zones-card">
+                <div class="place-filter__special-icon"></div>
+                <div class="place-filter__special-content">
+                    <h4 class="place-filter__special-title">Mostrar Zonas Críticas</h4>
+                    <p class="place-filter__special-desc">Áreas con alta concentración de barreras (3+ reportes en un radio de 100m). Se visualizan como zonas sombreadas en el mapa.</p>
+                  </div>
+                  <div class="switch">
+                    <input type="checkbox" class="place-filter-special" id="critical-zones-toggle" checked/>
+                    <span class="switch__slider"></span>
+                  </div>
+              </div>
+            </div>
+
           </div>
         </div>
+      </div>    <!-- Contenedor del mapa -->
+    <section class="map-wrapper">
+      <div id="map-container"></div>
 
-        <!-- Toast -->
-        <div id="map-toast" class="map-toast map-toast--hidden">
-          <span id="map-toast-text"></span>
+      <!-- Controles a la izquierda (botón para desplegar filtros) -->
+      <div class="map-left-controls">
+        <button id="btn-toggle-place-filter" type="button" class="btn-circle" aria-label="Abrir filtros">
+          <span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 16 16" fill="none">
+              <path d="M6.66378 3.33203H1.99913" stroke="#024260" stroke-width="1.33276" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path d="M7.99654 12.6611H1.99913" stroke="#024260" stroke-width="1.33276" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path d="M9.3293 1.99902V4.66454" stroke="#024260" stroke-width="1.33276" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path d="M10.662 11.3286V13.9941" stroke="#024260" stroke-width="1.33276" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path d="M13.9939 7.99658H7.99654" stroke="#024260" stroke-width="1.33276" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path d="M13.9939 12.6611H10.662" stroke="#024260" stroke-width="1.33276" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path d="M13.9939 3.33203H9.3293" stroke="#024260" stroke-width="1.33276" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path d="M5.33102 6.66357V9.32909" stroke="#024260" stroke-width="1.33276" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path d="M5.33102 7.99658H1.99913" stroke="#024260" stroke-width="1.33276" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </span>
+          <span>Filtros</span>
+        </button>
+      </div>
+
+      <!-- Controles flotantes -->
+      <div class="map-floating-controls">
+        <button id="btn-zoom-in" type="button" class="btn-circle" aria-label="Acercar mapa">
+          +
+        </button>
+        <button id="btn-zoom-out" type="button" class="btn-circle" aria-label="Alejar mapa">
+          &minus;
+        </button>
+        <button id="btn-center-cation" type="button" class="btn-circle" aria-label="Ir a mi ubicación">
+          &#9673;
+        </button>
+        <a href="report.html" class="btn-circle btn-circle--alert" aria-label="Reportar barrera">
+          &#9888;
+        </a>
+
+      </div>
+
+      <!-- Información de ruta (se mantiene en el mapa principal) -->
+      <div id="route-info" class="route-info route-info--hidden">
+        <div class="route-info__status">
+          <span class="tag tag-verde">Ruta A · Recomendada</span>
+        </div>
+        <div class="route-info__details">
+          <div class="route-info__metric">
+            <span class="route-info__label">Duración</span>
+            <span id="route-duration" class="route-info__value">–</span>
+          </div>
+          <div class="route-info__metric">
+            <span class="route-info__label">Distancia</span>
+            <span id="route-distance" class="route-info__value">–</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Toast -->
+      <div id="map-toast" class="map-toast map-toast--hidden">
+        <span id="map-toast-text"></span>
+      </div>
+
+      <!-- BACKDROP del modal de ruta -->
+      <div id="route-modal-backdrop" class="route-modal-backdrop route-modal--hidden"></div>
+
+      <!-- MODAL / Bottom sheet de planificación de ruta -->
+      <div id="route-modal" class="route-modal route-modal--hidden">
+        <div class="route-modal__header">
+          <h2 class="route-modal__title">Planificación de ruta</h2>
+          <button id="route-modal-close" class="btn-icon-map route-modal__close" aria-label="Cerrar">
+            &times;
+          </button>
         </div>
 
-        <!-- BACKDROP del modal de ruta -->
-        <div id="route-modal-backdrop" class="route-modal-backdrop route-modal--hidden"></div>
-
-        <!-- MODAL / Bottom sheet de planificación de ruta -->
-        <div id="route-modal" class="route-modal route-modal--hidden">
-          <div class="route-modal__header">
-            <h2 class="route-modal__title">Planificación de ruta</h2>
-            <button id="route-modal-close" class="btn-icon-map route-modal__close" aria-label="Cerrar">
-              &times;
-            </button>
+        <div class="route-modal__body">
+          <div class="route-field">
+            <label for="route-origin-input" class="route-field__label">Origen</label>
+            <div class="route-field__row">
+              <input id="route-origin-input" type="text" placeholder="Mi ubicación actual o dirección" />
+              <button id="btn-pick-origin" type="button" class="btn-mini" aria-label="Seleccionar origen en el mapa">
+                Mapa
+              </button>
+            </div>
           </div>
 
-          <div class="route-modal__body">
+          <div class="route-field">
+            <label for="route-dest-input" class="route-field__label">Destino</label>
+            <div class="route-field__row">
+              <input id="route-dest-input" type="text" placeholder="Buscar destino o evento" />
+              <button id="btn-pick-destination" type="button" class="btn-mini"
+                aria-label="Seleccionar destino en el mapa">
+                Mapa
+              </button>
+            </div>
+          </div>
+
+          <div class="route-filters">
+            <p class="route-filters__title">Filtros de ruta</p>
+            <div class="route-filters__chips">
+              <button type="button" class="chip-filter" data-filter="ramps">
+                Rutas con rampas verificadas
+              </button>
+              <button type="button" class="chip-filter" data-filter="lighting">
+                Priorizar iluminación
+              </button>
+              <button type="button" class="chip-filter" data-filter="avoid-barriers">
+                Evitar barreras reportadas
+              </button>
+            </div>
+          </div>
+          <!--PARTE DE MANUEL, SUJETA A CANVIOS, ANTES DE ELIMINAR PREGUNTARME-->
+          <div id="route-cards-container" class="route-cards-list">
+          </div>
+
+          <p id="route-error-msg" class="route-msg-error route-info--hidden">
+            ⚠️ Rutas generadas sin datos de seguridad por horario.
+          </p>
+          <!--PARTE DE MANUEL, SUJETA A CANVIOS, ANTES DE ELIMINAR PREGUNTARME-->
+        </div>
+
+        <div class="route-modal__footer">
+          <button id="btn-start-route" type="button" class="btn-primary">
+            Iniciar navegación
+          </button>
+        </div>
+      </div>
+
+      <!--SUJETO A CAMBIOS, PARTE DE MANUEL-->
+      <div id="report-modal" class="route-modal route-modal--hidden">
+        <div class="route-modal__header">
+          <h2 class="route-modal__title">Nuevo Reporte</h2>
+          <button id="report-modal-close" class="btn-icon-map route-modal__close" aria-label="Cerrar">&times;</button>
+        </div>
+        <div class="route-modal__body">
+          <form id="form-reporte">
             <div class="route-field">
-              <label for="route-origin-input" class="route-field__label">Origen</label>
-              <div class="route-field__row">
-                <input id="route-origin-input" type="text" placeholder="Mi ubicación actual o dirección" />
-                <button id="btn-pick-origin" type="button" class="btn-mini" aria-label="Seleccionar origen en el mapa">
-                  Mapa
-                </button>
-              </div>
+              <label class="route-field__label">Tipo de obstáculo</label>
+              <select id="report-type" class="route-field__input browser-default">
+                <option value="">Seleccionar...</option>
+                <option value="bache">Bache / Hueco</option>
+                <option value="obra">Obra en construcción</option>
+                <option value="iluminacion">Falta de iluminación</option>
+              </select>
             </div>
-
             <div class="route-field">
-              <label for="route-dest-input" class="route-field__label">Destino</label>
-              <div class="route-field__row">
-                <input id="route-dest-input" type="text" placeholder="Buscar destino o evento" />
-                <button id="btn-pick-destination" type="button" class="btn-mini"
-                  aria-label="Seleccionar destino en el mapa">
-                  Mapa
-                </button>
-              </div>
+              <label class="route-field__label">Comentario</label>
+              <textarea id="report-comment" rows="3" class="route-field__input"
+                placeholder="Describe el problema..."></textarea>
             </div>
-
-            <div class="route-filters">
-              <p class="route-filters__title">Filtros de ruta</p>
-              <div class="route-filters__chips">
-                <button type="button" class="chip-filter" data-filter="ramps">
-                  Rutas con rampas verificadas
-                </button>
-                <button type="button" class="chip-filter" data-filter="lighting">
-                  Priorizar iluminación
-                </button>
-                <button type="button" class="chip-filter" data-filter="avoid-barriers">
-                  Evitar barreras reportadas
-                </button>
-              </div>
+            <div class="route-field">
+              <button type="button" id="btn-foto" class="btn-outline btn-full-width">📷 Adjuntar Foto</button>
+              <small id="foto-status" class="status-text">Sin foto adjunta</small>
             </div>
-            <!--PARTE DE MANUEL, SUJETA A CANVIOS, ANTES DE ELIMINAR PREGUNTARME-->
-            <div id="route-cards-container" class="route-cards-list">
+            <div class="route-modal__footer">
+              <button type="submit" class="btn-primary">Enviar Reporte</button>
             </div>
-
-            <p id="route-error-msg" class="route-msg-error route-info--hidden">
-              ⚠️ Rutas generadas sin datos de seguridad por horario.
-            </p>
-            <!--PARTE DE MANUEL, SUJETA A CANVIOS, ANTES DE ELIMINAR PREGUNTARME-->
-          </div>
-
-          <div class="route-modal__footer">
-            <button id="btn-start-route" type="button" class="btn-primary">
-              Iniciar navegación
-            </button>
-          </div>
+          </form>
         </div>
-
-        <!--SUJETO A CAMBIOS, PARTE DE MANUEL-->
-        <div id="report-modal" class="route-modal route-modal--hidden">
-          <div class="route-modal__header">
-            <h2 class="route-modal__title">Nuevo Reporte</h2>
-            <button id="report-modal-close" class="btn-icon-map route-modal__close" aria-label="Cerrar">&times;</button>
-          </div>
-          <div class="route-modal__body">
-            <form id="form-reporte">
-              <div class="route-field">
-                <label class="route-field__label">Tipo de obstáculo</label>
-                <select id="report-type" class="route-field__input browser-default">
-                  <option value="">Seleccionar...</option>
-                  <option value="bache">Bache / Hueco</option>
-                  <option value="obra">Obra en construcción</option>
-                  <option value="iluminacion">Falta de iluminación</option>
-                </select>
-              </div>
-              <div class="route-field">
-                <label class="route-field__label">Comentario</label>
-                <textarea id="report-comment" rows="3" class="route-field__input"
-                  placeholder="Describe el problema..."></textarea>
-              </div>
-              <div class="route-field">
-                <button type="button" id="btn-foto" class="btn-outline btn-full-width">📷 Adjuntar Foto</button>
-                <small id="foto-status" class="status-text">Sin foto adjunta</small>
-              </div>
-              <div class="route-modal__footer">
-                <button type="submit" class="btn-primary">Enviar Reporte</button>
-              </div>
-            </form>
-          </div>
-        </div>
-        <!--SUJETO A CAMBIOS, PARTE DE MANUEL-->
-      </section>
-    </main>
+      </div>
+      <!--SUJETO A CAMBIOS, PARTE DE MANUEL-->
+    </section>
+  </main>
   </div>
 
-  		<!-- NAV inferior (solo mobile) -->
-		<nav class="bottom-nav" aria-label="Navegación inferior">
-			<a href="../app/home.html" class="bottom-link">🏠<span>Inicio</span></a>
-			<a href="../app/map.html" class="bottom-link">🗺️<span>Mapa</span></a>
-			<a href="#report-view" class="bottom-link main-action">＋</a>
-			<a href="../app/community.html" class="bottom-link">👥<span>Comunidad</span></a>
-			<a href="../app/profile.html" class="bottom-link">👤<span>Perfil</span></a>
-		</nav>
+  <!-- NAV inferior (solo mobile) -->
+  <nav class="bottom-nav" aria-label="Navegación inferior">
+    <a href="../app/home.html" class="bottom-link">🏠<span>Inicio</span></a>
+    <a href="../app/map.html" class="bottom-link">🗺️<span>Mapa</span></a>
+    <a href="#report-view" class="bottom-link main-action">＋</a>
+    <a href="../app/community.html" class="bottom-link">👥<span>Comunidad</span></a>
+    <a href="../app/profile.html" class="bottom-link">👤<span>Perfil</span></a>
+  </nav>
 
 
   <!-- Scripts Leaflet -->
@@ -300,32 +444,32 @@
   <script src="../scripts/navigation.js"></script>
   <script src="../scripts/main.js"></script>
 </body>
-   <!-- SNACKBAR GLOBAL -->
-    <div id="snackbar" class="snackbar"></div>
+<!-- SNACKBAR GLOBAL -->
+<div id="snackbar" class="snackbar"></div>
 
-    <!-- TAB BAR (SOLO MÓVIL) -->
-    <nav class="bottom-nav">
-        <a href="home.html" class="bottom-link">
-            <span>🏠</span><span data-lang="navHome">Inicio</span>
-        </a>
+<!-- TAB BAR (SOLO MÓVIL) -->
+<nav class="bottom-nav">
+  <a href="home.html" class="bottom-link">
+    <span>🏠</span><span data-lang="navHome">Inicio</span>
+  </a>
 
-        <a href="map.html" class="bottom-link">
-            <span>🗺️</span><span data-lang="navMap">Mapa</span>
-        </a>
+  <a href="map.html" class="bottom-link">
+    <span>🗺️</span><span data-lang="navMap">Mapa</span>
+  </a>
 
-        <a href="report.html" class="main-action">＋</a>
+  <a href="report.html" class="main-action">＋</a>
 
-        <a href="community.html" class="bottom-link">
-            <span>👥</span><span data-lang="navCommunity">Comunidad</span>
-        </a>
+  <a href="community.html" class="bottom-link">
+    <span>👥</span><span data-lang="navCommunity">Comunidad</span>
+  </a>
 
-        <a href="profile.html" class="bottom-link">
-            <span>👤</span><span data-lang="navProfile">Perfil</span>
-        </a>
-    </nav>
-    
-    <!-- Scripts -->
-    <script src="../scripts/main.js"></script>
-    <script src="../scripts/report.js"></script>
+  <a href="profile.html" class="bottom-link">
+    <span>👤</span><span data-lang="navProfile">Perfil</span>
+  </a>
+</nav>
+
+<!-- Scripts -->
+<script src="../scripts/main.js"></script>
+<script src="../scripts/report.js"></script>
 
 </html>
