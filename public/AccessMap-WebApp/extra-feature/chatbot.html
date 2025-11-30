@@ -1,0 +1,45 @@
+<div class="am-chatbot">
+
+    <button id="amChatToggle" class="am-chatbot-toggle">
+        💬
+    </button>
+
+    <div id="amChatWindow" class="am-chatbot-window" aria-hidden="true">
+        
+        <div class="am-chatbot-header">
+            <div class="am-chatbot-header-left">
+                <div class="am-chatbot-avatar">💬</div>
+                <div>
+                    <div class="am-chatbot-title">AccessMap – Asistente</div>
+                    <div class="am-chatbot-subtitle">Te ayudo con dudas rápidas ✨</div>
+                </div>
+            </div>
+            <button id="amChatSettings" class="am-chatbot-settings">⚙</button>
+
+            <button id="amChatClose" class="am-chatbot-close">✕</button>
+        </div>
+
+        <div id="amChatBody" class="am-chatbot-body">
+        </div>
+
+        <form id="amChatForm" class="am-chatbot-input-area">
+            <input id="amChatInput" class="am-chatbot-input" type="text" placeholder="Escribe tu mensaje..." autocomplete="off">
+
+            <button id="amChatMic" type="button" class="am-chatbot-mic">🎤</button>
+
+            <button id="amChatSend" type="submit" class="am-chatbot-send hidden">Enviar</button>
+        </form>
+
+    </div>
+
+    <!-- MINI MENÚ DE OPCIONES (New Chat / Cancelar) -->
+<div id="amChatMenu" class="am-chatbot-menu">
+  <div class="am-chatbot-menu-option" id="amNewChat">
+    🆕 Nueva conversación
+  </div>
+
+  <div class="am-chatbot-menu-option am-chatbot-menu-cancel" id="amCancelMenu">
+    ✖ Cancelar
+  </div>
+</div>
+</div>

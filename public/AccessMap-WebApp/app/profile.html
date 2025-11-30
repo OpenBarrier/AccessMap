@@ -5,9 +5,9 @@
     <title data-lang="titleProfile">AccessMap – Perfil</title>
 
     <!-- Estilos globales -->
-    <link rel="stylesheet" href="../styles/reset.css" />
-    <link rel="stylesheet" href="../styles/main.css" />
     <link rel="stylesheet" href="../styles/layout.css" />
+    <link rel="stylesheet" href="../styles/main.css" />
+
 
     <!-- Estilos propios del módulo Perfil -->
     <link rel="stylesheet" href="../styles/profile.css" />
@@ -32,7 +32,8 @@
         </nav>
     </aside>
 
-    <main class="main-content">
+    <main class="page-container profile-page">
+
 
         <!-- PERFIL PRINCIPAL -->
         <section id="view-profile" class="view view--active">
@@ -390,60 +391,59 @@
             </div>
         </section>
 
- <!-- VISTA: ACCESIBILIDAD COMPLETA CONTAINER -->
-<section id="view-accessibility" class="view">
-    <div class="profile-container">
+        <!-- VISTA: ACCESIBILIDAD COMPLETA CONTAINER -->
+        <section id="view-accessibility" class="view">
+            <div class="profile-container">
 
-        <header class="subheader">
-            <button type="button"
-                    class="subheader-back"
-                    data-view-target="view-profile">
-                ←
-            </button>
-            <h2>Mi perfil de accesibilidad</h2>
-        </header>
+                <header class="subheader">
+                    <button type="button"
+                            class="subheader-back"
+                            data-view-target="view-profile">
+                        ←
+                    </button>
+                    <h2>Mi perfil de accesibilidad</h2>
+                </header>
 
-        <p class="access-description">
-            Selecciona tus ayudas de movilidad para mejorar las recomendaciones del mapa.
-        </p>
+                <p class="access-description">
+                    Selecciona tus ayudas de movilidad para mejorar las recomendaciones del mapa.
+                </p>
 
-        <form id="accessibilityForm" class="form-card">
+                <form id="accessibilityForm" class="form-card">
 
-            <div class="option-btn-profile" data-value="silla">
-                🦽 <span>Silla de ruedas</span>
+                    <div class="option-btn-profile" data-value="silla">
+                        🦽 <span>Silla de ruedas</span>
+                    </div>
+
+                    <div class="option-btn-profile" data-value="andador">
+                        🚶‍♂️ <span>Andador</span>
+                    </div>
+
+                    <div class="option-btn-profile" data-value="coche">
+                        👶 <span>Coche de bebé</span>
+                    </div>
+
+                    <div class="option-btn-profile" data-value="muletas">
+                        🦯 <span>Muletas</span>
+                    </div>
+
+                    <div class="option-btn-profile" data-value="baston">
+                        🦯 <span>Bastón</span>
+                    </div>
+
+                    <div class="option-btn-profile" data-value="ninguna">
+                        ⭕ <span>Ninguna de las anteriores</span>
+                    </div>
+
+                    <button type="submit"
+                            class="btn-azul btn-center btn-grande">
+                        Guardar preferencias
+                    </button>
+
+                </form>
+
             </div>
+        </section>
 
-            <div class="option-btn-profile" data-value="andador">
-                🚶‍♂️ <span>Andador</span>
-            </div>
-
-            <div class="option-btn-profile" data-value="coche">
-                👶 <span>Coche de bebé</span>
-            </div>
-
-            <div class="option-btn-profile" data-value="muletas">
-                🦯 <span>Muletas</span>
-            </div>
-
-            <div class="option-btn-profile" data-value="baston">
-                🦯 <span>Bastón</span>
-            </div>
-
-            <div class="option-btn-profile" data-value="ninguna">
-                ⭕ <span>Ninguna de las anteriores</span>
-            </div>
-
-            <button type="submit"
-                    class="btn-azul btn-center btn-grande">
-                Guardar preferencias
-            </button>
-
-        </form>
-
-    </div>
-</section>
-
-</section>
 
         <!-- VISTA: CONFIGURACIÓN PRINCIPAL -->
         <section id="view-settings" class="view">
@@ -722,7 +722,6 @@
                 </div>
             </div>
         </section>
-
     </main>
 
     <!-- SNACKBAR GLOBAL -->
