@@ -1,4 +1,5 @@
 
+
 /* ============================================================
    LAYOUT RESPONSIVE – AccessMap
    ============================================================ */
@@ -340,4 +341,55 @@
 		margin: 0;
 	}
 
+}
+
+
+
+
+/* ===================================================
+   LAYOUT UNIFICADO — FULL WIDTH REAL + SIDEBAR FIX
+=================================================== */
+
+:root {
+    --sidebar-width: 314px;
+}
+
+/* Contenido en desktop */
+@media (min-width: 768px) {
+    .page-container,
+    .community-container,
+    .profile-page,
+    .report-container,
+    .map-container,
+    .home-container,
+    .settings-container,
+    .access-container {
+        width: calc(100% - var(--sidebar-width));
+        margin-left: var(--sidebar-width);
+        padding: 2rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        box-sizing: border-box;
+    }
+
+    /* Sidebar visible en desktop */
+    .sidebar {
+        transform: translateX(0);
+    }
+}
+
+/* MOBILE - sidebar oculto */
+@media (max-width: 767px) {
+    .page-container,
+    .community-container,
+    .profile-page,
+    .report-container,
+    .map-container,
+    .home-container,
+    .settings-container,
+    .access-container {
+        width: 100%;
+        margin-left: 0;
+        padding: 1.3rem;
+    }
 }

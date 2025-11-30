@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/layout.css">
     <link rel="stylesheet" href="../styles/reset.css">
+    <link rel="stylesheet" href="../styles/chatbot.css">
 
     <link rel="stylesheet" href="../styles/home.css">
 </head>
@@ -195,10 +196,18 @@
             <span>👤</span><span data-lang="navProfile">Perfil</span>
         </a>
     </nav>
-    
-    <!-- Scripts -->
+
+
+<!-- CHATBOT (modular) -->
+  <div data-include="../extra-feature/chatbot.html"></div>
+
+  <!-- JS del chatbot -->
+  <script src="../scripts/include.js"></script>
+  <script src="../scripts/chatbotIntents.js"></script>
+  <script src="../scripts/chatbot.js"></script>
+ <!-- Scripts -->
     <script src="../scripts/main.js"></script>
-    <script src="../scripts/report.js"></script>
+
 
   </body>
 </html>
