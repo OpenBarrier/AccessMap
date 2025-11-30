@@ -21,6 +21,26 @@
 
         <div id="amChatBody" class="am-chatbot-body">
         </div>
+        <!-- Estado: escuchando -->
+        <div id="amListening" class="am-listening hidden">
+
+            <div class="am-siri-wrapper">
+                <canvas id="siriCanvas"></canvas>
+            </div>
+
+            <span>Te estoy escuchando...</span>
+        </div>
+
+
+
+        <!-- Estado: procesando voz -->
+        <div id="amProcessing" class="am-processing hidden">
+            <div class="am-processing-dots">
+                <div></div><div></div><div></div>
+            </div>
+            <span>Reconociendo tu voz...</span>
+        </div>
+
 
         <form id="amChatForm" class="am-chatbot-input-area">
             <input id="amChatInput" class="am-chatbot-input" type="text" placeholder="Escribe tu mensaje..." autocomplete="off">
