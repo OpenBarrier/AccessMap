@@ -71,6 +71,21 @@
     var accessibleMarkers = [];
     var warningMarkers = [];
 
+    // Marcadores por subtipo de barrera
+    var barriersBySubtype = {
+      rampas: [],
+      obstrucciones: [],
+      baches: [],
+      aceras: [],
+      escaleras: [],
+    };
+
+    // Marcadores por rango de fecha (para filtros rápidos)
+    var markersByDateRange = {
+      urgent: [], // últimas 24 horas
+      recent: [], // última semana
+    };
+
     // Capas para lugares (hospitales, parques, transporte)
     var categoryMarkers = {
       hospitales: [],
@@ -109,10 +124,24 @@
       return icon;
     }
 
-    function getMarkerIconByType(type) {
-      if (type === "accessible") return createColoredPin("#16a34a");
-      if (type === "warning") return createColoredPin("#f59e0b");
-      if (type === "barrier") return createColoredPin("#dc2626");
+    function getMarkerIconByType(type, subtype) {
+      if (type === "accessible") return createColoredPin("#05af43"); // verde
+      if (type === "warning") return createColoredPin("#e69000"); // ambar
+      if (type === "barrier") {
+        // Colores por subtipo de barrera (coinciden con el filtro visual)
+        switch (subtype) {
+          case "rampas":
+          case "aceras":
+          case "escaleras":
+            return createColoredPin("#e03737"); // rojo
+          case "obstrucciones":
+            return createColoredPin("#f97316"); // naranja
+          case "baches":
+            return createColoredPin("#e69000"); // amarillo
+          default:
+            return createColoredPin("#e03737"); // rojo por defecto
+        }
+      }
       return createColoredPin("#3b82f6");
     }
 
@@ -171,28 +200,93 @@
       }
     }
 
-    function addPlace(lat, lng, name, type) {
-      var popupHtml =
-        "<strong>" +
-        name +
-        "</strong><br/>" +
-        (type === "accessible"
-          ? '<span class="tag tag-verde">Accesible</span>'
-          : type === "warning"
-          ? '<span class="tag tag-ambar">Precaución</span>'
-          : '<span class="tag tag-rojo">Barrera</span>');
+    function addPlace(lat, lng, name, type, subtype, dateReported) {
+      // Generar fecha aleatoria si no se proporciona
+      if (!dateReported) {
+        var now = new Date();
+        var randomDays = Math.floor(Math.random() * 30); // 0-30 días atrás
+        dateReported = new Date(
+          now.getTime() - randomDays * 24 * 60 * 60 * 1000
+        );
+      }
+
+      // Mapeo de subtipo a etiqueta legible
+      var subtypeLabel = {
+        rampas: "Rampas Dañadas",
+        obstrucciones: "Obstrucciones en Vía",
+        baches: "Baches",
+        aceras: "Aceras Estrechas",
+        escaleras: "Escaleras sin Rampa",
+      };
+
+      var dateStr = dateReported.toLocaleDateString("es-PE", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      });
+
+      var popupHtml = "<strong>" + name + "</strong><br/>";
+
+      if (type === "barrier" && subtype) {
+        popupHtml +=
+          '<span class="tag tag-rojo">' +
+          (subtypeLabel[subtype] || subtype) +
+          "</span><br/>";
+        popupHtml += "<small>Reportado: " + dateStr + "</small>";
+      } else if (type === "accessible") {
+        popupHtml += '<span class="tag tag-verde">Accesible</span><br/>';
+        popupHtml += "<small>Verificado: " + dateStr + "</small>";
+      } else if (type === "warning") {
+        popupHtml += '<span class="tag tag-ambar">Precaución</span><br/>';
+        popupHtml += "<small>Reportado: " + dateStr + "</small>";
+      }
+
+      // Normalizar subtipo para asegurar coincidencia con los filtros
+      var normalizedSubtype = null;
+      if (type === "barrier" && subtype) {
+        // Solo permitir los subtipos válidos
+        var validSubtypes = [
+          "rampas",
+          "obstrucciones",
+          "baches",
+          "aceras",
+          "escaleras",
+        ];
+        if (validSubtypes.includes(subtype)) {
+          normalizedSubtype = subtype;
+        } else {
+          normalizedSubtype = "rampas"; // fallback seguro
+        }
+      }
 
       var marker = L.marker([lat, lng], {
-        icon: getMarkerIconByType(type),
+        icon: getMarkerIconByType(type, normalizedSubtype),
       })
         .addTo(map)
         .bindPopup(popupHtml);
 
       marker.customType = type;
+      marker.customSubtype = normalizedSubtype || null;
+      marker.customDate = dateReported;
       allMarkers.push(marker);
+
+      // Clasificar por rango de fecha
+      var now = new Date();
+      var diffHours = (now - dateReported) / (1000 * 60 * 60);
+      var diffDays = diffHours / 24;
+
+      if (diffHours <= 24) {
+        markersByDateRange.urgent.push(marker);
+      }
+      if (diffDays <= 7) {
+        markersByDateRange.recent.push(marker);
+      }
 
       if (type === "barrier") {
         barrierMarkers.push(marker);
+        if (subtype && barriersBySubtype[subtype]) {
+          barriersBySubtype[subtype].push(marker);
+        }
       } else if (type === "warning") {
         warningMarkers.push(marker);
       } else if (type === "accessible") {
@@ -253,7 +347,7 @@
 
     // Puntos demo
     addPlace(-12.055, -77.045, "Rampa verificada", "accessible");
-    addPlace(-12.05, -77.04, "Vereda rota", "barrier");
+    addPlace(-12.05, -77.04, "Vereda rota", "barrier", "baches");
     addPlace(-12.04, -77.048, "Cruce con pendiente fuerte", "warning");
 
     // Grupo 1: Centro de Lima (cerca de Plaza San Martín)
@@ -264,7 +358,8 @@
       [-12.0464, -77.035],
     ];
     clusterCentro.forEach(function (c, i) {
-      addPlace(c[0], c[1], "Barrera Centro #" + (i + 1), "barrier");
+      var subtype = i % 2 === 0 ? "rampas" : "baches";
+      addPlace(c[0], c[1], "Barrera Centro #" + (i + 1), "barrier", subtype);
     });
 
     // Grupo 2: Miraflores (cerca del Parque Kennedy)
@@ -275,7 +370,14 @@
       [-12.1419, -77.0002],
     ];
     clusterMiraflores.forEach(function (c, i) {
-      addPlace(c[0], c[1], "Barrera Miraflores #" + (i + 1), "barrier");
+      var subtypes = ["escaleras", "aceras", "obstrucciones", "rampas"];
+      addPlace(
+        c[0],
+        c[1],
+        "Barrera Miraflores #" + (i + 1),
+        "barrier",
+        subtypes[i % 4]
+      );
     });
 
     // Grupo 3: San Juan de Lurigancho (zona demo)
@@ -286,7 +388,14 @@
       [-12.0552, -77.0054],
     ];
     clusterSJL.forEach(function (c, i) {
-      addPlace(c[0], c[1], "Barrera SJL #" + (i + 1), "barrier");
+      var subtypes = ["baches", "rampas", "escaleras", "obstrucciones"];
+      addPlace(
+        c[0],
+        c[1],
+        "Barrera SJL #" + (i + 1),
+        "barrier",
+        subtypes[i % 4]
+      );
     });
 
     // Asegurar que la zona roja se calcule al inicio
@@ -844,40 +953,126 @@
         });
     }
 
+    // ----- Filtro de Quick Filters (por fecha) -----
+    function updateQuickFilters() {
+      var urgentActive =
+        document.getElementById("quick-filter-urgent") &&
+        document
+          .getElementById("quick-filter-urgent")
+          .getAttribute("aria-checked") === "true";
+      var recentActive =
+        document.getElementById("quick-filter-recent") &&
+        document
+          .getElementById("quick-filter-recent")
+          .getAttribute("aria-checked") === "true";
+
+      // Si ninguno está activo, mostrar todos los pines
+      if (!urgentActive && !recentActive) {
+        // Mostrar todos los pines (se gestionan otros filtros)
+        updateBarrierFilters();
+        return;
+      }
+
+      // Crear conjunto de pines a mostrar según quick filters
+      var pinsToShow = new Set();
+
+      if (urgentActive) {
+        markersByDateRange.urgent.forEach(function (m) {
+          pinsToShow.add(m);
+        });
+      }
+
+      if (recentActive) {
+        markersByDateRange.recent.forEach(function (m) {
+          pinsToShow.add(m);
+        });
+      }
+
+      // Aplicar filtros de barrera sobre los quick filters
+      var barrierCheckboxes = document.querySelectorAll(
+        ".place-filter-barrier"
+      );
+      var selectedSubtypes = {};
+      barrierCheckboxes.forEach(function (cb) {
+        var subtype = cb.id.replace("barrier-", "");
+        selectedSubtypes[subtype] = cb.checked;
+      });
+
+      // Mostrar/ocultar todos los pines de barrera según quick filters + tipo
+      barrierMarkers.forEach(function (m) {
+        var markerSubtype = m.customSubtype;
+        var inQuickFilter = pinsToShow.has(m);
+        var typeMatches = selectedSubtypes[markerSubtype] || false;
+        var shouldShow = inQuickFilter && typeMatches;
+
+        if (shouldShow) {
+          if (!map.hasLayer(m)) m.addTo(map);
+        } else {
+          if (map.hasLayer(m)) map.removeLayer(m);
+        }
+      });
+
+      updateDangerZone();
+    }
+
+    // ----- Filtro de tipos de barreras -----
+    function updateBarrierFilters() {
+      var onlyAccessible = toggleAccessible && toggleAccessible.checked;
+
+      // Si está activado "solo accesibles", ocultar todas las barreras
+      if (onlyAccessible) {
+        barrierMarkers.forEach(function (m) {
+          if (map.hasLayer(m)) map.removeLayer(m);
+        });
+        return;
+      }
+
+      // Obtener qué tipos de barrera están seleccionados
+      var selectedSubtypes = {};
+      var barrierCheckboxes = document.querySelectorAll(
+        ".place-filter-barrier"
+      );
+      barrierCheckboxes.forEach(function (cb) {
+        var subtype = cb.id.replace("barrier-", "");
+        selectedSubtypes[subtype] = cb.checked;
+      });
+
+      // Mostrar/ocultar marcadores según filtro
+      barrierMarkers.forEach(function (m) {
+        var markerSubtype = m.customSubtype;
+        var shouldShow = selectedSubtypes[markerSubtype] || false;
+
+        if (shouldShow) {
+          if (!map.hasLayer(m)) m.addTo(map);
+        } else {
+          if (map.hasLayer(m)) map.removeLayer(m);
+        }
+      });
+
+      updateDangerZone(); // Recalcular zona roja si cambió la visibilidad
+    }
+
     // ----- Filtro "Solo accesibles" -----
     function updateReportVisibility() {
-      var showAcc = toggleVisibleAccessible && toggleVisibleAccessible.checked;
-      var showWarn = toggleVisibleWarning && toggleVisibleWarning.checked;
-      var showBarr = toggleVisibleBarrier && toggleVisibleBarrier.checked;
+      // Si "Solo accesibles" está activado, solo mostrar accesibles; si no, mostrar todos
+      var onlyAccessible = toggleAccessible && toggleAccessible.checked;
 
-      // Accesibles
+      // Accesibles: siempre visibles
       accessibleMarkers.forEach(function (m) {
-        if (showAcc) {
-          if (!map.hasLayer(m)) m.addTo(map);
-        } else {
-          map.removeLayer(m);
-        }
+        if (!map.hasLayer(m)) m.addTo(map);
       });
 
-      // Warning
+      // Warning: visibles si NO está activado "solo accesibles"
       warningMarkers.forEach(function (m) {
-        if (showWarn) {
-          if (!map.hasLayer(m)) m.addTo(map);
+        if (onlyAccessible) {
+          if (map.hasLayer(m)) map.removeLayer(m);
         } else {
-          map.removeLayer(m);
+          if (!map.hasLayer(m)) m.addTo(map);
         }
       });
 
-      // Barreras
-      barrierMarkers.forEach(function (m) {
-        if (showBarr) {
-          if (!map.hasLayer(m)) m.addTo(map);
-        } else {
-          map.removeLayer(m);
-        }
-      });
-
-      updateDangerZone(); // Recalcular zona roja si las barreras cambiaron
+      // Barreras: gestionar según filtros de tipo
+      updateBarrierFilters();
     }
 
     // ----- Menú lateral (mobile) -----
@@ -1079,6 +1274,155 @@
         });
       });
     }
+
+    // ===== NUEVA LÓGICA: Quick Filters, Barrier Types, Critical Zones =====
+    var pfActiveCountEl = document.getElementById("place-filter-active-count");
+    var quickUrgentBtn = document.getElementById("quick-filter-urgent");
+    var quickRecentBtn = document.getElementById("quick-filter-recent");
+    var barrierCheckboxes = document.querySelectorAll(".place-filter-barrier");
+    var criticalZonesToggle = document.getElementById("critical-zones-toggle");
+    var showAllBtn = document.getElementById("place-filter-show-all");
+    var placeFilterBackdrop = document.querySelector(".place-filter__backdrop");
+
+    // Contador de filtros activos
+    function updatePlaceFilterActiveCount() {
+      var count = 0;
+      if (
+        quickUrgentBtn &&
+        quickUrgentBtn.getAttribute("aria-checked") === "true"
+      )
+        count++;
+      if (
+        quickRecentBtn &&
+        quickRecentBtn.getAttribute("aria-checked") === "true"
+      )
+        count++;
+      if (barrierCheckboxes && barrierCheckboxes.length) {
+        barrierCheckboxes.forEach(function (cb) {
+          if (cb.checked) count++;
+        });
+      }
+      if (criticalZonesToggle && criticalZonesToggle.checked) count++;
+      if (pfActiveCountEl)
+        pfActiveCountEl.textContent = count + " filtros activos";
+    }
+
+    // Quick Filter Toggle (Urgent)
+    if (quickUrgentBtn) {
+      quickUrgentBtn.addEventListener("click", function () {
+        var wasChecked = quickUrgentBtn.getAttribute("aria-checked") === "true";
+        quickUrgentBtn.setAttribute("aria-checked", !wasChecked);
+        updatePlaceFilterActiveCount();
+        updateQuickFilters();
+      });
+    }
+
+    // Quick Filter Toggle (Recent)
+    if (quickRecentBtn) {
+      quickRecentBtn.addEventListener("click", function () {
+        var wasChecked = quickRecentBtn.getAttribute("aria-checked") === "true";
+        quickRecentBtn.setAttribute("aria-checked", !wasChecked);
+        updatePlaceFilterActiveCount();
+        updateQuickFilters();
+      });
+    }
+
+    // Barrier Checkboxes
+    if (barrierCheckboxes && barrierCheckboxes.length) {
+      barrierCheckboxes.forEach(function (cb) {
+        cb.addEventListener("change", function () {
+          updatePlaceFilterActiveCount();
+          // Si hay quick filters activos, usar updateQuickFilters, si no, usar updateBarrierFilters
+          var urgentActive =
+            quickUrgentBtn &&
+            quickUrgentBtn.getAttribute("aria-checked") === "true";
+          var recentActive =
+            quickRecentBtn &&
+            quickRecentBtn.getAttribute("aria-checked") === "true";
+          if (urgentActive || recentActive) {
+            updateQuickFilters();
+          } else {
+            updateBarrierFilters();
+          }
+        });
+      });
+    }
+
+    // Make sure the visible switch wrapper toggles the hidden input reliably (some browsers/styles
+    // may make the native click unreliable). Attach click on the .switch container to toggle the input
+    // and emit a change event so the rest of the app reacts.
+    if (barrierCheckboxes && barrierCheckboxes.length) {
+      barrierCheckboxes.forEach(function (cb) {
+        try {
+          var sw = cb.closest && cb.closest(".switch");
+          if (sw) {
+            sw.addEventListener("click", function (e) {
+              // If click already targeted the actual input, let native behavior run
+              if (e.target === cb) return;
+              cb.checked = !cb.checked;
+              cb.dispatchEvent(new Event("change", { bubbles: true }));
+            });
+          }
+        } catch (err) {
+          // ignore
+        }
+      });
+    }
+
+    // Critical Zones Toggle
+    if (criticalZonesToggle) {
+      criticalZonesToggle.addEventListener("change", function () {
+        updatePlaceFilterActiveCount();
+        if (criticalZonesToggle.checked) {
+          updateDangerZone(); // Recalcular y mostrar zonas críticas
+        } else {
+          if (dangerCircle && map.hasLayer(dangerCircle)) {
+            map.removeLayer(dangerCircle);
+            dangerCircle = null;
+          }
+        }
+      });
+      // same switch wrapper helper for critical toggle
+      try {
+        var criticalSw =
+          criticalZonesToggle.closest && criticalZonesToggle.closest(".switch");
+        if (criticalSw) {
+          criticalSw.addEventListener("click", function (e) {
+            if (e.target === criticalZonesToggle) return;
+            criticalZonesToggle.checked = !criticalZonesToggle.checked;
+            criticalZonesToggle.dispatchEvent(
+              new Event("change", { bubbles: true })
+            );
+          });
+        }
+      } catch (err) {
+        // ignore
+      }
+    }
+
+    // Show All Barriers
+    if (showAllBtn) {
+      showAllBtn.addEventListener("click", function () {
+        if (barrierCheckboxes && barrierCheckboxes.length) {
+          barrierCheckboxes.forEach(function (cb) {
+            cb.checked = true;
+          });
+        }
+        updatePlaceFilterActiveCount();
+        updateBarrierFilters();
+      });
+    }
+
+    // Cerrar modal al hacer click en el backdrop
+    if (placeFilterBackdrop) {
+      placeFilterBackdrop.addEventListener("click", function () {
+        placeFilterPanel.classList.add("place-filter--hidden");
+        document.body.classList.remove("place-filter-open");
+      });
+    }
+
+    // Inicializar contador
+    updatePlaceFilterActiveCount();
 
     // Inicializar capas y visibilidad
     initCategoryMarkers();

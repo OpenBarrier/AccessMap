@@ -114,7 +114,7 @@
   margin-top: 0.15rem;
 }
 
-.search-suggestions__item+.search-suggestions__item {
+.search-suggestions__item + .search-suggestions__item {
   border-top: 1px solid #e2e8f0;
 }
 
@@ -294,11 +294,11 @@
   transition: 0.2s;
 }
 
-.switch input:checked+.switch__slider {
+.switch input:checked + .switch__slider {
   background-color: #05af43;
 }
 
-.switch input:checked+.switch__slider::before {
+.switch input:checked + .switch__slider::before {
   transform: translateX(1rem);
 }
 
@@ -434,8 +434,6 @@
   max-height: 80vh;
   display: flex;
   flex-direction: column;*/
-
-
 }
 
 .route-modal--hidden {
@@ -565,12 +563,14 @@
   width: 100%;
 }
 
-
 @media (max-width: 1023px) {
-  .place-filter {
-    left: 32%;
-    right: auto;
-    transform: translateX(-50%);
+  /* Para mobile y tablet, el modal debe ocupar 100% del ancho */
+  .place-filter__modal {
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-height: 75vh;
+    border-radius: 1.5rem 1.5rem 0 0;
   }
 }
 
@@ -662,7 +662,6 @@
   .map-toast {
     bottom: 8rem;
   }
-
 }
 
 /* Left floating controls (toggle filters) */
@@ -676,14 +675,8 @@
   z-index: 500;
 }
 
-/* When place filter panel is opened via left button, show it to the left */
-body.place-filter-open #place-filter-panel {
-  display: block;
-  position: absolute;
-  right: auto;
-  bottom: calc(7rem + 0.5rem);
-  z-index: 560;
-}
+/* When place filter panel is opened via left button, show the modal */
+/* (The new styles use display: flex in body.place-filter-open state defined below) */
 
 /* Do NOT show the bottom-card when place-filter is opened via left toggle.
    The bottom-card is only visible when the full-screen search (body.search-open)
@@ -821,84 +814,333 @@ body.place-filter-open #place-filter-panel {
 
 /*PARTE DE MANUEL, SI VAS A CAMBIAR PREGUNTAME ANTES*/
 
+/* ===== PLACE FILTER MODAL ===== */
 .place-filter {
-  position: absolute;
-  z-index: 550;
-  right: 1rem;
-  background-color: #ffffff;
-  border-radius: 1rem;
-  padding: 0.75rem 0.9rem;
-  box-shadow: 0 0.25rem 0.9rem rgba(15, 23, 42, 0.25);
-  width: 260px;
+  position: fixed;
+  inset: 0;
+  z-index: 1300;
+  display: none;
+  flex-direction: column;
 }
 
 .place-filter--hidden {
-  display: none;
+  display: none !important;
+}
+
+.place-filter__backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+  z-index: 1300;
+}
+
+.place-filter__modal {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fafaf8;
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.12);
+  max-height: 75vh;
+  display: flex;
+  flex-direction: column;
+  z-index: 1301;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Header */
+.place-filter__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 1.2rem 1.5rem;
+  border-bottom: 1px solid #e8e6e1;
 }
 
 .place-filter__title {
-  margin: 0 0 0.5rem 0;
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.place-filter__active-count {
+  margin: 0.3rem 0 0 0;
+  font-size: 0.8rem;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.place-filter__close {
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  color: #0f172a;
+  cursor: pointer;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+
+.place-filter__close:hover {
+  opacity: 0.7;
+}
+
+/* Content scrollable */
+.place-filter__content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Secciones generales */
+.place-filter__section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.place-filter__section-title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.place-filter__section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.place-filter__show-all {
+  border: none;
+  background: transparent;
+  color: #0066cc;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: none;
+}
+
+.place-filter__show-all:hover {
+  text-decoration: underline;
+}
+
+/* Quick Filter Cards */
+.place-filter__quick-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 0.8rem;
+  border: 2px solid #e0e0e0;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.place-filter__quick-card--urgent {
+  border-color: #e03737;
+}
+
+.place-filter__quick-card--recent {
+  border-color: #e69000;
+}
+
+.place-filter__quick-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Urgent filter selected */
+.place-filter__quick-card--urgent[aria-checked="true"] {
+  background-color: rgba(224, 55, 55, 0.15);
+  border-color: #e03737;
+}
+
+/* Recent filter selected */
+.place-filter__quick-card--recent[aria-checked="true"] {
+  background-color: rgba(230, 144, 0, 0.15);
+  border-color: #e69000;
+}
+
+.place-filter__quick-icon {
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.place-filter__quick-icon--red {
+  background-color: #e03737;
+}
+
+.place-filter__quick-icon--yellow {
+  background-color: #e69000;
+}
+
+.place-filter__quick-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.place-filter__quick-title {
+  margin: 0;
   font-size: 0.9rem;
   font-weight: 600;
   color: #0f172a;
 }
 
-.place-filter__group {
-  margin-bottom: 0.5rem;
-  border-top: 1px solid #e2e8f0;
-  padding-top: 0.4rem;
-}
-
-.place-filter__subtitle {
-  margin: 0 0 0.25rem 0;
+.place-filter__quick-desc {
+  margin: 0.25rem 0 0 0;
   font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: #94a3b8;
+  color: #64748b;
 }
 
-.place-filter__chip {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.25rem 0.6rem;
-  border-radius: 999px;
-  border: 1px solid #cbd5e1;
-  background-color: #f8fafc;
-  font-size: 0.8rem;
-  cursor: pointer;
-  margin-right: 0.25rem;
-  margin-bottom: 0.25rem;
-}
-
-.place-filter__chip--active {
-  background-color: #dcfce7;
-  border-color: #16a34a;
-  color: #166534;
-}
-
-.place-filter__toggle {
+.place-filter__quick-check {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background-color: #05af43;
+  color: #ffffff;
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  justify-content: center;
+  font-weight: 700;
   font-size: 0.85rem;
-  color: #334155;
-  margin-bottom: 0.25rem;
+  flex-shrink: 0;
 }
 
-.place-filter__toggle input[type="checkbox"] {
-  accent-color: #00b592;
-}
-
-.place-filter__close {
-  position: absolute;
-  right: 0.6rem;
-  top: -0.5rem;
-  background: transparent;
-  border: none;
-  font-size: 1.6rem;
-  color: #0f172a;
+/* Barrier Items */
+.place-filter__barrier-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.6rem 0;
   cursor: pointer;
+  position: relative;
+}
+
+.place-filter__barrier-dot {
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.place-filter__barrier-dot--red {
+  background-color: #e03737;
+}
+
+.place-filter__barrier-dot--orange {
+  background-color: #f97316;
+}
+
+.place-filter__barrier-dot--yellow {
+  background-color: #e69000;
+}
+
+.place-filter__barrier-label {
+  flex: 1;
+  font-size: 0.9rem;
+  color: #334155;
+  font-weight: 500;
+}
+
+.place-filter__barrier-item {
+  position: relative;
+}
+
+.place-filter-barrier {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  margin: 0;
+  z-index: 2;
+}
+
+.place-filter-barrier:hover {
+  opacity: 0.8;
+}
+
+/* Special Card (Zonas Críticas) */
+.place-filter__special-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 0.8rem;
+  border: 2px solid #ffe0e0;
+  background-color: #ffffff;
+  margin-top: 0.5rem;
+}
+
+.place-filter__special-icon {
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  background-color: #e03737;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.place-filter__special-content {
+  flex: 1;
+}
+
+.place-filter__special-title {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.place-filter__special-desc {
+  margin: 0.25rem 0 0 0;
+  font-size: 0.8rem;
+  color: #64748b;
+  line-height: 1.4;
+}
+
+.place-filter-special {
+  width: 1.4rem;
+  height: 1.4rem;
+  cursor: pointer;
+  accent-color: #024260;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+/* Body state for place filter open */
+body.place-filter-open #place-filter-panel {
+  display: flex;
 }
 
 /* ----- Fullscreen search overlay ----- */
@@ -956,10 +1198,7 @@ body.search-open .map-search-bar .search-input-wrapper {
 }
 
 /* Hide place filter panel and integrated bottom-card by default */
-.place-filter {
-  display: none;
-}
-
+/* Hide place filter panel and integrated bottom-card by default (see .place-filter--hidden for specific display: none rule) */
 
 .search-integrated-bottom {
   display: none;
@@ -1032,7 +1271,6 @@ body.search-open #place-filter-panel {
   }
 }
 
-
 /*CALMAA*/
 
 /* =========================================
@@ -1057,7 +1295,6 @@ body.search-open #place-filter-panel {
   /* Máxima prioridad para estar encima de todo (incluyendo modales) */
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
 }
-
 
 /* --- 2. Alertas de Navegación (Notificaciones y Peligro) --- */
 

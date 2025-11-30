@@ -135,36 +135,120 @@
         <div id="search-results-container" class="search-results-container"></div>
       </form>
     </section>
-    <!-- place-filter-panel moved out of the form -->
-    <div id="place-filter-panel" class="place-filter place-filter--hidden">
-      <button id="place-filter-close" class="place-filter__close" aria-label="Cerrar panel">&times;</button>
-      <h3 class="place-filter__title">Lugares</h3>
+      <!-- place-filter-panel: Modal deslizable desde inferior -->
+      <div id="place-filter-panel" class="place-filter place-filter--hidden">
+        <div class="place-filter__backdrop"></div>
+        
+        <div class="place-filter__modal">
+          <!-- Encabezado -->
+          <div class="place-filter__header">
+            <div>
+              <h2 class="place-filter__title">Filtros del Mapa</h2>
+              <p class="place-filter__active-count" id="place-filter-active-count">4 filtros activos</p>
+            </div>
+            <button id="place-filter-close" class="place-filter__close" aria-label="Cerrar panel">&times;</button>
+          </div>
 
-      <div class="place-filter__group">
-        <p class="place-filter__subtitle">Categorías</p>
-        <button class="place-filter__chip" data-layer="hospitales">Hospitales</button>
-        <button class="place-filter__chip" data-layer="parques">Parques y plazas</button>
-        <button class="place-filter__chip" data-layer="transporte">Transporte</button>
-      </div>
+          <!-- Contenedor scrollable -->
+          <div class="place-filter__content">
+            
+            <!-- Sección 1: Filtros Rápidos -->
+            <div class="place-filter__section">
+              <h3 class="place-filter__section-title">Filtros Rápidos</h3>
+              
+              <div class="place-filter__quick-card place-filter__quick-card--urgent" id="quick-filter-urgent" role="checkbox" aria-checked="false" tabindex="0">
+                <div class="place-filter__quick-icon place-filter__quick-icon--red"></div>
+                <div class="place-filter__quick-content">
+                  <h4 class="place-filter__quick-title">Reportes Urgentes (Últimas 24h)</h4>
+                  <p class="place-filter__quick-desc">Resalta barreras reportadas en las últimas 24 horas</p>
+                </div>
+              </div>
 
-      <div class="place-filter__group">
-        <p class="place-filter__subtitle">Filtros</p>
-        <label class="place-filter__toggle">
-          <input type="checkbox" id="toggle-visible-accessible" checked />
-          <span>Ver accesibles</span>
-        </label>
-        <label class="place-filter__toggle">
-          <input type="checkbox" id="toggle-visible-warning" checked />
-          <span>Ver precaución</span>
-        </label>
-        <label class="place-filter__toggle">
-          <input type="checkbox" id="toggle-visible-barrier" checked />
-          <span>Ver barreras</span>
-        </label>
-      </div>
-    </div>
+              <div class="place-filter__quick-card place-filter__quick-card--recent" id="quick-filter-recent" role="checkbox" aria-checked="true" tabindex="0">
+                <div class="place-filter__quick-icon place-filter__quick-icon--yellow"></div>
+                <div class="place-filter__quick-content">
+                  <h4 class="place-filter__quick-title">Actividad Reciente (Última Semana)</h4>
+                  <p class="place-filter__quick-desc">Muestra reportes de los últimos 7 días</p>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <!-- Sección 2: Tipos de Barreras -->
+            <div class="place-filter__section">
+              <div class="place-filter__section-header">
+                <h3 class="place-filter__section-title">Tipos de Barreras</h3>
+                <button class="place-filter__show-all" id="place-filter-show-all" type="button">Mostrar todo</button>
+              </div>
 
-    <!-- Contenedor del mapa -->
+              <!-- Rampas Dañadas -->
+              <label class="place-filter__barrier-item">
+                <div class="place-filter__barrier-dot place-filter__barrier-dot--red"></div>
+                <span class="place-filter__barrier-label">Rampas Dañadas</span>
+                <div class="switch">
+                  <input type="checkbox" class="place-filter-barrier" id="barrier-rampas" checked />
+                  <span class="switch__slider"></span>
+                </div>
+              </label>
+
+              <!-- Obstrucciones en Vía -->
+              <label class="place-filter__barrier-item">
+                <div class="place-filter__barrier-dot place-filter__barrier-dot--orange"></div>
+                <span class="place-filter__barrier-label">Obstrucciones en Vía</span>
+                <div class="switch">
+                  <input type="checkbox" class="place-filter-barrier" id="barrier-obstrucciones" />
+                  <span class="switch__slider"></span>
+                </div>
+              </label>
+
+              <!-- Baches -->
+              <label class="place-filter__barrier-item">
+                <div class="place-filter__barrier-dot place-filter__barrier-dot--yellow"></div>
+                <span class="place-filter__barrier-label">Baches</span>
+                <div class="switch">
+                  <input type="checkbox" class="place-filter-barrier" id="barrier-baches" checked />
+                  <span class="switch__slider"></span>
+                </div>
+              </label>
+
+              <!-- Aceras Estrechas -->
+              <label class="place-filter__barrier-item">
+                <div class="place-filter__barrier-dot place-filter__barrier-dot--red"></div>
+                <span class="place-filter__barrier-label">Aceras Estrechas</span>
+                <div class="switch">
+                  <input type="checkbox" class="place-filter-barrier" id="barrier-aceras" />
+                  <span class="switch__slider"></span>
+                </div>
+              </label>
+
+              <!-- Escaleras sin Rampa -->
+              <label class="place-filter__barrier-item">
+                <div class="place-filter__barrier-dot place-filter__barrier-dot--red"></div>
+                <span class="place-filter__barrier-label">Escaleras sin Rampa</span>
+                <div class="switch">
+                  <input type="checkbox" class="place-filter-barrier" id="barrier-escaleras" checked />
+                  <span class="switch__slider"></span>
+                </div>
+              </label>
+            </div>
+            <hr>
+            <!-- Sección 3: Capa Especial -->
+            <div class="place-filter__section">
+              <div class="place-filter__special-card" id="critical-zones-card">
+                <div class="place-filter__special-icon"></div>
+                <div class="place-filter__special-content">
+                    <h4 class="place-filter__special-title">Mostrar Zonas Críticas</h4>
+                    <p class="place-filter__special-desc">Áreas con alta concentración de barreras (3+ reportes en un radio de 100m). Se visualizan como zonas sombreadas en el mapa.</p>
+                  </div>
+                  <div class="switch">
+                    <input type="checkbox" class="place-filter-special" id="critical-zones-toggle" />
+                    <span class="switch__slider"></span>
+                  </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>    <!-- Contenedor del mapa -->
     <section class="map-wrapper">
       <div id="map-container"></div>
 
