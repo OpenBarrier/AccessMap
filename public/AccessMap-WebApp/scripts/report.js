@@ -1,7 +1,7 @@
 // ============================================================
 // REPORT.JS – Flujo de Reportar Barrera (una sola página)
 // ============================================================
-
+(function() {
 console.log("✅ report.js cargado (flujo reportes)");
 
 /* ------------------------------------------------------------
@@ -405,3 +405,4 @@ function initReportModule() {
 
 document.addEventListener("DOMContentLoaded", initReportModule);
 
+})();

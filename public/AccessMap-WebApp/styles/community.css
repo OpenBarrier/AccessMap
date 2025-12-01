@@ -65,7 +65,7 @@
 
 /* Caja del input: ocupa todo el espacio disponible */
 .search-box {
-    flex: 1;            /* 👉 hace que se estire lo justo */
+    flex: 1;         
     background: white;
     padding: 0.7rem 1rem;
     border-radius: 12px;
@@ -81,10 +81,9 @@
     outline: none;
     background: none;
 }
-/* El de grupos reutiliza .search-section, solo definimos el botón */
+
 .search-groups-section {
-    /* no hace falta display:flex aquí porque ya lo tiene .search-section,
-       pero puedes dejarlo si ya está, no pasa nada */
+
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -99,7 +98,7 @@
     background: #e5e7eb;
     font-size: 1.4rem;
     cursor: pointer;
-    flex-shrink: 0;   /* 👉 que no se deforme aunque el espacio sea pequeño */
+    flex-shrink: 0;   
 }
 
 /* ------------------------------
@@ -660,4 +659,82 @@
 
 .member-remove-btn:hover {
     background: #fecaca;
+}
+/* ============================================================
+   CENTERING FIXES FOR COMMUNITY
+   ============================================================ */
+
+.community-container {
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 1rem;
+}
+
+.community-content-centered {
+    width: 100%;
+    max-width: 600px; /* Ajusta según necesites */
+    margin: 0 auto;
+}
+
+.tab-content-centered {
+    width: 100%;
+}
+
+/* Asegurar que todo el contenido esté centrado */
+.community-header,
+.tab-navigation,
+.search-section,
+.stats-container,
+.top-ranking-list,
+.collaborator-list,
+.group-list {
+    width: 100%;
+}
+
+/* Centrar las estadísticas */
+.stats-container {
+    justify-content: center;
+    gap: 1rem;
+}
+
+.stat-card {
+    flex: 1;
+    min-width: 120px;
+    max-width: 180px;
+}
+
+/* AJUSTA EL ANCHO */
+.top-ranking-list,
+.collaborator-list {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .community-container {
+        padding: 0.5rem;
+    }
+    
+    .community-content-centered {
+        max-width: 100%;
+    }
+    
+    .stats-container {
+        gap: 0.5rem;
+    }
+    
+    .stat-card {
+        min-width: 110px;
+    }
+}
+
+/* Para desktop con sidebar */
+@media (min-width: 768px) {
+    .community-content-centered {
+        max-width: 1500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
