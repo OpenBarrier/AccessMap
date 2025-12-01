@@ -12,7 +12,7 @@ Feature: US24: Crear grupos de usuarios locales
     Y el usuario desea crear un grupo local.
     Cuando la persona con movilidad reducida circunstancialmente presiona el <boton>.
     Entonces el sistema le pedirá ingresar la información del grupo y lo creará con
-    <nombre_grupo>, <descripcion_grupo> y <ubicacion_grupo>.
+    <nombre_grupo>, <descripcion_grupo>..
 
     Examples: Datos de entrada
     | boton                 |
@@ -21,10 +21,10 @@ Feature: US24: Crear grupos de usuarios locales
     | "crear nuevo grupo"   |
 
     Examples: Datos de salida
-    | nombre_grupo           | descripcion_grupo                                  | ubicacion_grupo      |
-    | "Accesibilidad Lima"   | "Grupo para reportar barreras en Lima Centro"      | "Lima Cercado"       |
-    | "Barreras San Miguel"  | "Comunidad para mejorar accesos en el distrito"    | "San Miguel"         |
-    | "Rutas Callao"         | "Usuarios compartiendo rutas seguras en el Callao" | "Callao"             |
+    | nombre_grupo           | descripcion_grupo                                  | 
+    | "Accesibilidad Lima"   | "Grupo para reportar barreras en Lima Centro"      | 
+    | "Barreras San Miguel"  | "Comunidad para mejorar accesos en el distrito"    | 
+    | "Rutas Callao"         | "Usuarios compartiendo rutas seguras en el Callao" | 
 
 
   Scenario Outline: E2: Agregar miembros al grupo
@@ -55,7 +55,7 @@ Feature: US24: Crear grupos de usuarios locales
     Dado que una persona con movilidad reducida circunstancialmente es el creador de un grupo local
     y está en el apartado de modificar grupo.
     Cuando la persona con movilidad reducida circunstancialmente presione el <boton_editar>.
-    Entonces el sistema pedirá la nueva información <nuevo_nombre>, <nueva_descripcion>, <nueva_ubicacion> 
+    Entonces el sistema pedirá la nueva información <nuevo_nombre>, <nueva_descripcion>
     Y actualizará la informacion del grupo 
     Y reflejara los cambios en la plataforma.
 
@@ -64,5 +64,5 @@ Feature: US24: Crear grupos de usuarios locales
     | "Editar"     |
 
      Examples: Datos de salida
-    | nuevo_nombre              | nueva_descripcion                                    | nueva_ubicacion |
-    | "Accesibilidad Lima Plus" | "Mejora de accesos en Lima con reportes coordinados" | "Lima Cercado"  |
+    | nuevo_nombre              | nueva_descripcion                                    | 
+    | "Accesibilidad Lima Plus" | "Mejora de accesos en Lima con reportes coordinados" | 

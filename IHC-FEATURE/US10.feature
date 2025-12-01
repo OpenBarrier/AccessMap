@@ -8,21 +8,19 @@ Feature: US10: Reporte de barreras en tiempo real
 
     Dado que el usuario ha completado los campos requeridos en la vista de creación de reporte,
     Cuando el usuario adjunta una <foto>, escribe un <comentario>, la <ubicacion> es precisa, y presiona <boton_enviar>,
-    Entonces el sistema registra el reporte, muestra una <mensaje_confirmacion>, y lo marca como <estado_reporte> en el historial del usuario.
+    Entonces el sistema registra el reporte, muestra una <mensaje_confirmacion>, y lo marca como estado_reporte en el historial del usuario.
 
   Examples: Datos de entrada
     | foto                  | comentario                        | ubicacion                               | boton_enviar |
-    | "rampa_obstruida.jpg" | "Rampa bloqueada por auto"        | "av.mexico jr.los olivos"               | "Enviar"     |
-    | "bache_calle.png"     | "Bache grande cerca de la esquina"| "av. 2 de mayo"                         | "Enviar"     |
-    | "escalera.jpg"        | "Escaleras sin rampa de acceso"   | "calle 3 de mayo- av. los jardines"     | "Enviar"     |
-    | "acera_danada.png"    | "Aceras rotas impiden paso"       | "av. los olivos - jr. los jardines"     | "Enviar"     |
+    | "rampa_obstruida.jpg" | "Rampa bloqueada por auto"        | "av.mexico jr.los olivos"               | "Enviar Reporte"     |
+    | "bache_calle.png"     | "Bache grande cerca de la esquina"| "av. 2 de mayo"                         | "Enviar Reporte"     |
+    | "escalera.jpg"        | "Escaleras sin rampa de acceso"   | "calle 3 de mayo- av. los jardines"     | "Enviar Reporte"     |
+    | "acera_danada.png"    | "Aceras rotas impiden paso"       | "av. los olivos - jr. los jardines"     | "Enviar Reporte"     |
 
   Examples: Datos de salida
-    | mensaje_confirmacion                         | estado_reporte                  |
-    | "¡Gracias! Reporte en procesamiento."        | "Pendiente de Verificación IA" | 
-    | "¡Gracias! Reporte en procesamiento."        | "Pendiente de Verificación IA" | 
-    | "¡Gracias! Reporte en procesamiento."        | "Pendiente de Verificación IA" | 
-    | "¡Gracias! Reporte en procesamiento."        | "Pendiente de Verificación IA" | 
+    | mensaje_confirmacion                                                                         | 
+    | "¡Gracias! Reporte en procesamiento. Puede seguri su estado en el "Historial del usuario"    |     
+
 
 
   Scenario Outline: E2: Error por falta de ubicación (GPS desactivado)

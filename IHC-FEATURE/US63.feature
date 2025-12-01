@@ -6,40 +6,30 @@ Feature: US63: Aceptación de Términos y Política de Privacidad
 
   Scenario Outline: E1: Aceptar los términos para habilitar el registro
 
-    Dado que un nuevo usuario está en la pantalla de <pantalla_registro>,
+    Dado que un nuevo usuario está en la pantalla de "Crear Cuenta",
+    Y el usuario llena su <correo_electronico> y <contrasena> correctamente
     Cuando el usuario marca la casilla de <casilla_aceptacion>,
-    Entonces el <boton_registro> se <estado_boton> (si los demás campos también son válidos),
+    Entonces el "Registrarse" esta activo (si los demás campos también son válidos),
     permitiéndole completar el registro.
 
   Examples: Datos de entrada
-    | pantalla_registro | casilla_aceptacion                            |
-    | "Registro"        | "Acepto los Términos y la Política de Privacidad" |
-    | "Registro"        | "Acepto los Términos del Servicio y la Privacidad" |
-
-
-  Examples: Datos de salida
-    | boton_registro   | estado_boton |
-    | "Registrarse"    | "activo"     |
-    | "Registrarse"    | "activo"     |
+    |correo_electronico |contrasena |casilla de aceptacion                               |
+    |Hola@gmail.com     | 123#jiji  | "Acepto los Términos del Servicio y la Privacidad" |
+    |Lola@gmail.com     | 1234hj#   | "Acepto los Términos del Servicio y la Privacidad" |
+    |Susan@gmail.com    |mimmm34%   | "Acepto los Términos del Servicio y la Privacidad" |
 
 
   Scenario Outline: E2: Intentar registrarse sin aceptar los términos
 
-    Dado que el nuevo usuario ha llenado sus <datos_registro> en la pantalla de 'Registro',
-    Cuando intenta presionar <boton_registro> pero no ha marcado la <casilla_aceptacion>,
-    Entonces el <boton_registro> permanece <estado_boton>,
-    Y la casilla de aceptación se resalta con un <borde_resaltado> para indicar que es un campo obligatorio.
+    Dado que el nuevo usuario ha llenado sus <correo_electronico> y <contrasena> correctamente en la pantalla de 'Registro',
+    Cuando intenta presionar "Registrarse" pero <marca> ha marcado la <casilla_aceptacion>,
+    Entonces el boton "Registrarse" permanece no accesible
 
   Examples: Datos de entrada
-    | datos_registro            | boton_registro | casilla_aceptacion  |
-    | "correo y contraseña"     | "Registrarse"  | "No marcado"        |
-    | "todos los campos llenos" | "Registrarse"  | "No marcado"        |
-    | "correo y clave seguras"  | "Registrarse"  | "No marcado"        |
-    | "datos válidos completos" | "Registrarse"  | "No marcado"        |
+   |correo_electronico |contrasena  | marca |casilla de aceptacion                               |
+    |Hola@gmail.com     | 123#jiji  |  no   |"Acepto los Términos del Servicio y la Privacidad" |
+    |Lola@gmail.com     | 1234hj#   |  no   |"Acepto los Términos del Servicio y la Privacidad" |
+    |Susan@gmail.com    |mimmm34%   |  no   | "Acepto los Términos del Servicio y la Privacidad" |
 
-  Examples: Datos de salida
-    | boton_registro | estado_boton | borde_resaltado |
-    | "Registrarse"  | "inactivo"   | "rojo"          |
-    | "Registrarse"  | "inactivo"   | "rojo"          |
-    | "Registrarse"  | "inactivo"   | "rojo"          |
-    | "Registrarse"  | "inactivo"   | "rojo"          |
+    
+
