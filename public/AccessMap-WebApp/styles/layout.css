@@ -125,7 +125,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: 70px; /* Un poquito más alto para comodidad */
+    height: 70px; 
     background: #ffffff;
     border-top: 1px solid #e2e8f0;
     display: flex;
@@ -159,16 +159,16 @@
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    background-color: #05af43; /* Verde Éxito */
+    background-color: #05af43; 
     color: white;
-    margin-top: -30px; /* EFECTO FLOTANTE: Sube el botón */
+    margin-top: -30px; 
     font-size: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-decoration: none; /* CRÍTICO: Quita la línea de enlace */
-    box-shadow: 0 4px 10px rgba(5, 175, 67, 0.4); /* Sombrita verde */
-    border: 4px solid #ffffff; /* Borde blanco para separarlo de la barra */
+    text-decoration: none; 
+    box-shadow: 0 4px 10px rgba(5, 175, 67, 0.4); 
+    border: 4px solid #ffffff; 
     line-height: 1;
 }
 
@@ -310,15 +310,15 @@
     .main-content {
         margin-left: 260px;
         padding: 0rem;
-				padding-left: 5.5rem;
+				padding-left: 1.5rem;
 				padding-right: 1.5rem;
         padding-bottom: 2rem;
     }
 
 		.header-inner {
 			position: absolute;
-			top: 1.2rem;   /* ajusta según te guste */
-			right: 1.5rem; /* ajusta según te guste */
+			top: 1.2rem;   
+			right: 1.5rem; 
 		}
 
 		.site-header.app-header {
@@ -343,15 +343,12 @@
 
 }
 
-
-
-
 /* ===================================================
    LAYOUT UNIFICADO — FULL WIDTH REAL + SIDEBAR FIX
 =================================================== */
 
 :root {
-    --sidebar-width: 314px;
+    --sidebar-width: 260px;
 }
 
 /* Contenido en desktop */
@@ -378,7 +375,6 @@
     }
 }
 
-/* MOBILE - sidebar oculto */
 @media (max-width: 767px) {
     .page-container,
     .community-container,
